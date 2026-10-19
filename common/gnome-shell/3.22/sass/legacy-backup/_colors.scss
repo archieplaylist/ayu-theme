@@ -1,0 +1,180 @@
+// When color definition differs for dark and light variant,
+// it gets @if ed depending on $variant
+//
+// Palette: official ayu colors (https://github.com/ayu-theme/ayu-colors)
+//   $flavor:          'light' (Ayu), 'dark' (Ayu-Dark) or 'mirage' (Ayu-Darker)
+//   $variant:         'light' | 'dark'   — widget coloring mode
+//   $darker:          'true' when dark assets/colors are needed
+
+$flavor: 'light' !default;
+
+//
+// Core ayu palette
+//
+$ayu: (
+  light:   (
+    'sunk':   #EBEEF0,  // surface.sunk
+    'base':   #F8F9FA,  // surface.base
+    'lift':   #FCFCFC,  // surface.lift
+    'fg':     #5C6773,  // editor.fg
+    'fg-idle': #828C99,
+    'line':   #F3F3F3,  // editor.line / panel
+    'accent': #035BD6,  // blue selection
+    'accent-soft': #478CC6,
+    'link':   #035BD6,
+    'gray':   #D9D8D7,  // guide
+    'orange': #F29718,
+    'yellow': #EBA400,
+    'green':  #86B300,
+    'red':    #F07171,
+    'pink':   #F2A191,
+    'blue':   #22A4E6,
+    'indigo': #55B4D4,
+    'text-on-accent': #FFFFFF,
+  ),
+  mirage:  (
+    'sunk':   #181C26,  // surface.sunk
+    'base':   #1F2430,  // surface.base
+    'lift':   #242936,  // surface.lift
+    'fg':     #CCCAC2,  // editor.fg
+    'fg-idle': #607080,
+    'line':   #1A1F29,  // editor.line
+    'accent': #FFCC66,  // common.accent.tint
+    'accent-soft': #409FFF,
+    'link':   #73D0FF,
+    'gray':   #3D4751,  // guide
+    'orange': #FFA659,
+    'yellow': #FFCD66,
+    'green':  #D5FF80,
+    'red':    #F28779,
+    'pink':   #F29E74,
+    'blue':   #73D0FF,
+    'indigo': #5CCFE6,
+    'text-on-accent': #21283A,
+  ),
+  dark:    (
+    'sunk':   #0D1017,  // surface.base (darker than lift, used as header)
+    'base':   #14181F,  // ui.panel.bg
+    'lift':   #10141C,  // surface.lift
+    'fg':     #BFBDB6,  // editor.fg
+    'fg-idle': #5A6673,
+    'line':   #161A24,  // editor.line
+    'accent': #E6B450,  // common.accent.tint
+    'accent-soft': #3388FF,
+    'link':   #39BAE6,
+    'gray':   #2D3640,  // guide
+    'orange': #FF8F40,
+    'yellow': #FFB454,
+    'green':  #AAD94C,
+    'red':    #F07178,
+    'pink':   #F29668,
+    'blue':   #59C2FF,
+    'indigo': #39BAE6,
+    'text-on-accent': #10141C,
+  )
+) !default;
+
+@function ayu($key, $flavor: $flavor) {
+  @return map-get(map-get($ayu, $flavor), $key);
+}
+
+//
+// Theme colors
+//
+$base_color: if($variant =='light', ayu('lift'), ayu('lift'));
+$text_color: if($variant == 'light', ayu('fg'), ayu('fg'));
+$bg_color:   if($variant =='light', ayu('base'), ayu('lift'));
+$fg_color:   if($variant =='light', ayu('fg'), ayu('fg'));
+
+$selected_fg_color: ayu('text-on-accent');
+$selected_bg_color: ayu('accent');
+$selected_borders_color: darken($selected_bg_color, 20%);
+$borders_color: ayu('gray');
+
+$link_color: if($variant == 'light', ayu('link'),
+                                     ayu('link'));
+$link_visited_color: if($variant == 'light', mix(ayu('link'), white, 60%),
+                                             mix(ayu('link'), ayu('fg'), 60%));
+
+$selection_mode_bg: if($transparency == 'true', transparentize($selected_bg_color, 0.05), $selected_bg_color);
+$selection_mode_fg: $selected_fg_color;
+$warning_color: ayu('yellow');
+$error_color: ayu('red');
+$warning_fg_color: if($variant == 'light', $text_color, $fg_color);
+$error_fg_color: white;
+$success_color: ayu('green');
+$destructive_color: ayu('red');
+$suggested_color: ayu('blue');
+$destructive_fg_color: white;
+$suggested_fg_color: $selected_fg_color;
+
+$drop_target_color: ayu('blue');
+
+//insensitive state derived colors
+$insensitive_fg_color: if($variant == 'light', transparentize($fg_color, 0.45), transparentize($fg_color, 0.55));
+$insensitive_bg_color: if($variant == 'light', mix($bg_color, $base_color, 40%), lighten($bg_color, 2%));
+
+$header_bg: red;
+@if $variant=='light' {
+  $header_bg: if($transparency=='true', transparentize(ayu('sunk'), 0.05), ayu('sunk'));
+} @else {
+  $header_bg: if($transparency=='true', transparentize(ayu('sunk'), 0.03), ayu('sunk'));
+}
+
+$header_bg_backdrop: lighten($header_bg, if($variant == 'dark', 1.5%, 3%));
+
+$header_border: darken($header_bg, 7%);
+
+$header_fg: saturate(transparentize($fg_color, 0.2), 10%);
+
+$dark_sidebar_bg: if($transparency == 'true', transparentize(ayu('line'), 0.05), ayu('line'));
+$dark_sidebar_fg: ayu('fg-idle');
+$dark_sidebar_border: if($variant == 'light', $dark_sidebar_bg, darken($dark_sidebar_bg, 5%));
+
+$osd_fg_color: $dark_sidebar_fg;
+$osd_bg_color: $dark_sidebar_bg;
+
+$osd_button_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
+$osd_button_border: transparentize(darken($osd_bg_color, 12%), 0.6);
+
+$osd_entry_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
+$osd_entry_border: transparentize(darken($osd_bg_color, 12%), 0.6);
+
+$osd_insensitive_bg_color: darken($osd_bg_color, 3%);
+$osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 30%);
+$osd_borders_color: transparentize(black, 0.3);
+
+$panel_bg: darken($dark_sidebar_bg, 4.7%);
+$panel_fg: $dark_sidebar_fg;
+
+$entry_bg: if($variant=='light', $base_color, lighten($base_color, 0%));
+$entry_border: ayu('gray');
+
+$header_entry_bg: if($variant == 'dark', transparentize(lighten($header_bg, 22%), 0.6), transparentize($base_color, 0.1));
+$header_entry_border: if($variant == 'dark', transparentize(darken($header_bg, 12%), 0.6), transparentize($header_fg, 0.7));
+
+$button_bg: if($variant == 'light', lighten($bg_color, 2%), lighten($base_color, 2%));
+$button_border: $entry_border;
+
+$header_button_bg: if($variant == 'dark', transparentize(lighten($header_bg, 22%), 0.6), transparentize($button_bg, 0.1));
+$header_button_border: if($variant == 'dark', transparentize(darken($header_bg, 12%), 0.6), transparentize($header_fg, 0.7));
+
+//WM Buttons
+
+// Close
+$wm_button_close_bg: ayu('red');
+$wm_button_close_hover_bg: lighten($wm_button_close_bg, 10%);
+$wm_button_close_active_bg: darken($wm_button_close_bg, 12%);
+
+$wm_icon_close_bg: if($variant == 'light', #FCFCFC, ayu('sunk'));
+
+// Minimize, Maximize
+$wm_button_hover_bg: if($variant == 'light', if($flavor == 'light', #fdfdfd, #425663), #26303B);
+$wm_button_active_bg: $selected_bg_color;
+
+$wm_button_hover_border: if($variant == 'light', #D1D3DA, #262932);
+
+$wm_icon_bg: if($variant == 'light', saturate(mix(ayu('fg'), white, 60%), 10%), #90939B);
+$wm_icon_unfocused_bg: if($variant == 'light', mix(ayu('fg'), white, 40%), #666A74);
+$wm_icon_hover_bg: if($variant == 'light', ayu('fg-idle'), #C4C7CC);
+$wm_icon_active_bg: $selected_fg_color;

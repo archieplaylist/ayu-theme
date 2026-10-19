@@ -1,0 +1,8 @@
+{
+  "name": "ayu-theme",
+  "private": true,
+  "description": "ayu GTK theme — asset utilities",
+  "devDependencies": {
+    "pngjs": "^7.0.0"
+  }
+}

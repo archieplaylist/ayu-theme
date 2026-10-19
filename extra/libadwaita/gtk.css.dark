@@ -1,0 +1,65 @@
+/* Ayu (dark) libadwaita named-color overrides
+ *
+ * Install via extra/libadwaita/install.sh
+ * libadwaita loads ~/.config/gtk-4.0/gtk.css on top of its own styles,
+ * so re-defining these named colors re-skins modern GNOME GTK4 apps.
+ */
+@define-color accent_bg_color #E6B450;
+@define-color accent_fg_color #10141C;
+@define-color accent_color #E6B450;
+@define-color accent_color_rgba rgba(230, 180, 80, 1);
+
+@define-color destructive_bg_color #F07178;
+@define-color destructive_fg_color #10141C;
+@define-color destructive_color #F07178;
+
+@define-color success_bg_color #AAD94C;
+@define-color success_fg_color #10141C;
+@define-color success_color #AAD94C;
+
+@define-color warning_bg_color #FFB454;
+@define-color warning_fg_color #BFBDB6;
+@define-color warning_color #FFB454;
+
+@define-color error_bg_color #F07178;
+@define-color error_fg_color #10141C;
+@define-color error_color #F07178;
+
+/*scrol window / views */
+@define-color window_bg_color #10141C;
+@define-color window_fg_color #BFBDB6;
+@define-color view_bg_color #14181F;
+@define-color view_fg_color #BFBDB6;
+
+/* header bar */
+@define-color headerbar_bg_color #0D1017;
+@define-color headerbar_fg_color #BFBDB6;
+@define-color headerbar_border_color #2D3640;
+@define-color headerbar_backdrop_color #161A24;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.35);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.5);
+
+@define-color sidebar_bg_color #161A24;
+@define-color sidebar_fg_color #5A6673;
+@define-color sidebar_backdrop_color #0D1017;
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.35);
+
+@define-color secondary_sidebar_bg_color #161A24;
+@define-color secondary_sidebar_fg_color #5A6673;
+@define-color secondary_sidebar_backdrop_color #0D1017;
+@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.35);
+
+@define-color card_bg_color #14181F;
+@define-color card_fg_color #BFBDB6;
+@define-color popover_bg_color #14181F;
+@define-color popover_fg_color #BFBDB6;
+
+@define-color thumbnail_fg_color #14181F;
+
+@define-color dialog_bg_color #10141C;
+@define-color dialog_fg_color #BFBDB6;
+
+@define-color bluebench_border_color #2D3640;
+@define-color unfocused_borders #2D3640;
+
+@define-color unfocused_fg_color #5A6673;

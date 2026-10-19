@@ -1,0 +1,108 @@
+{
+   "description": "Ayu-Darker (mirage) theme for Chrome/Chromium",
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6RY/VX2xN/FFEQQwi4sSHGaMxF6cARCTsKKxmPhbics9qDIkZxxBqeM4TUhHDhgsZrxZsXAplyKnIjTEIdw96XDK34uF5cqLOG5vzFRIOAdFfCyC9HNupQGg3Vd8PKSVmLZz/2Xsu5zmvx+zz3VIDtNK+HaVktMhJnO9utBougQIDAQAB",
+   "manifest_version": 2,
+   "name": "Ayu Darker",
+   "theme": {
+      "colors": {
+         "bookmark_text": [
+            204,
+            202,
+            194
+         ],
+         "button_background": [
+            0,
+            0,
+            0,
+            0
+         ],
+         "frame": [
+            24,
+            28,
+            38
+         ],
+         "frame_inactive": [
+            24,
+            28,
+            38
+         ],
+         "frame_incognito": [
+            24,
+            28,
+            38
+         ],
+         "frame_incognito_inactive": [
+            24,
+            28,
+            38
+         ],
+         "ntp_background": [
+            31,
+            36,
+            48
+         ],
+         "ntp_text": [
+            204,
+            202,
+            194
+         ],
+         "tab_background_text": [
+            96,
+            112,
+            128
+         ],
+         "tab_text": [
+            204,
+            202,
+            194
+         ],
+         "toolbar": [
+            31,
+            36,
+            48
+         ]
+      },
+      "images": {
+         "theme_frame": "images/theme_frame.png",
+         "theme_frame_inactive": "images/theme_frame.png",
+         "theme_toolbar": "images/theme_toolbar.png"
+      },
+      "properties": {
+         "ntp_background_alignment": "bottom",
+         "ntp_background_repeat": "no-repeat"
+      },
+      "tints": {
+         "background_tab": [
+            -1,
+            0.5,
+            0.85
+         ],
+         "buttons": [
+            -1,
+            -1,
+            -1
+         ],
+         "frame": [
+            -1,
+            -1,
+            -1
+         ],
+         "frame_inactive": [
+            -1,
+            -1,
+            -1
+         ],
+         "frame_incognito": [
+            -1,
+            0.2,
+            0.35
+         ],
+         "frame_incognito_inactive": [
+            -1,
+            0.3,
+            0.6
+         ]
+      }
+   },
+   "version": "1"
+}
