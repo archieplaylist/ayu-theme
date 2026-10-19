@@ -89,3 +89,10 @@ $osd_bg_color: $_ayu_sunk;
   $fg_color: ayu('fg');
   $backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 80%);
 }
+
+//
+// ayu container backgrounds (base, bg, and system/OSD surfaces)
+//
+$base_color: ayu('base');
+$bg_color: ayu('bg');
+$system_bg_color: ayu('sunk');
