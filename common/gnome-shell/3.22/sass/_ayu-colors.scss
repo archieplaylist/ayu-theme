@@ -1,0 +1,50 @@
+//
+// ayu palette override
+// $flavor: 'light' (Ayu), 'dark' (Ayu-Dark), 'mirage' (Ayu-Darker)
+//
+
+@function ayu($key) {
+  @return map-get(map-get($_ayu, $flavor), $key);
+}
+
+$_ayu: (
+  light:   (
+    base:   #F8F9FA,
+    sunk:   #EBEEF0,
+    fg:     #5C6773,
+    fg-idle:#828C99,
+    gray:   #D9D8D7,
+  ),
+  dark:    (
+    base:   #1F2430,
+    sunk:   #0D1017,
+    fg:     #BFBDB6,
+    fg-idle:#5A6673,
+    gray:   #2D3640,
+  ),
+  mirage:  (
+    base:   #1F2430,
+    sunk:   #181C26,
+    fg:     #CCCAC2,
+    fg-idle:#607080,
+    gray:   #3D4751,
+  ),
+) !default;
+
+$bg_color: ayu('base');
+$base_color: ayu('sunk');
+$fg_color: ayu('fg');
+
+$osd_fg_color: ayu('fg');
+$osd_bg_color: ayu('sunk');
+
+// system elements (lock/login) are always dark
+$system_base_color: #0D1017;
+$system_fg_color: #BFBDB6;
+
+$panel_bg_color: ayu('sunk');
+$panel_fg_color: ayu('fg');
+
+$card_bg_color: if($flavor == 'light', #FCFCFC, lighten($bg_color, 5%));
+$card_shadow_color: if($flavor == 'light', transparentize($dark_5, .97), transparent);
+$card_shadow_border_color: if($flavor == 'light', transparentize($dark_5, .91), transparent);

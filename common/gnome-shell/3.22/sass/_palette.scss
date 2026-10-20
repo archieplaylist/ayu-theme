@@ -1,68 +1,46 @@
-// Ayu palette mapped onto the handful of GNOME color names used by
-// gnome-shell-sass. $flavor ('light' | 'dark' | 'mirage') is set by the
-// gnome-shell*.scss entry points before this file is imported.
-
-$_ayu_flavors: (
-  light:   (
-    'light_1':  #FCFCFC,   // surface.lift  -> base_color
-    'light_2':  #F8F9FA,   // surface.base  -> bg_color
-    'dark_4':   #1A1F27,   // near-black    -> osd_bg_color
-    'blue_3':   #035BD6,   // accent        -> selected_bg_color
-    'green_4':  #86B300,
-    'green_5':  #6E9700,
-    'red_3':    #F07171,
-    'red_4':    #DE5B5B,
-    'yellow_5': #EBA400,
-    'sunk': #EBEEF0, 'text-on-accent': #FFFFFF, 'link': #035BD6,
-    'fg': #5C6773, 'base': #FCFCFC, 'bg': #F8F9FA, 'line': #F3F4F6,
-    'gray': #D9D8D7, 'fg-idle': #828C99,
-  ),
-  dark:    (
-    'light_1':  #BFBDB6,   // editor.fg
-    'light_2':  #BFBDB6,
-    'dark_4':   #10141C,   // surface.lift
-    'blue_3':   #E6B450,   // accent
-    'green_4':  #AAD94C,
-    'green_5':  #98C33F,
-    'red_3':    #F07178,
-    'red_4':    #DE5561,
-    'yellow_5': #FFB454,
-    'sunk': #0D1017, 'text-on-accent': #10141C, 'link': #39BAE6,
-    'fg': #BFBDB6, 'base': #10141C, 'bg': #14181F, 'line': #161A24,
-    'gray': #2D3640, 'fg-idle': #5A6673,
-  ),
-  mirage:  (
-    'light_1':  #CCCAC2,   // editor.fg
-    'light_2':  #CCCAC2,
-    'dark_4':   #1F2430,   // surface.base
-    'blue_3':   #FFCC66,   // accent
-    'green_4':  #B3DE55,
-    'green_5':  #D5FF80,
-    'red_3':    #F28779,
-    'red_4':    #E5727E,
-    'yellow_5': #FFCD66,
-    'sunk': #181C26, 'text-on-accent': #21283A, 'link': #73D0FF,
-    'fg': #CCCAC2, 'base': #1F2430, 'bg': #242936, 'line': #1A1F29,
-    'gray': #3D4751, 'fg-idle': #607080,
-  ),
-);
-
-@function ayu($key) {
-  @return map-get(map-get($_ayu_flavors, $flavor), $key);
-}
-
-// gnome-shell-sass palette names
-$light_1:  ayu('light_1');
-$light_2:  ayu('light_2');
-$dark_4:   ayu('dark_4');
-$blue_3:   ayu('blue_3');
-$green_4:  ayu('green_4');
-$green_5:  ayu('green_5');
-$red_3:    ayu('red_3');
-$red_4:    ayu('red_4');
-$yellow_5: ayu('yellow_5');
-
-// ayu keys used outside _colors.scss
-$_ayu_text_on_accent: map-get(map-get($_ayu_flavors, $flavor), 'text-on-accent');
-$_ayu_link: map-get(map-get($_ayu_flavors, $flavor), 'link');
-$_ayu_sunk: map-get(map-get($_ayu_flavors, $flavor), 'sunk');
+//GNOME Color Palette
+$blue_1: #99c1f1;
+$blue_2: #62a0ea;
+$blue_3: #3584e4;
+$blue_4: #1c71d8;
+$blue_5: #1a5fb4;
+$green_1: #8ff0a4;
+$green_2: #57e389;
+$green_3: #33d17a;
+$green_4: #2ec27e;
+$green_5: #26a269;
+$yellow_1: #f9f06b;
+$yellow_2: #f8e45c;
+$yellow_3: #f6d32d;
+$yellow_4: #f5c211;
+$yellow_5: #e5a50a;
+$orange_1: #ffbe6f;
+$orange_2: #ffa348;
+$orange_3: #ff7800;
+$orange_4: #e66100;
+$orange_5: #c64600;
+$red_1: #f66151;
+$red_2: #ed333b;
+$red_3: #e01b24;
+$red_4: #c01c28;
+$red_5: #a51d2d;
+$purple_1: #dc8add;
+$purple_2: #c061cb;
+$purple_3: #9141ac;
+$purple_4: #813d9c;
+$purple_5: #613583;
+$brown_1: #cdab8f;
+$brown_2: #b5835a;
+$brown_3: #986a44;
+$brown_4: #865e3c;
+$brown_5: #63452c;
+$light_1: #ffffff;
+$light_2: #f6f5f4;
+$light_3: #deddda;
+$light_4: #c0bfbc;
+$light_5: #9a9996;
+$dark_1: #77767b;
+$dark_2: #5e5c64;
+$dark_3: #3d3846;
+$dark_4: #241f31;
+$dark_5: #000000;
