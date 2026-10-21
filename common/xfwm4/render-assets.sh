@@ -37,7 +37,7 @@ render() {
 
 render assets.svg		assets			96
 render assets-dark.svg		assets-dark		96
-render assets-darker.svg	assets-darker		96
+render assets-mirage.svg	assets-mirage		96
 render assets.svg		assets-hdpi		192
 render assets-dark.svg		assets-dark-hdpi	192
-render assets-darker.svg	assets-darker-hdpi	192
+render assets-mirage.svg	assets-mirage-hdpi	192

@@ -128,7 +128,7 @@
         "#8a8a87": "#BFBDB6"
       }
     },
-    "common/xfwm4/assets-darker": {
+    "common/xfwm4/assets-mirage": {
       "all": {
         "#f38e94": "#F7B5AB",
         "#eb424c": "#F28779",
@@ -163,7 +163,7 @@
         "#8a8a87": "#BFBDB6"
       }
     },
-    "common/xfwm4/assets-darker-hdpi": {
+    "common/xfwm4/assets-mirage-hdpi": {
       "all": {
         "#f38e94": "#F7B5AB",
         "#eb424c": "#F28779",
@@ -268,7 +268,7 @@
       "#8a8a87": "#BFBDB6",
       "#ffe8c0": "#FFCB8F"
     },
-    "common/xfwm4/assets-darker.svg": {
+    "common/xfwm4/assets-mirage.svg": {
       "#f38e94": "#F7B5AB",
       "#eb424c": "#F28779",
       "#f07178": "#F49F92",

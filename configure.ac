@@ -12,9 +12,9 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([no-dist-gzip dist-xz foreign])
 AC_PROG_MKDIR_P
 
-ARC_ENABLE([LIGHT],         [light],         [Ayu],         [disable])
-ARC_ENABLE([DARKER],        [darker],        [Ayu-Darker],    [disable])
-ARC_ENABLE([DARK],          [dark],          [Ayu-Dark],      [disable])
+ARC_ENABLE([LIGHT],         [light],         [Ayu Light],   [disable])
+ARC_ENABLE([MIRAGE],        [mirage],        [Ayu Mirage],  [disable])
+ARC_ENABLE([DARK],          [dark],          [Ayu Dark],    [disable])
 ARC_ENABLE([CINNAMON],      [cinnamon],      [Cinnamon],      [disable])
 ARC_ENABLE([GNOME_SHELL],   [gnome-shell],   [GNOME Shell],   [disable])
 ARC_ENABLE([GTK2],          [gtk2],          [GTK2],          [disable])

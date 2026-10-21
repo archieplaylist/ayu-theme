@@ -5,9 +5,9 @@
 //   The $ayu map below is generated from tools/palette.json by
 //   tools/gen-palette.mjs — do not edit it by hand.
 //
-//   $flavor:          'light' (Ayu), 'dark' (Ayu-Dark) or 'mirage' (Ayu-Darker)
+//   $flavor:          'light' (Ayu Light), 'dark' (Ayu Dark) or 'mirage' (Ayu Mirage)
 //   $variant:         'light' | 'dark'   — widget coloring mode
-//   $darker:          'true' when dark assets/colors are needed
+//   $mirage:          'true' when the mirage assets/colors are needed
 
 $flavor: 'light' !default;
 

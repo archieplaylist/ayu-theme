@@ -58,7 +58,7 @@ autoreconf --force --install
 CONFIGURE_ARGS=(
 	--prefix=/usr
 	--enable-light
-	--enable-darker
+	--enable-mirage
 	--enable-dark
 	--enable-gtk2
 	--enable-gtk3
@@ -83,12 +83,12 @@ make install DESTDIR="$STAGE"
 
 THEMEDIR="$STAGE/usr/share/themes"
 if [ "$SOLID" = "1" ]; then
-	THEMES=(Ayu-solid Ayu-Darker-solid Ayu-Dark-solid)
-	HDPI_THEMES=(Ayu-solid-hdpi Ayu-Darker-solid-hdpi Ayu-Dark-solid-hdpi)
+	THEMES=(Ayu-Light-solid Ayu-Mirage-solid Ayu-Dark-solid)
+	HDPI_THEMES=(Ayu-Light-solid-hdpi Ayu-Mirage-solid-hdpi Ayu-Dark-solid-hdpi)
 	SUFFIX="-solid"
 else
-	THEMES=(Ayu Ayu-Darker Ayu-Dark)
-	HDPI_THEMES=(Ayu-hdpi Ayu-Darker-hdpi Ayu-Dark-hdpi)
+	THEMES=(Ayu-Light Ayu-Mirage Ayu-Dark)
+	HDPI_THEMES=(Ayu-Light-hdpi Ayu-Mirage-hdpi Ayu-Dark-hdpi)
 	SUFFIX=""
 fi
 

@@ -1,24 +1,24 @@
 if !ENABLE_TRANSPARENCY
-themedir        = $(datadir)/themes/Ayu-solid
-themedarkerdir  = $(datadir)/themes/Ayu-Darker-solid
+themedir        = $(datadir)/themes/Ayu-Light-solid
+thememiragedir  = $(datadir)/themes/Ayu-Mirage-solid
 themedarkdir    = $(datadir)/themes/Ayu-Dark-solid
-hdpidir         = $(datadir)/themes/Ayu-solid-hdpi
-hdpidarkerdir   = $(datadir)/themes/Ayu-Darker-solid-hdpi
+hdpidir         = $(datadir)/themes/Ayu-Light-solid-hdpi
+hdpimiragedir   = $(datadir)/themes/Ayu-Mirage-solid-hdpi
 hdpidarkdir     = $(datadir)/themes/Ayu-Dark-solid-hdpi
 else
-themedir        = $(datadir)/themes/Ayu
-themedarkerdir  = $(datadir)/themes/Ayu-Darker
+themedir        = $(datadir)/themes/Ayu-Light
+thememiragedir  = $(datadir)/themes/Ayu-Mirage
 themedarkdir    = $(datadir)/themes/Ayu-Dark
-hdpidir         = $(datadir)/themes/Ayu-hdpi
-hdpidarkerdir   = $(datadir)/themes/Ayu-Darker-hdpi
+hdpidir         = $(datadir)/themes/Ayu-Light-hdpi
+hdpimiragedir   = $(datadir)/themes/Ayu-Mirage-hdpi
 hdpidarkdir     = $(datadir)/themes/Ayu-Dark-hdpi
 endif
 
 ithemedir       = $(DESTDIR)$(themedir)
-ithemedarkerdir = $(DESTDIR)$(themedarkerdir)
+ithememiragedir = $(DESTDIR)$(thememiragedir)
 ithemedarkdir   = $(DESTDIR)$(themedarkdir)
 ihdpidir        = $(DESTDIR)$(hdpidir)
-ihdpidarkerdir  = $(DESTDIR)$(hdpidarkerdir)
+ihdpimiragedir  = $(DESTDIR)$(hdpimiragedir)
 ihdpidarkdir    = $(DESTDIR)$(hdpidarkdir)
 
 install-exec-hook:
@@ -30,9 +30,9 @@ if ENABLE_LIGHT
 	cp $(srcdir)/index.theme $(ithemedir)
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)
-	cp $(srcdir)/index.theme-darker $(ithemedarkerdir)/index.theme
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)
+	cp $(srcdir)/index.theme-mirage $(ithememiragedir)/index.theme
 endif # ENABLE_LIGHT
 
 if ENABLE_DARK
@@ -50,18 +50,18 @@ if ENABLE_CINNAMON
 		cinnamon.css \
 		$(ithemedir)/cinnamon
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/cinnamon
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)/cinnamon
 
 	cd $(srcdir)/cinnamon && cp -R \
 		common-assets \
 		dark-assets \
-		$(ithemedarkerdir)/cinnamon
+		$(ithememiragedir)/cinnamon
 
 	cd $(srcdir)/cinnamon && cp -R \
-		cinnamon-darker.css \
-		$(ithemedarkerdir)/cinnamon/cinnamon.css
-endif # ENABLE_DARKER
+		cinnamon-mirage.css \
+		$(ithememiragedir)/cinnamon/cinnamon.css
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)/cinnamon
@@ -88,18 +88,18 @@ if ENABLE_GNOME_SHELL
 		gnome-shell.css \
 		$(ithemedir)/gnome-shell
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/gnome-shell
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)/gnome-shell
 
 	cd $(srcdir)/gnome-shell/$(GNOME_VERSION) && cp -R \
 		common-assets \
 		dark-assets \
-		$(ithemedarkerdir)/gnome-shell
+		$(ithememiragedir)/gnome-shell
 
 	cd $(srcdir)/gnome-shell/$(GNOME_VERSION) && cp -R \
-		gnome-shell-darker.css \
-		$(ithemedarkerdir)/gnome-shell/gnome-shell.css
-endif # ENABLE_DARKER
+		gnome-shell-mirage.css \
+		$(ithememiragedir)/gnome-shell/gnome-shell.css
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)/gnome-shell
@@ -130,22 +130,22 @@ if ENABLE_LIGHT
 		$(ithemedir)/gtk-2.0
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/gtk-2.0
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)/gtk-2.0
 
 	cd $(srcdir)/gtk-2.0 && cp -R \
 		menubar-toolbar \
 		*.rc \
-		$(ithemedarkerdir)/gtk-2.0
+		$(ithememiragedir)/gtk-2.0
 
 	cd $(srcdir)/gtk-2.0 && cp -R \
 		assets-dark \
-		$(ithemedarkerdir)/gtk-2.0/assets
+		$(ithememiragedir)/gtk-2.0/assets
 
 	cd $(srcdir)/gtk-2.0 && cp -R \
-		gtkrc-darker \
-		$(ithemedarkerdir)/gtk-2.0/gtkrc
-endif # ENABLE_DARKER
+		gtkrc-mirage \
+		$(ithememiragedir)/gtk-2.0/gtkrc
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)/gtk-2.0
@@ -179,18 +179,18 @@ if ENABLE_LIGHT
 		$(ithemedir)/gtk-3.0
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/gtk-3.0
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)/gtk-3.0
 
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
 		assets \
 		gtk-dark.css \
-		$(ithemedarkerdir)/gtk-3.0
+		$(ithememiragedir)/gtk-3.0
 
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
-		gtk-darker.css \
-		$(ithemedarkerdir)/gtk-3.0/gtk.css
-endif # ENABLE_DARKER
+		gtk-mirage.css \
+		$(ithememiragedir)/gtk-3.0/gtk.css
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)/gtk-3.0
@@ -216,15 +216,15 @@ if ENABLE_LIGHT
 		$(ithemedir)/gtk-3.0/gtk-dark.css
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
+if ENABLE_MIRAGE
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
-		gtk-solid-darker.css \
-		$(ithemedarkerdir)/gtk-3.0/gtk.css
+		gtk-solid-mirage.css \
+		$(ithememiragedir)/gtk-3.0/gtk.css
 
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
 		gtk-solid-dark.css \
-		$(ithemedarkerdir)/gtk-3.0/gtk-dark.css
-endif # ENABLE_DARKER
+		$(ithememiragedir)/gtk-3.0/gtk-dark.css
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
@@ -249,18 +249,18 @@ if ENABLE_LIGHT
 		$(ithemedir)/gtk-4.0
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/gtk-4.0
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)/gtk-4.0
 
 	cd $(srcdir)/gtk-4.0 && cp -R \
 		assets \
 		gtk-dark.css \
-		$(ithemedarkerdir)/gtk-4.0
+		$(ithememiragedir)/gtk-4.0
 
 	cd $(srcdir)/gtk-4.0 && cp -R \
-		gtk-darker.css \
-		$(ithemedarkerdir)/gtk-4.0/gtk.css
-endif # ENABLE_DARKER
+		gtk-mirage.css \
+		$(ithememiragedir)/gtk-4.0/gtk.css
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)/gtk-4.0
@@ -286,15 +286,15 @@ if ENABLE_LIGHT
 		$(ithemedir)/gtk-4.0/gtk-dark.css
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
+if ENABLE_MIRAGE
 	cd $(srcdir)/gtk-4.0 && cp -R \
-		gtk-solid-darker.css \
-		$(ithemedarkerdir)/gtk-4.0/gtk.css
+		gtk-solid-mirage.css \
+		$(ithememiragedir)/gtk-4.0/gtk.css
 
 	cd $(srcdir)/gtk-4.0 && cp -R \
 		gtk-solid-dark.css \
-		$(ithemedarkerdir)/gtk-4.0/gtk-dark.css
-endif # ENABLE_DARKER
+		$(ithememiragedir)/gtk-4.0/gtk-dark.css
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	cd $(srcdir)/gtk-4.0 && cp -R \
@@ -315,13 +315,13 @@ if ENABLE_LIGHT
 	cd $(ithemedir)/metacity-1 && rm metacity-theme-1-dark.xml metacity-theme-2-dark.xml
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	cp -R $(srcdir)/metacity-1 $(ithemedarkerdir)
+if ENABLE_MIRAGE
+	cp -R $(srcdir)/metacity-1 $(ithememiragedir)
 
-	cd $(ithemedarkerdir)/metacity-1 && \
+	cd $(ithememiragedir)/metacity-1 && \
 		mv metacity-theme-1-dark.xml metacity-theme-1.xml && \
 		mv metacity-theme-2-dark.xml metacity-theme-2.xml
-endif # ENABLE_DARKER
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	cp -R $(srcdir)/metacity-1 $(ithemedarkdir)
@@ -342,13 +342,13 @@ if ENABLE_LIGHT
 	cd $(ithemedir)/unity && rm -rf window-buttons-dark
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	cp -R $(srcdir)/unity $(ithemedarkerdir)
+if ENABLE_MIRAGE
+	cp -R $(srcdir)/unity $(ithememiragedir)
 
-	cd $(ithemedarkerdir)/unity && \
+	cd $(ithememiragedir)/unity && \
 	rm -rf window-buttons && \
 	mv window-buttons-dark window-buttons
-endif # ENABLE_DARKER
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	cp -R $(srcdir)/unity $(ithemedarkdir)
@@ -373,15 +373,15 @@ if ENABLE_LIGHT
 		cp themerc-hdpi $(ihdpidir)/xfwm4/themerc
 endif # ENABLE_LIGHT
 
-if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/xfwm4 $(ihdpidarkerdir)/xfwm4
+if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)/xfwm4 $(ihdpimiragedir)/xfwm4
 
 	cd $(srcdir)/xfwm4 && \
-		cp -R assets-darker/*.png $(ithemedarkerdir)/xfwm4 && \
-		cp themerc-darker $(ithemedarkerdir)/xfwm4/themerc && \
-		cp -R assets-darker-hdpi/*.png $(ihdpidarkerdir)/xfwm4 && \
-		cp themerc-darker-hdpi $(ihdpidarkerdir)/xfwm4/themerc
-endif # ENABLE_DARKER
+		cp -R assets-mirage/*.png $(ithememiragedir)/xfwm4 && \
+		cp themerc-mirage $(ithememiragedir)/xfwm4/themerc && \
+		cp -R assets-mirage-hdpi/*.png $(ihdpimiragedir)/xfwm4 && \
+		cp themerc-mirage-hdpi $(ihdpimiragedir)/xfwm4/themerc
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)/xfwm4 $(ihdpidarkdir)/xfwm4
@@ -399,9 +399,9 @@ endif # ENABLE_XFWM
 uninstall-local:
 	rm -rf $(ithemedir)
 
-if ENABLE_DARKER
-	rm -rf $(ithemedarkerdir)
-endif # ENABLE_DARKER
+if ENABLE_MIRAGE
+	rm -rf $(ithememiragedir)
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	rm -rf $(ithemedarkdir)
@@ -410,9 +410,9 @@ endif # ENABLE_DARK
 if ENABLE_XFWM
 	rm -rf $(ihdpidir)
 
-if ENABLE_DARKER
-	rm -rf $(ihdpidarkerdir)
-endif # ENABLE_DARKER
+if ENABLE_MIRAGE
+	rm -rf $(ihdpimiragedir)
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	rm -rf $(ihdpidarkdir)
@@ -429,5 +429,5 @@ EXTRA_DIST = $(srcdir)/cinnamon \
 	     $(srcdir)/unity \
 	     $(srcdir)/xfwm4 \
 	     $(srcdir)/index.theme \
-	     $(srcdir)/index.theme-darker \
+	     $(srcdir)/index.theme-mirage \
 	     $(srcdir)/index.theme-dark

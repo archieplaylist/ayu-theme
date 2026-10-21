@@ -9,7 +9,7 @@ $header_radius: if($variant=='light' or $variant=='lighter', 4px, 3px);
 $scale_trough_bg: if($variant != 'dark', $button_border, darken($bg_color, 5%));
 
 $asset_suffix: if($variant=='dark', '-dark', '');
-$darker_asset_suffix: if($variant=='darker', '-dark', $asset_suffix);
+$mirage_asset_suffix: if($variant=='mirage', '-dark', $asset_suffix);
 
 /***************
  * Base States *
@@ -1349,8 +1349,8 @@ windowcontrols {
     @each $k in ('close','maximize', 'minimize') {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
 
-        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$darker_asset_suffix}.png'),
-                                                     url('assets/titlebutton-#{$k}#{$m}#{$darker_asset_suffix}@2.png')); }
+        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$mirage_asset_suffix}.png'),
+                                                     url('assets/titlebutton-#{$k}#{$m}#{$mirage_asset_suffix}@2.png')); }
       }
     }
   }
@@ -2539,7 +2539,7 @@ switch {
   }
 
   headerbar switch#{$k} {
-    background-image: -gtk-scaled(url("assets/switch#{$l}-header#{$darker_asset_suffix}.png"),url("assets/switch#{$l}-header#{$darker_asset_suffix}@2.png"));
+    background-image: -gtk-scaled(url("assets/switch#{$l}-header#{$mirage_asset_suffix}.png"),url("assets/switch#{$l}-header#{$mirage_asset_suffix}@2.png"));
   }
 }
 
@@ -4014,7 +4014,7 @@ window {
   border-width: 0px;
 
   &.csd {
-    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', darken($header_bg, 7%), $_wm_border),
+    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'mirage', darken($header_bg, 7%), $_wm_border),
                 0 8px 8px 0 if($variant !='dark', opacify($_wm_border, 0.1), transparentize($_wm_border, 0.2));
     margin: 0px;
     border-radius: $header_radius $header_radius 0 0;
@@ -4023,7 +4023,7 @@ window {
       // change when we go to backdrop, to prevent jumping windows.
       // The biggest shadow should be in the same order then in the active state
       // or the jumping will happen during the transition.
-      box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', transparentize(darken($header_bg, 7%), 0.1), $_wm_border),
+      box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'mirage', transparentize(darken($header_bg, 7%), 0.1), $_wm_border),
                   0 8px 8px 0 transparent,
                   0 5px 5px 0 if($variant !='dark', opacify($_wm_border, 0.1), transparentize($_wm_border, 0.2));
       transition: $backdrop_transition;
@@ -4058,11 +4058,11 @@ window {
   &.tiled-right,
   &.tiled-bottom {
     border-radius: 0;
-    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', darken($header_bg, 7%), $_wm_border),
+    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'mirage', darken($header_bg, 7%), $_wm_border),
                 0 0 0 20px transparent; //transparent control workaround -- GTK issue #3670
 
     &:backdrop {
-      box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', darken($header_bg, 7%), $_wm_border),
+      box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'mirage', darken($header_bg, 7%), $_wm_border),
                   0 0 0 20px transparent; // GTK issue #3670
     }
   }
@@ -4072,7 +4072,7 @@ window {
   // server-side decorations as used by mutter
   &.ssd { //just doing borders, wm draws actual shadows
     border-radius: $header_radius $header_radius 0 0;
-    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', transparentize(black, 0.35), $_wm_border);
+    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'mirage', transparentize(black, 0.35), $_wm_border);
 
     &.maximized { border-radius: 0; }
   }

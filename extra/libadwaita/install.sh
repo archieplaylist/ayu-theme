@@ -24,9 +24,9 @@ resolve_flavor() {
             # Best-effort: use the GTK3 theme name to detect the flavor
             GTK_THEME="$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null | tr -d "'\\" || true)"
             case "$GTK_THEME" in
-                Ayu-Darkersolid*|Ayu-Darker*) echo "mirage" ;;
+                Ayu-Miragesolid*|Ayu-Mirage*) echo "mirage" ;;
                 Ayu-Darksolid*|Ayu-Dark*) echo "dark" ;;
-                Ayu-solid*) echo "light" ;;
+                Ayu-Lightsolid*|Ayu-Light*) echo "light" ;;
                 *) echo "light" ;;
             esac
             ;;

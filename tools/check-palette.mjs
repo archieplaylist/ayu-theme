@@ -138,10 +138,10 @@ const assetDirs = [
   "common/gtk-2.0/menubar-toolbar",
   "common/xfwm4/assets",
   "common/xfwm4/assets-dark",
-  "common/xfwm4/assets-darker",
+  "common/xfwm4/assets-mirage",
   "common/xfwm4/assets-hdpi",
   "common/xfwm4/assets-dark-hdpi",
-  "common/xfwm4/assets-darker-hdpi",
+  "common/xfwm4/assets-mirage-hdpi",
 ];
 for (const dir of assetDirs) {
   const abs = path.join(ROOT, dir);

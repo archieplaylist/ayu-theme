@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Ayu
+Name=Ayu Light
 Comment=ayu theme for GTK 2/3/4 — based on Arc
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Ayu
-MetacityTheme=Ayu
+GtkTheme=Ayu-Light
+MetacityTheme=Ayu-Light
 IconTheme=gnome
 CursorTheme=DMZ-Black
 ButtonLayout=menu:minimize,maximize,close
