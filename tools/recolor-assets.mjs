@@ -1,96 +1,98 @@
 #!/usr/bin/env node
-/* Recolor Arc accent pixels in rendered PNG assets to the ayu palette.
- *
- * Run from anywhere after `npm i pngjs` is available (node resolves it from
- * the repo root or your global modules):
+/* Recolor the rendered PNG assets to the exact ayu palette colours.
  *
  *   node tools/recolor-assets.mjs          # recolor in place
  *   node tools/recolor-assets.mjs --dry    # list what would change
  *
- *  - light files (no "-dark" suffix): Arc blue -> ayu light blue (#035BD6 model)
- *  - "-dark" files (and the assets-dark dir): Arc blue -> ayu yellow (#E6B450 model)
- * Only saturated blue-band pixels are touched; partial alpha is preserved.
+ * The mapping lives in tools/asset-map.json and points at the official ayu
+ * colours (https://github.com/ayu-theme/ayu-colors). Base colours are written
+ * exactly; antialiased edge pixels keep their original tone so the artwork is
+ * not distorted. The tool is idempotent: running it twice changes nothing.
  */
-import { PNG } from "pngjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { PNG } from "pngjs";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const MAP = JSON.parse(fs.readFileSync(path.join(ROOT, "tools/asset-map.json"), "utf8"));
 
-function rgb2hsl(r, g, b) {
-  r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
-  let h = 0;
-  if (d) {
-    switch (max) {
-      case r: h = ((g - b) / d + 6) % 6; break;
-      case g: h = (b - r) / d + 2; break;
-      default: h = (r - g) / d + 4;
-    }
-    h *= 60;
+function hex2rgb(hex) {
+  const h = hex.replace("#", "");
+  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+}
+function rgb2hex(r, g, b) {
+  return (
+    "#" +
+    [r, g, b]
+      .map((v) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0"))
+      .join("")
+  ).toUpperCase();
+}
+
+/* Build the lookup table for one file: exact colour -> target colour. */
+function buildLut(mapping) {
+  const lut = [];
+  for (const [source, target] of Object.entries(mapping)) {
+    if (source.toLowerCase() === target.toLowerCase()) continue; // already exact
+    lut.push({ source, target, s: hex2rgb(source), t: hex2rgb(target) });
   }
-  const l = (max + min) / 2;
-  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
-  return [h, s, l];
-}
-function hsl2rgb(h, s, l) {
-  h = ((h % 360) + 360) % 360;
-  const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs(((h / 60) % 2) - 1)), m = l - c / 2;
-  let r, g, b;
-  if (h < 60) { r = c; g = x; b = 0; } else if (h < 120) { r = x; g = c; b = 0; } else if (h < 180) { r = 0; g = c; b = x; }
-  else if (h < 240) { r = 0; g = x; b = c; } else if (h < 300) { r = x; g = 0; b = c; } else { r = c; g = 0; b = x; }
-  return [(r + m) * 255, (g + m) * 255, (b + m) * 255];
+  return lut;
 }
 
-// target models derived from Arc accent #5294e2 (h=213.3°, s=0.695, l=0.602)
-//  light goal #035BD6: h=213.6°, s=0.971, l=0.426
-//  dark  goal #E6B450: h=38.4°,  s=0.757, l=0.607
-const LIGHT = { hue: 213.6, satMul: 0.971 / 0.695, lightMul: 0.426 / 0.602 };
-const DARK  = { hue: 38.4,  satMul: 0.757 / 0.695, lightMul: 1.0 };
-
-function recolor(file, forceDark, dry) {
+function recolor(file, lut, dry) {
   const png = PNG.sync.read(fs.readFileSync(file));
   const d = png.data;
-  const target = forceDark || /-dark/.test(path.basename(file)) ? DARK : LIGHT;
   let changed = 0;
   for (let i = 0; i < d.length; i += 4) {
     if (d[i + 3] === 0) continue;
-    const h = rgb2hsl(d[i], d[i + 1], d[i + 2]);
-    // Accent pixels only: neutral blue-grays (Arc uses s ~0.15) must stay
-    // untouched, so discriminate on chroma instead of HSL saturation.
-    // Arc accent #5294e2 has chroma 0.565; its antialiased blends >= 0.2.
-    const chroma = (Math.max(d[i], d[i + 1], d[i + 2]) - Math.min(d[i], d[i + 1], d[i + 2])) / 255;
-    if (chroma < 0.18 || h[0] < 195 || h[0] > 250) continue;
-    // Idempotency: leave pixels that already sit in the ayu accent family.
-    let hueDiff = Math.abs(h[0] - target.hue);
-    if (hueDiff > 180) hueDiff = 360 - hueDiff;
-    if (target === LIGHT && hueDiff < 6 && h[1] > 0.90 && h[2] < 0.55) continue;
-    if (target === DARK && hueDiff < 6 && h[1] > 0.60) continue;
-    const ns = Math.min(1, h[1] * target.satMul);
-    const nl = Math.max(0, Math.min(1, h[2] * target.lightMul));
-    const [nr, ng, nb] = hsl2rgb(target.hue, ns, nl);
-    d[i] = nr; d[i + 1] = ng; d[i + 2] = nb;
-    changed++;
+    const r = d[i], g = d[i + 1], b = d[i + 2];
+    for (const entry of lut) {
+      if (r !== entry.s[0] || g !== entry.s[1] || b !== entry.s[2]) continue;
+      d[i] = entry.t[0]; d[i + 1] = entry.t[1]; d[i + 2] = entry.t[2];
+      changed++;
+      break;
+    }
   }
-  if (!dry) fs.writeFileSync(file, PNG.sync.write(png));
+  if (!dry && changed) fs.writeFileSync(file, PNG.sync.write(png));
   return changed;
 }
 
 const dry = process.argv.includes("--dry");
-const dirs = [
-  ["common/gtk-2.0/assets", false],
-  ["common/gtk-2.0/assets-dark", true],
-  ["common/gtk-2.0/menubar-toolbar", false],
-  ["common/gtk-3.0/3.22/assets", false],
-  ["common/gtk-4.0/assets", false],
-];
-for (const [dir, forceDark] of dirs) {
+let total = 0;
+
+for (const [dir, variants] of Object.entries(MAP.png)) {
   const abs = path.join(ROOT, dir);
-  if (!fs.existsSync(abs)) continue;
-  for (const f of fs.readdirSync(abs).filter(x => x.endsWith(".png"))) {
-    const n = recolor(path.join(abs, f), forceDark, dry);
-    if (dry && n > 0) console.log(`${dir}/${f}: ${n} px`);
+  if (!fs.existsSync(abs)) {
+    console.error(`missing directory: ${dir}`);
+    process.exitCode = 1;
+    continue;
+  }
+  for (const file of fs.readdirSync(abs).filter((x) => x.endsWith(".png"))) {
+    const isDark = /-dark/.test(file);
+    const mapping = isDark ? variants.dark || variants.all : variants.light || variants.all;
+    if (!mapping) continue;
+    const lut = buildLut(mapping);
+    const n = recolor(path.join(abs, file), lut, dry);
+    total += n;
+    if (n && dry) console.log(`${dir}/${file}: ${n} px`);
   }
 }
-console.log("assets recolored" + (dry ? " (dry run)" : ""));
+
+// The GTK4 tree reuses the GTK3 artwork.
+const gtk4 = path.join(ROOT, "common/gtk-4.0/assets");
+const gtk3 = path.join(ROOT, "common/gtk-3.0/3.22/assets");
+if (fs.existsSync(gtk4) && fs.existsSync(gtk3)) {
+  for (const file of fs.readdirSync(gtk3).filter((x) => x.endsWith(".png"))) {
+    const target = path.join(gtk4, file);
+    if (!fs.existsSync(target)) continue;
+    const isDark = /-dark/.test(file);
+    const mapping = isDark ? MAP.png["common/gtk-3.0/3.22/assets"].dark : MAP.png["common/gtk-3.0/3.22/assets"].light;
+    const lut = buildLut(mapping);
+    const n = recolor(target, lut, dry);
+    total += n;
+    if (n && dry) console.log(`common/gtk-4.0/assets/${file}: ${n} px`);
+  }
+}
+
+console.log(`assets recolored${dry ? " (dry run)" : ""}`);
