@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ----------------------------------------------------------------
 # Ayu libadwaita overrides installer
 #
