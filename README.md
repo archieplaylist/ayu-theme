@@ -24,6 +24,70 @@ of truth for the CSS, the window manager themes and the artwork. See
 See *Manual Installation* below. No distro packages exist for this recolored
 theme; it must be built from source.
 
+### Nix / NixOS
+
+The repository ships a flake with the theme, a NixOS module and a Home Manager
+module. Add it to your flake:
+
+```nix
+{
+  inputs.ayu-theme.url = "github:archieplaylist/ayu-theme";
+
+  # ...
+}
+```
+
+**NixOS** — installs the themes system-wide (all three variants plus their
+HiDPI window decorations):
+
+```nix
+{
+  imports = [ inputs.ayu-theme.nixosModules.default ];
+
+  services.ayu-theme.enable = true;
+}
+```
+
+The themes end up in `/run/current-system/sw/share/themes`, which is on
+`XDG_DATA_DIRS` in every session, so GTK, GNOME Shell and xfwm4 find them.
+Pick the variant you want in *gnome-tweaks* (or with your own
+`org.gnome.desktop.interface gtk-theme` setting).
+
+**Home Manager** — applies a variant for the current user, including the
+libadwaita overrides that modern GNOME apps need:
+
+```nix
+{
+  imports = [ inputs.ayu-theme.homeModules.default ];
+
+  ayu-theme = {
+    enable = true;
+    variant = "dark"; # light, mirage or dark
+  };
+}
+```
+
+This module only *applies* the theme; the theme files themselves come from the
+NixOS module above (or from a manual installation).
+
+**Other systems** — the flake builds the theme as a plain package:
+
+```console
+$ nix build github:archieplaylist/ayu-theme
+$ nix profile install github:archieplaylist/ayu-theme
+```
+
+The theme is data only, so link it into a directory that is on
+`XDG_DATA_DIRS`:
+
+```console
+$ mkdir -p ~/.local/share/themes
+$ ln -s "$(nix path-info github:archieplaylist/ayu-theme)/share/themes/"* ~/.local/share/themes/
+```
+
+For hacking on the theme, `nix develop` gives you a shell with autotools,
+`sassc` and the GTK development files. `nix flake check` builds the package.
+
 --
 
 ### Manual Installation

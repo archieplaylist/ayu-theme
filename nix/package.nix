@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   version =
     let
       acInit = builtins.replaceStrings [ "\n" ] [ " " ] (builtins.readFile ../configure.ac);
-      matched = builtins.match "AC_INIT\\( *\\[ayu-theme\\], *\\[([^]]*)\\].*" acInit;
+      matched = builtins.match "AC_INIT[(][[:space:]]*[[]ayu-theme[]],[[:space:]]*[[]([^]]*)[]].*" acInit;
     in
     if matched == null then "0" else builtins.head matched;
 
@@ -54,8 +54,9 @@ stdenv.mkDerivation {
         cd "$dir"
         for entry in *.scss; do
           case "$entry" in _*) continue ;; esac
-          echo "  ${dir}/$entry -> ${entry%.scss}.css"
-          sassc "$entry" "../${entry%.scss}.css"
+          target=$(basename "$entry" .scss)
+          echo "  $dir/$entry -> $target.css"
+          sassc "$entry" "../$target.css"
         done
       )
     done

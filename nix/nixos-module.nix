@@ -24,11 +24,13 @@ in
     };
 
     murrine = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
+      type = lib.types.nullOr lib.types.package;
+      default = null;
       description = ''
-        Also install the murrine GTK2 engine. The GTK2 part of the theme is
-        an engine theme and is not rendered without it.
+        Optional GTK2 theme engine package, e.g. `pkgs.gtk-engine-murrine`
+        on nixpkgs versions that still ship it. The GTK2 part of the theme is
+        an engine theme and is not rendered without it. GTK2 has been dropped
+        from current nixpkgs, hence the default of `null`.
       '';
     };
   };
@@ -39,6 +41,6 @@ in
     # pick them up.
     environment.systemPackages = [
       cfg.package
-    ] ++ lib.optional cfg.murrine pkgs.gtk-engine-murrine;
+    ] ++ lib.optional (cfg.murrine != null) cfg.murrine;
   };
 }

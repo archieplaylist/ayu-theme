@@ -8,7 +8,14 @@ let
   cfg = config.ayu-theme;
 
   # "Ayu-Dark", "Ayu-Mirage-solid", ...
-  themeName = "Ayu-" + lib.capitalize cfg.variant + (lib.optionalString cfg.solid "-solid");
+  themeName =
+    {
+      light = "Ayu-Light";
+      mirage = "Ayu-Mirage";
+      dark = "Ayu-Dark";
+    }
+    .${cfg.variant}
+    + (lib.optionalString cfg.solid "-solid");
 
   # The HiDPI window decorations are shipped as a separate theme.
   windowThemeName = themeName + (lib.optionalString cfg.hdpi "-hdpi");
