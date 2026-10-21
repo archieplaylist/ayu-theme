@@ -83,6 +83,29 @@ Because this theme is heavily based on the pixmap engine, a lot of the styling c
   between variants live in `light-assets/`/`dark-assets/` so the light theme
   gets ayu blue and the dark/mirage themes get ayu yellow.
 
+* The GTK titlebar button PNGs are kept in sync with the xfwm4 decorations by
+  `tools/recolor-titlebuttons.mjs`. Run it after re-rendering the titlebutton
+  assets; it updates both the normal and `@2` files in
+  `gtk-3.0/3.22/assets` and `gtk-4.0/assets`.
+
+--
+
+#### Editing the Xfwm4 window decoration
+
+* The xfwm4 assets are generated from `common/xfwm4/assets.svg` (light),
+  `assets-dark.svg` (dark) and `assets-darker.svg` (mirage). The SVGs are
+  already ayu-colored; keep the palette in sync with `_colors.scss` when you
+  bring in new artwork from Arc.
+
+* `./render-assets.sh` renders all 45 assets for each variant into `assets/`,
+  `assets-dark/` and `assets-darker/`, and the 2x versions into
+  `assets-hdpi/`, `assets-dark-hdpi/` and `assets-darker-hdpi/`. It works with
+  Inkscape 1.x and 0.92; `optipng` is used when available.
+
+* The window-manager-only `*-hdpi` themes are installed from the 2x trees.
+  `themerc-hdpi`, `themerc-dark-hdpi` and `themerc-darker-hdpi` double the
+  pixel geometry (button spacing, title offset, shadow and top border).
+
 --
 
 #### libadwaita overrides

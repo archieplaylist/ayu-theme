@@ -2,15 +2,24 @@ if !ENABLE_TRANSPARENCY
 themedir        = $(datadir)/themes/Ayu-solid
 themedarkerdir  = $(datadir)/themes/Ayu-Darker-solid
 themedarkdir    = $(datadir)/themes/Ayu-Dark-solid
+hdpidir         = $(datadir)/themes/Ayu-solid-hdpi
+hdpidarkerdir   = $(datadir)/themes/Ayu-Darker-solid-hdpi
+hdpidarkdir     = $(datadir)/themes/Ayu-Dark-solid-hdpi
 else
 themedir        = $(datadir)/themes/Ayu
 themedarkerdir  = $(datadir)/themes/Ayu-Darker
 themedarkdir    = $(datadir)/themes/Ayu-Dark
+hdpidir         = $(datadir)/themes/Ayu-hdpi
+hdpidarkerdir   = $(datadir)/themes/Ayu-Darker-hdpi
+hdpidarkdir     = $(datadir)/themes/Ayu-Dark-hdpi
 endif
 
 ithemedir       = $(DESTDIR)$(themedir)
-ithemedarkerdir   = $(DESTDIR)$(themedarkerdir)
-ithemedarkdir  = $(DESTDIR)$(themedarkdir)
+ithemedarkerdir = $(DESTDIR)$(themedarkerdir)
+ithemedarkdir   = $(DESTDIR)$(themedarkdir)
+ihdpidir        = $(DESTDIR)$(hdpidir)
+ihdpidarkerdir  = $(DESTDIR)$(hdpidarkerdir)
+ihdpidarkdir    = $(DESTDIR)$(hdpidarkdir)
 
 install-exec-hook:
 
@@ -355,27 +364,33 @@ endif # ENABLE_UNITY
 if ENABLE_XFWM
 
 if ENABLE_LIGHT
-	$(MKDIR_P) $(ithemedir)/xfwm4
+	$(MKDIR_P) $(ithemedir)/xfwm4 $(ihdpidir)/xfwm4
 
 	cd $(srcdir)/xfwm4 && \
 		cp -R assets/*.png $(ithemedir)/xfwm4 && \
-		cp themerc $(ithemedir)/xfwm4/themerc
+		cp themerc $(ithemedir)/xfwm4/themerc && \
+		cp -R assets-hdpi/*.png $(ihdpidir)/xfwm4 && \
+		cp themerc-hdpi $(ihdpidir)/xfwm4/themerc
 endif # ENABLE_LIGHT
 
 if ENABLE_DARKER
-	$(MKDIR_P) $(ithemedarkerdir)/xfwm4
+	$(MKDIR_P) $(ithemedarkerdir)/xfwm4 $(ihdpidarkerdir)/xfwm4
 
 	cd $(srcdir)/xfwm4 && \
-		cp -R assets-dark/*.png $(ithemedarkerdir)/xfwm4 && \
-		cp themerc-dark $(ithemedarkerdir)/xfwm4/themerc
+		cp -R assets-darker/*.png $(ithemedarkerdir)/xfwm4 && \
+		cp themerc-darker $(ithemedarkerdir)/xfwm4/themerc && \
+		cp -R assets-darker-hdpi/*.png $(ihdpidarkerdir)/xfwm4 && \
+		cp themerc-darker-hdpi $(ihdpidarkerdir)/xfwm4/themerc
 endif # ENABLE_DARKER
 
 if ENABLE_DARK
-	$(MKDIR_P) $(ithemedarkdir)/xfwm4
+	$(MKDIR_P) $(ithemedarkdir)/xfwm4 $(ihdpidarkdir)/xfwm4
 
 	cd $(srcdir)/xfwm4 && \
 		cp -R assets-dark/*.png $(ithemedarkdir)/xfwm4 && \
-		cp themerc-dark $(ithemedarkdir)/xfwm4/themerc
+		cp themerc-dark $(ithemedarkdir)/xfwm4/themerc && \
+		cp -R assets-dark-hdpi/*.png $(ihdpidarkdir)/xfwm4 && \
+		cp themerc-dark-hdpi $(ihdpidarkdir)/xfwm4/themerc
 endif # ENABLE_DARK
 
 endif # ENABLE_XFWM
@@ -391,6 +406,18 @@ endif # ENABLE_DARKER
 if ENABLE_DARK
 	rm -rf $(ithemedarkdir)
 endif # ENABLE_DARK
+
+if ENABLE_XFWM
+	rm -rf $(ihdpidir)
+
+if ENABLE_DARKER
+	rm -rf $(ihdpidarkerdir)
+endif # ENABLE_DARKER
+
+if ENABLE_DARK
+	rm -rf $(ihdpidarkdir)
+endif # ENABLE_DARK
+endif # ENABLE_XFWM
 
 
 EXTRA_DIST = $(srcdir)/cinnamon \

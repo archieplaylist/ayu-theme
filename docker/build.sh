@@ -84,9 +84,11 @@ make install DESTDIR="$STAGE"
 THEMEDIR="$STAGE/usr/share/themes"
 if [ "$SOLID" = "1" ]; then
 	THEMES=(Ayu-solid Ayu-Darker-solid Ayu-Dark-solid)
+	HDPI_THEMES=(Ayu-solid-hdpi Ayu-Darker-solid-hdpi Ayu-Dark-solid-hdpi)
 	SUFFIX="-solid"
 else
 	THEMES=(Ayu Ayu-Darker Ayu-Dark)
+	HDPI_THEMES=(Ayu-hdpi Ayu-Darker-hdpi Ayu-Dark-hdpi)
 	SUFFIX=""
 fi
 
@@ -97,6 +99,15 @@ for theme in "${THEMES[@]}"; do
 	done
 	[ -d "$THEMEDIR/$theme/cinnamon" ] || { echo "Missing $theme/cinnamon" >&2; exit 1; }
 	[ -d "$THEMEDIR/$theme/gnome-shell" ] || { echo "Missing $theme/gnome-shell" >&2; exit 1; }
+	[ -f "$THEMEDIR/$theme/xfwm4/themerc" ] || { echo "Missing $theme/xfwm4/themerc" >&2; exit 1; }
+done
+
+for theme in "${HDPI_THEMES[@]}"; do
+	[ -f "$THEMEDIR/$theme/xfwm4/themerc" ] || { echo "Missing $theme/xfwm4/themerc" >&2; exit 1; }
+	[ "$(find "$THEMEDIR/$theme/xfwm4" -name '*.png' | wc -l)" -eq 45 ] || {
+		echo "Missing xfwm4 HDPI assets in $theme" >&2
+		exit 1
+	}
 done
 
 # Nothing from the original Arc accent may survive into a release artifact.
@@ -111,7 +122,7 @@ say "Packaging $TARBALL"
 tar --owner=0 --group=0 --numeric-owner \
 	-C "$THEMEDIR" \
 	-czf "$OUT/$TARBALL" \
-	"${THEMES[@]}"
+	"${THEMES[@]}" "${HDPI_THEMES[@]}"
 
 ( cd "$OUT" && sha256sum "$TARBALL" > "$TARBALL.sha256" )
 

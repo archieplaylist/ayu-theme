@@ -62,6 +62,11 @@ function recolor(file, forceDark, dry) {
     // Arc accent #5294e2 has chroma 0.565; its antialiased blends >= 0.2.
     const chroma = (Math.max(d[i], d[i + 1], d[i + 2]) - Math.min(d[i], d[i + 1], d[i + 2])) / 255;
     if (chroma < 0.18 || h[0] < 195 || h[0] > 250) continue;
+    // Idempotency: leave pixels that already sit in the ayu accent family.
+    let hueDiff = Math.abs(h[0] - target.hue);
+    if (hueDiff > 180) hueDiff = 360 - hueDiff;
+    if (target === LIGHT && hueDiff < 6 && h[1] > 0.90 && h[2] < 0.55) continue;
+    if (target === DARK && hueDiff < 6 && h[1] > 0.60) continue;
     const ns = Math.min(1, h[1] * target.satMul);
     const nl = Math.max(0, Math.min(1, h[2] * target.lightMul));
     const [nr, ng, nb] = hsl2rgb(target.hue, ns, nl);
@@ -79,8 +84,6 @@ const dirs = [
   ["common/gtk-2.0/menubar-toolbar", false],
   ["common/gtk-3.0/3.22/assets", false],
   ["common/gtk-4.0/assets", false],
-  ["common/xfwm4/assets", false],
-  ["common/xfwm4/assets-dark", true],
 ];
 for (const [dir, forceDark] of dirs) {
   const abs = path.join(ROOT, dir);

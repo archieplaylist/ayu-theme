@@ -81,6 +81,13 @@ After the installation is complete the theme can be activated with `gnome-tweak-
 
 If the `--disable-transparency` option was used, the theme will be installed as `Ayu-solid`, `Ayu-Darker-solid` and `Ayu-Dark-solid`.
 
+Xfwm4 does not automatically load 2x window-decoration assets on HiDPI
+displays, so each variant also installs a separate window-manager-only theme
+with 2x assets. On a 2x display, select `Ayu-hdpi` (or
+`Ayu-Darker-hdpi`/`Ayu-Dark-hdpi`, and the `-solid-hdpi` names when built
+without transparency) as the Xfwm4 window manager theme in addition to the
+normal GTK theme.
+
 ### Building a release tarball with Docker
 
 `./build-docker.sh` builds the theme in a Debian container (toolchain only — no
@@ -93,7 +100,8 @@ packages the result:
     ./build-docker.sh -o /tmp/out      # custom output directory
 
 Each tarball contains the theme directories (`Ayu`, `Ayu-Darker`, `Ayu-Dark`,
-or the `-solid` equivalents) ready to extract into `/usr/share/themes`:
+or the `-solid` equivalents), plus the `-hdpi` window-manager themes, ready to
+extract into `/usr/share/themes`:
 
     sudo tar -xzf ayu-theme-<version>.tar.gz -C /usr/share/themes
 
@@ -124,7 +132,7 @@ Run
 
 from the cloned git repository, or
 
-    sudo rm -rf /usr/share/themes/{Ayu,Ayu-Darker,Ayu-Dark}
+    sudo rm -rf /usr/share/themes/{Ayu,Ayu-Darker,Ayu-Dark,Ayu-hdpi,Ayu-Darker-hdpi,Ayu-Dark-hdpi,Ayu-solid,Ayu-Darker-solid,Ayu-Dark-solid,Ayu-solid-hdpi,Ayu-Darker-solid-hdpi,Ayu-Dark-solid-hdpi}
 
 ## Extras
 
@@ -142,9 +150,11 @@ Now open the Plank preferences window by executing `plank --preferences` from a 
 Named-color overrides that make modern GNOME (libadwaita) apps render in ayu.
 See the GTK4 section above, or `extra/libadwaita/install.sh`.
 
-### Asset recolor tool
-`tools/recolor-assets.mjs` maps the remaining Arc blue accents in rendered PNG
-assets onto the ayu accents. Run it after re-rendering assets with inkscape.
+### Asset recolor tools
+`tools/recolor-assets.mjs` maps the remaining Arc blue accents in rendered GTK
+PNG assets onto the ayu accents. Run it after re-rendering assets with inkscape.
+`tools/recolor-titlebuttons.mjs` updates the GTK titlebar button PNGs (close,
+maximize, minimize) so the client-side decorations match the xfwm4 assets.
 
 ## Troubleshooting
 

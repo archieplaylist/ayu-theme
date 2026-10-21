@@ -1,6 +1,6 @@
 AC_INIT(
     [ayu-theme],
-    [2026.10.1],
+    [2026.10.2],
     [https://github.com/ayu-theme/ayu-theme/issues],
     [ayu-theme],
     [https://github.com/ayu-theme/ayu-theme],
