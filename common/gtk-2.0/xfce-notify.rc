@@ -1,19 +1,19 @@
-gtk-color-scheme = "selected_bg_color:#035BD6\nselected_fg_color:#ffffff"
+gtk-color-scheme = "selected_bg_color:#FFCC66\nselected_fg_color:#735923"
 
 style "notify-window" {
   XfceNotifyWindow::summary-bold = 1
-  XfceNotifyWindow::border-color = "#161A24"
-  XfceNotifyWindow::border-color-hover = "#161A24"
+  XfceNotifyWindow::border-color = "#171B24"
+  XfceNotifyWindow::border-color-hover = "#171B24"
   XfceNotifyWindow::border-radius = 3.0
   XfceNotifyWindow::border-width = 1.0
   XfceNotifyWindow::border-width-hover = 1.0
 
-  bg[NORMAL] = "#1B212C"
+  bg[NORMAL] = "#1C212C"
 }
 
 style "notify-button" {
-  bg[NORMAL] = "#2A3140"
-  bg[PRELIGHT] = "#607080"
+  bg[NORMAL] = "#282E3B"
+  bg[PRELIGHT] = "#707A8C"
   bg[ACTIVE] = @selected_bg_color
 
   fg[NORMAL] = "#CCCAC2"

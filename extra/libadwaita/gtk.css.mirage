@@ -5,25 +5,25 @@
  * so re-defining these named colors re-skins modern GNOME GTK4 apps.
  */
 @define-color accent_bg_color #FFCC66;
-@define-color accent_fg_color #21283A;
+@define-color accent_fg_color #735923;
 @define-color accent_color #FFCC66;
 @define-color accent_color_rgba rgba(255, 204, 102, 1);
 
-@define-color destructive_bg_color #F28779;
-@define-color destructive_fg_color #21283A;
-@define-color destructive_color #F28779;
+@define-color destructive_bg_color #FF6666;
+@define-color destructive_fg_color #735923;
+@define-color destructive_color #FF6666;
 
-@define-color success_bg_color #D5FF80;
-@define-color success_fg_color #21283A;
-@define-color success_color #D5FF80;
+@define-color success_bg_color #87D96C;
+@define-color success_fg_color #735923;
+@define-color success_color #87D96C;
 
 @define-color warning_bg_color #FFCD66;
 @define-color warning_fg_color #CCCAC2;
 @define-color warning_color #FFCD66;
 
-@define-color error_bg_color #F28779;
-@define-color error_fg_color #21283A;
-@define-color error_color #F28779;
+@define-color error_bg_color #FF6666;
+@define-color error_fg_color #735923;
+@define-color error_color #FF6666;
 
 /*scrol window / views */
 @define-color window_bg_color #1F2430;
@@ -34,24 +34,24 @@
 /* header bar */
 @define-color headerbar_bg_color #181C26;
 @define-color headerbar_fg_color #CCCAC2;
-@define-color headerbar_border_color #3D4751;
+@define-color headerbar_border_color rgba(23, 27, 36, 1);
 @define-color headerbar_backdrop_color #282E3B;
 @define-color headerbar_shade_color rgba(0, 0, 0, 0.3);
 @define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.45);
 
 @define-color sidebar_bg_color #282E3B;
-@define-color sidebar_fg_color #607080;
+@define-color sidebar_fg_color #707A8C;
 @define-color sidebar_backdrop_color #181C26;
 @define-color sidebar_shade_color rgba(0, 0, 0, 0.3);
 
 @define-color secondary_sidebar_bg_color #282E3B;
-@define-color secondary_sidebar_fg_color #607080;
+@define-color secondary_sidebar_fg_color #707A8C;
 @define-color secondary_sidebar_backdrop_color #181C26;
 @define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.3);
 
 @define-color card_bg_color #242936;
 @define-color card_fg_color #CCCAC2;
-@define-color popover_bg_color #242936;
+@define-color popover_bg_color #1C212C;
 @define-color popover_fg_color #CCCAC2;
 
 @define-color thumbnail_fg_color #242936;
@@ -59,7 +59,7 @@
 @define-color dialog_bg_color #1F2430;
 @define-color dialog_fg_color #CCCAC2;
 
-@define-color bluebench_border_color #3D4751;
-@define-color unfocused_borders #3D4751;
+@define-color bluebench_border_color rgba(23, 27, 36, 1);
+@define-color unfocused_borders rgba(23, 27, 36, 1);
 
-@define-color unfocused_fg_color #607080;
+@define-color unfocused_fg_color #707A8C;

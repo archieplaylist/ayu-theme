@@ -7,8 +7,8 @@
       "colors": {
          "bookmark_text": [
             92,
-            103,
-            115
+            97,
+            102
          ],
          "button_background": [
             0,
@@ -43,18 +43,18 @@
          ],
          "ntp_text": [
             92,
-            103,
-            115
+            97,
+            102
          ],
          "tab_background_text": [
             130,
-            140,
-            153
+            142,
+            159
          ],
          "tab_text": [
             92,
-            103,
-            115
+            97,
+            102
          ],
          "toolbar": [
             248,

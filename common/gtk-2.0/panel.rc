@@ -5,7 +5,7 @@ style "theme-panel" {
 
   bg[NORMAL] = "#171B24"
   bg[ACTIVE] = @selected_bg_color
-  bg[PRELIGHT] = "#2A313D"
+  bg[PRELIGHT] = "#282E3B"
   bg[SELECTED] = @selected_bg_color
 
   fg[NORMAL] = "#707A8C"
