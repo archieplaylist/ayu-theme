@@ -30,6 +30,19 @@ This theme uses `sassc` (libsass) to process the various .scss files. Never edit
   `Ayu-Dark` dark) is selected by the `$flavor` variable set in the entry
   `.scss` files; `$variant` and `$transparency` behave like they did in Arc.
 
+* The palette itself is **not** written by hand. `tools/palette.json` holds the
+  official ayu-colors values, `tools/gen-palette.mjs` writes them into the
+  `$ayu` map of every Sass tree, and `tools/check-palette.mjs` fails when a
+  colour is not an ayu token. See `PALETTE.md`.
+
+  ```sh
+  node tools/gen-palette.mjs      # regenerate the $ayu blocks
+  node tools/check-palette.mjs    # verify that everything is an ayu colour
+  ```
+
+  The generated block is delimited by `// BEGIN AYU PALETTE` and
+  `// END AYU PALETTE`; never edit it by hand.
+
 Note: the GTK3 and GNOME Shell CSS are shared by every GTK >= 3.22 / GNOME >= 3.22
 release; separate version directories for 3.14–3.20 were dropped.
 
@@ -66,17 +79,22 @@ Because this theme is heavily based on the pixmap engine, a lot of the styling c
 
 * The `assets.svg` sources and the PNGs are already ayu-colored in this tree,
   so a fresh render normally needs no extra pass. If you bring in new artwork
-  from Arc, re-run the hue-remap over both the sources and the rendered PNGs:
+  from Arc, re-run the colour map over both the sources and the rendered PNGs:
 
   ```sh
   npm i
-  node tools/recolor-svg.mjs      # SVG/XML sources (accent colors only)
+  node tools/recolor-svg.mjs      # SVG/XML sources
   node tools/recolor-assets.mjs   # rendered PNGs
   ```
 
-  Both scripts only touch saturated Arc accent blues: neutral blue-grays
-  (Arc's slightly blue UI grays) are preserved by a chroma threshold, and
-  already-converted ayu accents are skipped.
+  The mapping is defined in `tools/asset-map.json` and points at the official
+  ayu colours: the accents become `#035BD6` (light) or `#E6B450` (dark), the
+  window-button close states use the ayu red ramp, and the widget chrome uses
+  the ayu surfaces and gray ramp. Both scripts write exact colours and are
+  idempotent, so running them twice changes nothing.
+
+  `tools/check-palette.mjs` fails if a legacy Arc colour is left in a
+  rendered asset.
 
 * Cinnamon and GNOME Shell assets are plain SVG and are recolored by
   `tools/recolor-svg.mjs` as well. Accent-bearing assets that are shared

@@ -4,6 +4,11 @@ ayu theme for GTK 4, GTK 3 and GTK 2, based on the flat, transparent Arc theme a
 
 It also themes Cinnamon, GNOME Shell, Metacity, Unity, Xfwm4, Plank and Chrome/Chromium.
 
+Every colour of the theme comes from the official palette: the values in
+`tools/palette.json` are generated from ayu-colors and are the single source
+of truth for the CSS, the window manager themes and the artwork. See
+[PALETTE.md](PALETTE.md) for the mapping and the few documented deviations.
+
 ## The theme is available in three variants
 
 ##### Ayu (light)
