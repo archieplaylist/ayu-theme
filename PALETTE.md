@@ -39,7 +39,7 @@ Never edit it by hand — run `node tools/gen-palette.mjs` after updating
 
 The theme uses the official ayu roles for the surfaces:
 
-| Theme variable | ayu token | light | mirage | dark |
+| Theme variable | ayu token | Ayu Light | Ayu Mirage | Ayu Dark |
 |---|---|---|---|---|
 | `$bg_color` (window) | `surface.base` | `#F8F9FA` | `#1F2430` | `#0D1017` |
 | `$base_color` (entry, editor) | `surface.lift` | `#FCFCFC` | `#242936` | `#10141C` |
@@ -96,7 +96,7 @@ to the ayu palette by `tools/recolor-svg.mjs` (sources) and
 `tools/recolor-assets.mjs` (rendered PNGs). The mapping lives in
 `tools/asset-map.json`:
 
-* accents: `#035BD6` (light), `#E6B450` (dark), `#FFCC66` (mirage)
+* accents: `#035BD6` (Ayu Light), `#E6B450` (Ayu Dark), `#FFCC66` (Ayu Mirage)
 * window-button close states: the ayu red ramp
   (`#F07171`/`#F28886`/`#E5474F` light, `#F07178`/`#F39193`/`#EF616B` dark,
   `#F49F92`/`#F7B5AB`/`#F28779` mirage)

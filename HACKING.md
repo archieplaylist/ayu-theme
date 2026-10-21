@@ -11,7 +11,7 @@ This theme uses `sassc` (libsass) to process the various .scss files. Never edit
 
   ```sh
   cd common/gtk-3.0/3.22/sass
-  for f in gtk gtk-dark gtk-darker gtk-solid gtk-solid-dark gtk-solid-darker; do
+  for f in gtk gtk-dark gtk-mirage gtk-solid gtk-solid-dark gtk-solid-mirage; do
       sassc "$f.scss" "../$f.css"
   done
   ```
@@ -20,14 +20,14 @@ This theme uses `sassc` (libsass) to process the various .scss files. Never edit
 
   ```sh
   cd common/cinnamon/sass
-  for f in cinnamon cinnamon-dark cinnamon-darker; do sassc "$f.scss" "../$f.css"; done
+  for f in cinnamon cinnamon-dark cinnamon-mirage; do sassc "$f.scss" "../$f.css"; done
 
   cd common/gnome-shell/3.22/sass
-  for f in gnome-shell gnome-shell-dark gnome-shell-darker; do sassc "$f.scss" "../$f.css"; done
+  for f in gnome-shell gnome-shell-dark gnome-shell-mirage; do sassc "$f.scss" "../$f.css"; done
   ```
 
-* Colors live in `_colors.scss`. Each flavor (`Ayu` light, `Ayu-Darker` mirage,
-  `Ayu-Dark` dark) is selected by the `$flavor` variable set in the entry
+* Colors live in `_colors.scss`. Each flavor (`Ayu Light`, `Ayu Mirage`,
+  `Ayu Dark`) is selected by the `$flavor` variable set in the entry
   `.scss` files; `$variant` and `$transparency` behave like they did in Arc.
 
 * The palette itself is **not** written by hand. `tools/palette.json` holds the
@@ -52,7 +52,7 @@ release; separate version directories for 3.14–3.20 were dropped.
 
 * Go to `common/gtk-2.0`
 
-* The colors are defined in `gtkrc`, `gtkrc-dark` and `gtkrc-darker` (light / mirage / dark)
+* The colors are defined in `gtkrc`, `gtkrc-dark` and `gtkrc-mirage` (light / dark / mirage)
 
 * `main.rc` contains the major part of the theme
 
@@ -111,17 +111,17 @@ Because this theme is heavily based on the pixmap engine, a lot of the styling c
 #### Editing the Xfwm4 window decoration
 
 * The xfwm4 assets are generated from `common/xfwm4/assets.svg` (light),
-  `assets-dark.svg` (dark) and `assets-darker.svg` (mirage). The SVGs are
+  `assets-dark.svg` (dark) and `assets-mirage.svg` (mirage). The SVGs are
   already ayu-colored; keep the palette in sync with `_colors.scss` when you
   bring in new artwork from Arc.
 
 * `./render-assets.sh` renders all 45 assets for each variant into `assets/`,
-  `assets-dark/` and `assets-darker/`, and the 2x versions into
-  `assets-hdpi/`, `assets-dark-hdpi/` and `assets-darker-hdpi/`. It works with
+  `assets-dark/` and `assets-mirage/`, and the 2x versions into
+  `assets-hdpi/`, `assets-dark-hdpi/` and `assets-mirage-hdpi/`. It works with
   Inkscape 1.x and 0.92; `optipng` is used when available.
 
 * The window-manager-only `*-hdpi` themes are installed from the 2x trees.
-  `themerc-hdpi`, `themerc-dark-hdpi` and `themerc-darker-hdpi` double the
+  `themerc-hdpi`, `themerc-dark-hdpi` and `themerc-mirage-hdpi` double the
   pixel geometry (button spacing, title offset, shadow and top border).
 
 --

@@ -11,11 +11,11 @@ of truth for the CSS, the window manager themes and the artwork. See
 
 ## The theme is available in three variants
 
-##### Ayu (light)
+##### Ayu Light
 
-##### Ayu-Darker (mirage)
+##### Ayu Mirage
 
-##### Ayu-Dark (dark)
+##### Ayu Dark
 
 ## Installation
 
@@ -66,9 +66,9 @@ Clone the git repository with
 Other options to pass to autogen.sh are
 
     --disable-transparency     disable transparency in the GTK3/GTK4 theme
-    --disable-light            disable Ayu (light) support
-    --disable-darker           disable Ayu-Darker (mirage) support
-    --disable-dark             disable Ayu-Dark support
+    --disable-light            disable Ayu Light support
+    --disable-mirage           disable Ayu Mirage support
+    --disable-dark             disable Ayu Dark support
     --disable-cinnamon         disable Cinnamon support
     --disable-gnome-shell      disable GNOME Shell support
     --disable-gtk2             disable GTK2 support
@@ -82,14 +82,14 @@ Other options to pass to autogen.sh are
                                release; the version is detected automatically
                                and any GTK >= 3.22 build uses the 3.22 CSS
 
-After the installation is complete the theme can be activated with `gnome-tweak-tool` or a similar program by selecting `Ayu`, `Ayu-Darker` or `Ayu-Dark` as Window/GTK+ theme.
+After the installation is complete the theme can be activated with `gnome-tweak-tool` or a similar program by selecting `Ayu Light`, `Ayu Mirage` or `Ayu Dark` as Window/GTK+ theme.
 
-If the `--disable-transparency` option was used, the theme will be installed as `Ayu-solid`, `Ayu-Darker-solid` and `Ayu-Dark-solid`.
+If the `--disable-transparency` option was used, the theme will be installed as `Ayu-Light-solid`, `Ayu-Mirage-solid` and `Ayu-Dark-solid`.
 
 Xfwm4 does not automatically load 2x window-decoration assets on HiDPI
 displays, so each variant also installs a separate window-manager-only theme
-with 2x assets. On a 2x display, select `Ayu-hdpi` (or
-`Ayu-Darker-hdpi`/`Ayu-Dark-hdpi`, and the `-solid-hdpi` names when built
+with 2x assets. On a 2x display, select `Ayu-Light-hdpi` (or
+`Ayu-Mirage-hdpi`/`Ayu-Dark-hdpi`, and the `-solid-hdpi` names when built
 without transparency) as the Xfwm4 window manager theme in addition to the
 normal GTK theme.
 
@@ -104,9 +104,9 @@ packages the result:
     ./build-docker.sh --all            # both variants
     ./build-docker.sh -o /tmp/out      # custom output directory
 
-Each tarball contains the theme directories (`Ayu`, `Ayu-Darker`, `Ayu-Dark`,
-or the `-solid` equivalents), plus the `-hdpi` window-manager themes, ready to
-extract into `/usr/share/themes`:
+Each tarball contains the theme directories (`Ayu-Light`, `Ayu-Mirage`,
+`Ayu-Dark`, or the `-solid` equivalents), plus the `-hdpi` window-manager
+themes, ready to extract into `/usr/share/themes`:
 
     sudo tar -xzf ayu-theme-<version>.tar.gz -C /usr/share/themes
 
@@ -117,7 +117,7 @@ removed afterwards unless `--keep-image` is given.
 
 The GTK4 theme is installed as `<theme>/gtk-4.0/gtk.css` and is picked up by
 GTK4 apps when the theme is selected in `gnome-tweaks` or via
-`GTK_THEME=Ayu gtk4-demo`.
+`GTK_THEME=Ayu-Light gtk4-demo`.
 
 Modern libadwaita apps hard-code the Adwaita stylesheet and ignore `GTK_THEME`.
 For those, install the ayu named-color overrides (see `extra/libadwaita/`):
@@ -137,12 +137,12 @@ Run
 
 from the cloned git repository, or
 
-    sudo rm -rf /usr/share/themes/{Ayu,Ayu-Darker,Ayu-Dark,Ayu-hdpi,Ayu-Darker-hdpi,Ayu-Dark-hdpi,Ayu-solid,Ayu-Darker-solid,Ayu-Dark-solid,Ayu-solid-hdpi,Ayu-Darker-solid-hdpi,Ayu-Dark-solid-hdpi}
+    sudo rm -rf /usr/share/themes/{Ayu-Light,Ayu-Mirage,Ayu-Dark,Ayu-Light-hdpi,Ayu-Mirage-hdpi,Ayu-Dark-hdpi,Ayu-Light-solid,Ayu-Mirage-solid,Ayu-Dark-solid,Ayu-Light-solid-hdpi,Ayu-Mirage-solid-hdpi,Ayu-Dark-solid-hdpi}
 
 ## Extras
 
 ### Chrome/Chromium theme
-The ayu Chrome themes live in `extra/Chrome/{ayu-theme,ayu-darker-theme,ayu-dark-theme}`.
+The ayu Chrome themes live in `extra/Chrome/{ayu-theme,ayu-mirage-theme,ayu-dark-theme}`.
 Modern Chrome no longer accepts unsigned `.crx` files, so pack the theme you
 want from its folder via `chrome://extensions` → *Developer mode* → *Pack
 extension* (select the `ayu-*-theme` folder as the extension root).
@@ -175,5 +175,5 @@ If you find a bug, please report it at the upstream tracker: https://github.com/
 This theme is based on Arc by horst3180 and is available under the terms of the GPL-3.0. See `COPYING` for details. The ayu palette follows https://github.com/ayu-theme/ayu-colors.
 
 ## Full Preview
-Run `GTK_THEME=Ayu gtk4-demo` (or open any GTK 3/4 app with `GTK_THEME=...`)
+Run `GTK_THEME=Ayu-Light gtk4-demo` (or open any GTK 3/4 app with `GTK_THEME=...`)
 against an installed variant for a live preview.
