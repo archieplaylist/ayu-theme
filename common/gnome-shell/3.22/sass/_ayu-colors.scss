@@ -2,49 +2,55 @@
 // ayu palette override
 // $flavor: 'light' (Ayu), 'dark' (Ayu-Dark), 'mirage' (Ayu-Darker)
 //
+// The palette itself lives in _ayu-palette.scss (generated from
+// tools/palette.json by tools/gen-palette.mjs).
+//
 
-@function ayu($key) {
-  @return map-get(map-get($_ayu, $flavor), $key);
-}
 
-$_ayu: (
-  light:   (
-    base:   #F8F9FA,
-    sunk:   #EBEEF0,
-    fg:     #5C6773,
-    fg-idle:#828C99,
-    gray:   #D9D8D7,
-  ),
-  dark:    (
-    base:   #1F2430,
-    sunk:   #0D1017,
-    fg:     #BFBDB6,
-    fg-idle:#5A6673,
-    gray:   #2D3640,
-  ),
-  mirage:  (
-    base:   #1F2430,
-    sunk:   #181C26,
-    fg:     #CCCAC2,
-    fg-idle:#607080,
-    gray:   #3D4751,
-  ),
-) !default;
+//
+// Surfaces follow the official ayu roles:
+//   window → surface.base   entry/card → surface.lift
+//   panel  → ui.panel.bg    popup      → ui.popup.bg
+//
+$bg_color: ayu('surface.base');
+$base_color: ayu('surface.lift');
+$fg_color: ayu('editor.fg');
 
-$bg_color: ayu('base');
-$base_color: ayu('sunk');
-$fg_color: ayu('fg');
-
-$osd_fg_color: ayu('fg');
-$osd_bg_color: ayu('sunk');
+$osd_fg_color: ayu('editor.fg');
+$osd_bg_color: ayu('ui.popup.bg');
 
 // system elements (lock/login) are always dark
-$system_base_color: #0D1017;
-$system_fg_color: #BFBDB6;
+$system_base_color: ayu('surface.base', 'dark');
+$system_fg_color: ayu('editor.fg', 'dark');
 
-$panel_bg_color: ayu('sunk');
-$panel_fg_color: ayu('fg');
+$panel_bg_color: ayu('ui.panel.bg');
+$panel_fg_color: ayu('ui.fg');
 
-$card_bg_color: if($flavor == 'light', #FCFCFC, lighten($bg_color, 5%));
+$card_bg_color: if($flavor == 'light', ayu('surface.lift'), lighten($bg_color, 5%));
 $card_shadow_color: if($flavor == 'light', transparentize($dark_5, .97), transparent);
 $card_shadow_border_color: if($flavor == 'light', transparentize($dark_5, .91), transparent);
+
+//
+// Accent and state colors — override the Adwaita defaults from
+// _default-colors.scss, which are imported before this file.
+//
+$accent_color: ayu('common.accent.tint');
+
+$destructive_bg_color: ayu('common.error');
+$destructive_color: ayu('common.error');
+$destructive_fg_color: ayu('surface.over');
+
+$success_bg_color: ayu('vcs.added');
+$success_color: ayu('vcs.added');
+$success_fg_color: ayu('surface.over');
+
+$warning_bg_color: ayu('syntax.func');
+$warning_color: ayu('syntax.func');
+$warning_fg_color: ayu('surface.over');
+
+$error_bg_color: ayu('common.error');
+$error_color: ayu('common.error');
+$error_fg_color: ayu('surface.over');
+
+$link_color: ayu('common.accent.tint');
+$link_visited_color: mix($link_color, ayu('surface.base'), 60%);

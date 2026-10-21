@@ -1,8 +1,8 @@
 // Named Colors
 
 // base colors
-$_base_color_dark: #222226;
-$_base_color_light: #fafafb;
+$_base_color_dark: ayu('surface.base');
+$_base_color_light: ayu('surface.base');
 
 // accent colors
 $accent_color: if($variant== 'light', -st-accent-color, st-mix(-st-accent-color, $light_1, 60%));
@@ -17,7 +17,7 @@ $success_bg_color: if($variant == 'light', $green_4, $green_5);
 $success_fg_color: $light_1;
 $success_color: $success_bg_color;
 
-$warning_bg_color: if($variant == 'light', $yellow_5, #cd9309); // uses darker off-palette yellow
+$warning_bg_color: if($variant == 'light', $yellow_5, ayu('palette.yellow.l1')); // darker yellow for dark mode
 $warning_fg_color: transparentize(black, .2);
 $warning_color: $warning_bg_color;
 
