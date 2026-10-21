@@ -13,7 +13,8 @@ style "notify-window" {
 
 style "notify-button" {
   bg[NORMAL] = "#282E3B"
-  bg[PRELIGHT] = "#707A8C"
+  # a lighter step of the same surface: the #CCCAC2 label keeps 6:1 on it
+  bg[PRELIGHT] = shade(1.3, "#282E3B")
   bg[ACTIVE] = @selected_bg_color
 
   fg[NORMAL] = "#CCCAC2"

@@ -447,7 +447,7 @@ StScrollBar {
     -natural-hpadding: 6px;
     -minimum-hpadding: 2px;
     font-weight: bold;
-    color: green;
+    color: $_panel_fg_color;
     transition-duration: 100;
 
     &:hover {}

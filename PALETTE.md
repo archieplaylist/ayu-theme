@@ -45,7 +45,8 @@ The theme uses the official ayu roles for the surfaces:
 | `$base_color` (entry, editor) | `surface.lift` | `#FCFCFC` | `#242936` | `#10141C` |
 | `$header_bg` (header bar) | `surface.sunk` | `#EBEEF0` | `#181C26` | `#010102` |
 | `$text_color`, `$fg_color` | `editor.fg` | `#5C6166` | `#CCCAC2` | `#BFBDB6` |
-| `$dark_sidebar_fg` | `ui.fg` | `#828E9F` | `#707A8C` | `#5A6378` |
+| `$dark_sidebar_fg`, `$panel_fg` (GTK sidebars, panels) | `editor.fg` | `#5C6166` | `#CCCAC2` | `#BFBDB6` |
+| `$panel_fg_color` (GNOME Shell top bar) | `editor.fg` | `#5C6166` | `#CCCAC2` | `#BFBDB6` |
 | `$dark_sidebar_bg` | `ui.panel.bg` | `#FAFAFA` | `#282E3B` | `#141821` |
 | `$osd_bg_color` | `ui.popup.bg` | `#FFFFFF` | `#1C212C` | `#0F131A` |
 | `$borders_color`, `$entry_border` | `ui.line` | `rgba(#6B7D8F,.12)` | `#171B24` | `#1B1F29` |
@@ -66,6 +67,13 @@ The same mapping is used by the GTK 2 `gtkrc` files, the Xfwm4 `themerc`
 files, the Metacity themes, the Chrome/Chromium manifests and the libadwaita
 overrides in `extra/libadwaita/`.
 
+`ui.fg` is ayu's *muted* token. It is only used for secondary text
+(entry placeholders, unfocused window buttons) and never as the foreground
+of a filled surface: on `ui.panel.bg` it reaches just ~3:1, while
+`editor.fg` keeps 6:1 (light) up to 9.5:1 (dark). The same rule applies to
+the GNOME Shell top bar, where the clock, the panel labels and the status
+icons all take their colour from `$panel_fg_color`.
+
 ## Derived colours
 
 A few states have no ayu token. They are computed from ayu tokens with the
@@ -85,6 +93,7 @@ formulas below — never with a hand-picked hex value.
 | `$wm_button_close_active_bg` | `darken(syntax.markup, 12%)` |
 | `$osd_button_bg` | `transparentize(lighten(ui.popup.bg, 22%), .6)` |
 | `$osd_button_border` | `transparentize(darken(ui.popup.bg, 12%), .6)` |
+| XFCE notification hover (GTK 2) | `shade(ui.panel.bg, 1.3)` (`#343C4D`) |
 
 Pure black and white are only used for masks, shadows and gradients
 (`rgba(0,0,0,.35)`, `white`, …); they are not brand colours.

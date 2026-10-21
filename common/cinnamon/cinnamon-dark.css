@@ -428,7 +428,7 @@ StScrollBar {
   -natural-hpadding: 6px;
   -minimum-hpadding: 2px;
   font-weight: bold;
-  color: green;
+  color: white;
   transition-duration: 100; }
 
 .system-status-icon {

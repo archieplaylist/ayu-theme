@@ -409,7 +409,9 @@ $header_border: darken($header_bg, 7%);
 $header_fg: saturate(transparentize($fg_color, 0.2), 10%);
 
 $dark_sidebar_bg: if($transparency == 'true', transparentize(ayu('ui.panel.bg'), 0.05), ayu('ui.panel.bg'));
-$dark_sidebar_fg: ayu('ui.fg');
+// Sidebar and panel text: editor.fg is the only token that stays readable
+// on ui.panel.bg (~3:1 for ui.fg), see PALETTE.md.
+$dark_sidebar_fg: ayu('editor.fg');
 $dark_sidebar_border: if($variant == 'light', $dark_sidebar_bg, darken($dark_sidebar_bg, 5%));
 
 $osd_fg_color: ayu('editor.fg');

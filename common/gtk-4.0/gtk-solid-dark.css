@@ -3153,7 +3153,7 @@ columnview row:not(:selected) cell editablelabel.editing text selection {
  *********************/
 .app-notification {
   padding: 10px;
-  color: #5A6378;
+  color: #BFBDB6;
   background-color: #141821;
   background-clip: border-box;
   border-radius: 0 0 2px 2px;

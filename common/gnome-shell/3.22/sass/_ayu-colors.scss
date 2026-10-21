@@ -24,7 +24,10 @@ $system_base_color: ayu('surface.base', 'dark');
 $system_fg_color: ayu('editor.fg', 'dark');
 
 $panel_bg_color: ayu('ui.panel.bg');
-$panel_fg_color: ayu('ui.fg');
+// The panel foreground has to be readable on ui.panel.bg: ui.fg is the
+// muted token and only reaches ~3:1 there, editor.fg keeps 6:1 (light)
+// up to 9.5:1 (dark).
+$panel_fg_color: ayu('editor.fg');
 
 $card_bg_color: if($flavor == 'light', ayu('surface.lift'), lighten($bg_color, 5%));
 $card_shadow_color: if($flavor == 'light', transparentize($dark_5, .97), transparent);

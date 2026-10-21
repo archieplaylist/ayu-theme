@@ -45,10 +45,12 @@ UnityDecoration {
 UnityPanelWidget,
 .unity-panel {
   background-image: _solid($header_bg);
-  color: lighten($panel_fg, 20%);
+  // $panel_fg is already the readable foreground for the panel background,
+  // fading it further would drop it below 4.5:1 in the light flavor.
+  color: $panel_fg;
   box-shadow: none;
 
-  &:backdrop { color: lighten($panel_fg, 1%); }
+  &:backdrop { color: transparentize($panel_fg, 0.3); }
 }
 
 .unity-panel.menubar.menuitem:hover,
