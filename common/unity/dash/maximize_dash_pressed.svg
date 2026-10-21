@@ -70,18 +70,18 @@
       <stop
          id="stop4896"
          offset="1"
-         style="stop-color:#161A24;stop-opacity:1;" />
+         style="stop-color:#1B1F29;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        id="linearGradient4882-4">
       <stop
          id="stop4884-9"
          offset="0"
-         style="stop-color:#4B5563;stop-opacity:1;" />
+         style="stop-color:#5A6378;stop-opacity:1;" />
       <stop
          id="stop4886-9"
          offset="1"
-         style="stop-color:#3D4751;stop-opacity:0;" />
+         style="stop-color:#333B44;stop-opacity:0;" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
@@ -180,50 +180,50 @@
         <g
            id="g4806-5-2-2-9"
            transform="translate(1294,247)"
-           style="fill:#c0e3ff;fill-opacity:1">
+           style="fill:#035BD6;fill-opacity:1">
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="status"
              id="layer9-78-2-0-0-8" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="devices"
              id="layer10-3-9-9-51-2"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="apps"
              id="layer11-19-7-6-4-7"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="places"
              id="layer13-4-7-4-0-9"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="mimetypes"
              id="layer14-8-9-7-6-0"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="emblems"
              id="layer15-5-4-2-4-4" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="emotes"
              id="g71291-1-4-6-4-2" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="categories"
              id="g4953-7-0-8-22-2" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="actions"
              id="layer12-3-7-2-3-1">
             <path

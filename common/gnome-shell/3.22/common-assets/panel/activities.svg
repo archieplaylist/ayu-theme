@@ -21,8 +21,8 @@
    version="1.0"
    style="display:inline;enable-background:new">
   <sodipodi:namedview
-     stroke="#ef2929"
-     fill="#f57900"
+     stroke="#F07171"
+     fill="#F29718"
      id="base"
      pagecolor="#bebebe"
      bordercolor="#525252"
@@ -59,9 +59,9 @@
      guidetolerance="10000"
      borderlayer="true"
      showborder="true"
-     guidecolor="#ff0b00"
+     guidecolor="#E5474F"
      guideopacity="1"
-     guidehicolor="#004fb4"
+     guidehicolor="#035BD6"
      guidehiopacity="0.49803922">
     <inkscape:grid
        type="xygrid"

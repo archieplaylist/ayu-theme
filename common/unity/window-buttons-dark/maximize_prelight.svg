@@ -60,18 +60,18 @@
       <stop
          id="stop4896"
          offset="1"
-         style="stop-color:#161A24;stop-opacity:1;" />
+         style="stop-color:#1B1F29;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        id="linearGradient4882-4">
       <stop
          id="stop4884-9"
          offset="0"
-         style="stop-color:#4B5563;stop-opacity:1;" />
+         style="stop-color:#5A6378;stop-opacity:1;" />
       <stop
          id="stop4886-9"
          offset="1"
-         style="stop-color:#3D4751;stop-opacity:0;" />
+         style="stop-color:#333B44;stop-opacity:0;" />
     </linearGradient>
   </defs>
   <sodipodi:namedview
@@ -145,7 +145,7 @@
         <ellipse
            cy="255"
            cx="1302"
-           style="display:inline;opacity:0.45;fill:#2D3640;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           style="display:inline;opacity:0.45;fill:#333B44;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="path4068-7-5-9-6-7-2-4-6-6"
            rx="6"
            ry="6.0000005" />
@@ -157,57 +157,57 @@
         <g
            id="g4806-9-0-6"
            transform="translate(1294,247)"
-           style="fill:#c0e3ff;fill-opacity:1">
+           style="fill:#035BD6;fill-opacity:1">
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="status"
              id="layer9-78-7-6-6" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="devices"
              id="layer10-3-3-2-7"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="apps"
              id="layer11-19-75-1-2"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="places"
              id="layer13-4-9-2-3"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
              inkscape:label="mimetypes"
              id="layer14-8-5-0-4"
-             style="fill:#c0e3ff;fill-opacity:1" />
+             style="fill:#035BD6;fill-opacity:1" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="emblems"
              id="layer15-5-8-0-4" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="emotes"
              id="g71291-1-7-5-9" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="categories"
              id="g4953-7-1-4-1" />
           <g
              transform="translate(-81.0002,-967)"
-             style="display:inline;fill:#c0e3ff;fill-opacity:1"
+             style="display:inline;fill:#035BD6;fill-opacity:1"
              inkscape:label="actions"
              id="layer12-3-0-0-6">
             <path
                sodipodi:nodetypes="csscccsscc"
                inkscape:connector-curvature="0"
                d="m 87.799705,972 3.381737,0 c 0.450297,0 0.816227,0.36847 0.818758,0.8188 l 0,3.3817 z m 2.407413,6.00692 -3.395078,0 c -0.450346,0 -0.818758,-0.36842 -0.818758,-0.81875 l 0,-3.39509 4.213836,4.21384"
-               style="opacity:1;fill:#D0CEC7;fill-opacity:1;fill-rule:evenodd;stroke:none"
+               style="opacity:1;fill:#BFBDB6;fill-opacity:1;fill-rule:evenodd;stroke:none"
                id="path4293-6-7-1" />
           </g>
         </g>

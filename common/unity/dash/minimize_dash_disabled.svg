@@ -60,18 +60,18 @@
       <stop
          id="stop4896"
          offset="1"
-         style="stop-color:#161A24;stop-opacity:1;" />
+         style="stop-color:#1B1F29;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        id="linearGradient4882-4">
       <stop
          id="stop4884-9"
          offset="0"
-         style="stop-color:#4B5563;stop-opacity:1;" />
+         style="stop-color:#5A6378;stop-opacity:1;" />
       <stop
          id="stop4886-9"
          offset="1"
-         style="stop-color:#3D4751;stop-opacity:0;" />
+         style="stop-color:#333B44;stop-opacity:0;" />
     </linearGradient>
   </defs>
   <sodipodi:namedview
@@ -155,7 +155,7 @@
            inkscape:connector-curvature="0"
            d="m 1373,254 0,2 6,0 0,-2 z"
            id="rect9057-4-09-2"
-           style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#ABB4BE;fill-opacity:1;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
+           style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#828E9F;fill-opacity:1;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
            sodipodi:nodetypes="ccccc" />
       </g>
       <rect
