@@ -32,11 +32,11 @@
 @define-color error_color #{$error_color};
 
 // Window
-@define-color window_bg_color #{$base_color};
+@define-color window_bg_color #{$bg_color};
 @define-color window_fg_color #{$text_color};
 
 // Views - e.g. text view or tree view
-@define-color view_bg_color #{$bg_color};
+@define-color view_bg_color #{$base_color};
 @define-color view_fg_color #{$fg_color};
 
 // Header bar, search bar, tab bar
@@ -44,7 +44,7 @@
 @define-color headerbar_fg_color #{$header_fg};
 @define-color headerbar_border_color #{$header_border};
 @define-color headerbar_backdrop_color #{$header_bg_backdrop};
-@define-color headerbar_shade_color #{$bg_color};
+@define-color headerbar_shade_color #{if($variant != 'dark', transparentize(black, 0.88), transparentize(black, 0.65))};
 
 // Cards, boxed lists
 @define-color card_bg_color #{$base_color};
@@ -52,7 +52,7 @@
 @define-color card_shade_color #{$base_color};
 
 // Popovers
-@define-color popover_bg_color #{if($variant!='dark', $base_color, $bg_color)};
+@define-color popover_bg_color #{ayu('ui.popup.bg')};
 @define-color popover_fg_color #{$fg_color};
 
 // Miscellaneous

@@ -772,16 +772,16 @@ toolbar.inline-toolbar toolbutton {
 menuitem.button.flat,
 modelbutton.flat {
   transition: none;
-  min-height: 24px;
-  padding-left: 8px;
-  padding-right: 8px;
+  min-height: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
   outline-offset: -3px;
-  border-radius: 2px;
+  border-radius: 9px;
 
   @extend %undecorated_button;
 
-  &:hover { background-color: if($variant=='light', mix($fg_color,$bg_color,5%), mix($fg_color,$bg_color,10%)); }
-  &:active, &:selected { &, arrow { @extend %selected_items; } }
+  &:hover { background-color: gtkalpha(currentColor, 0.1); }
+  &:active, &:selected { background-color: gtkalpha(currentColor, 0.19); }
   &:checked { color: $fg_color; }
 
   // FIXME: temporary workaround
@@ -1026,7 +1026,7 @@ headerbar,
 
   border-width: 0 0 1px;
   border-style: solid;
-  border-color: opacify($header_border, 1);
+  border-color: $header_border;
 
   color: $header_fg;
   background-color: opacify($header_bg, 1);
@@ -1091,7 +1091,7 @@ headerbar,
 
   .maximized & {
     background-color: opacify($header_bg, 1);
-    border-color: opacify($header_border, 1);
+    border-color: $header_border;
 
     &:backdrop { background-color: opacify($header_bg_backdrop, 1); }
   }
@@ -1642,10 +1642,10 @@ menubar,
     padding: 4px 8px;
     border: solid transparent;
     border-width: 0;
+    border-radius: 9px;
 
-    &:hover { //Seems like it :hover even with keyboard focus
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
+    &:hover, &:selected { //Seems like it :hover even with keyboard focus
+      background-color: gtkalpha(currentColor, 0.1);
     }
     &:disabled {
       color: transparentize($header_fg, 0.6);
@@ -1656,37 +1656,41 @@ menubar,
 
 menu,
 .menu {
-  $_menu_bg: if($variant=='light', $base_color, $bg_color);
+  $_menu_bg: ayu('ui.popup.bg');
   margin: 4px;
-  padding: 0;
-  border-radius: 0;
+  padding: 6px 0;
+  border-radius: 15px;
   background-color: $_menu_bg;
   border: 1px solid $borders_color;
 
   .csd & {
-    padding: 4px 0px;
-    border-radius: 2px;
+    padding: 6px 0px;
+    border-radius: 15px;
     border: none;
   }
 
   separator,
   .csd & separator {
-    margin: 2px 0;
-    background-color: $_menu_bg;
+    margin: 6px 0;
+    background-color: $borders_color;
   }
 
   // Firefox workaround
   .separator:not(label),
-  .csd & .separator:not(label) { color: $_menu_bg; }
+  .csd & .separator:not(label) { color: $borders_color; }
   // Firefox workaround end
 
   menuitem {
-    min-height: 16px;
+    min-height: 32px;
     min-width: 40px;
-    padding: 5px;
-    &:hover {
-      color: $selected_fg_color;
-      background-color: $selected_bg_color;
+    padding: 0 12px;
+    margin: 0 6px;
+    border-radius: 9px;
+    &:hover, &:selected {
+      background-color: gtkalpha(currentColor, 0.1);
+    }
+    &:active {
+      background-color: gtkalpha(currentColor, 0.19);
     }
     &:disabled {
       color: $insensitive_fg_color;
@@ -1728,15 +1732,15 @@ menu,
 
     &.top {
       margin-top: -6px;
-      border-bottom: 1px solid mix($fg_color, $base_color, 10%);
+      border-bottom: 1px solid $borders_color;
       -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
     }
     &.bottom {
       margin-bottom: -6px;
-      border-top: 1px solid mix($fg_color, $base_color, 10%);
+      border-top: 1px solid $borders_color;
       -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
     }
-    &:hover { background-color: mix($fg_color, $base_color, 10%); }
+    &:hover { background-color: gtkalpha(currentColor, 0.1); }
     &:disabled {
       color: transparent;
       background-color: transparent;
@@ -1750,9 +1754,9 @@ menu,
 //
 popover,
 popover.background {
-  $_popover_bg: if($variant=='light', $base_color, $bg_color);
-  padding: 2px;
-  border-radius: 3px;
+  $_popover_bg: ayu('ui.popup.bg');
+  padding: 8px;
+  border-radius: 15px;
   background-clip: border-box;
   background-color: $_popover_bg;
 
@@ -1760,7 +1764,10 @@ popover.background {
 
   .csd &, & { border: 1px solid darken($borders_color, 5%); }
 
-  & separator { background-color: $_popover_bg; }
+  & separator {
+    background-color: $borders_color;
+    margin: 6px 0;
+  }
   label.separator {
     @extend .dim-label;
 

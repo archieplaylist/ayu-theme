@@ -398,11 +398,31 @@ checkbutton.selection-mode check {
  ******************/
 
 //FIXME Needs full restyle for headerbar widgets
-headerbar.flat {
+headerbar.flat,
+toolbarview > .top-bar headerbar,
+toolbarview > .bottom-bar headerbar {
   background: none;
   box-shadow: none;
   border-bottom-width: 0;
   color: inherit;
+  min-height: 46px;
+  padding: 0;
+}
+
+// libadwaita already pads toolbarview headerbars through their windowhandle.
+// Dropping the theme's vertical widget margins keeps every page of a GtkStack
+// at the same height (Nautilus' path bar used to inflate the content header).
+toolbarview > .top-bar headerbar,
+toolbarview > .bottom-bar headerbar {
+  entry,
+  spinbutton,
+  separator:not(.sidebar),
+  button,
+  menubutton,
+  switch {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 /******************
@@ -636,14 +656,29 @@ popover.menu {
     color: inherit;
 
     > row {
-      border-radius: 2px;
-      padding: 5px $_menu_padding;
-      min-height: 16px;
+      border-radius: 9px;
+      padding: 0 12px;
+      min-height: 32px;
       min-width: 40px;
 
-      &:hover, &:active, &.has-open-popup {
+      // Menu selections are a subtle overlay, not the accent colour; the
+      // accent stays reserved for list/tree selection.
+      &:selected {
+        background-color: transparent;
+        color: inherit;
+      }
+
+      &:hover, &.has-open-popup {
         &, &:selected.activatable {
-          @extend %selected_items;
+          background-color: gtkalpha(currentColor, 0.1);
+          color: inherit;
+        }
+      }
+
+      &:active {
+        &, &:selected.activatable {
+          background-color: gtkalpha(currentColor, 0.19);
+          color: inherit;
         }
       }
 

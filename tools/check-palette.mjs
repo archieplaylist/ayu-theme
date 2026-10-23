@@ -43,6 +43,9 @@ for (const flavor of Object.values(palette.flavors)) collect(flavor);
 const derived = new Set([
   // neutral masks and shadows
   "#000000", "#ffffff", "#00000000",
+  // headerbar backdrop: lighten(surface.base, 1.5%) in mirage and dark,
+  // see PALETTE.md; the light value is #ffffff above
+  "#222735", "#10131c",
   // legacy Arc artwork that is only used as an alpha mask in the sprite sheets
   "#ff00ff",
 ]);
@@ -105,7 +108,8 @@ for (const glob of SOURCE_GLOBS) {
       const base = hex.slice(0, 6);
       if (official.has(base)) continue;
       if (officialAlpha.has(hex)) continue;
-      if (derived.has(hex) || derived.has(base)) continue;
+      if (derived.has(hex) || derived.has("#" + hex) ||
+          derived.has(base) || derived.has("#" + base)) continue;
       if (rel.includes("gnome-shell") && shellAdwaita.has(base)) continue;
       report("colour", rel, `#${hex} is not an ayu palette colour`);
     }

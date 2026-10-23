@@ -366,8 +366,8 @@ $ayu: (
 // Theme colors
 //
 // Surfaces follow the official ayu roles:
-//   window → surface.base      entry/editor → surface.lift
-//   header → surface.sunk      panel → ui.panel.bg      popup → ui.popup.bg
+//   window/header → surface.base      entry/editor → surface.lift
+//   panel → ui.panel.bg      popup/menu → ui.popup.bg
 //
 $bg_color: ayu('surface.base');
 $base_color: ayu('surface.lift');
@@ -400,11 +400,11 @@ $drop_target_color: ayu('syntax.entity');
 $insensitive_fg_color: if($variant == 'light', transparentize($fg_color, 0.45), transparentize($fg_color, 0.55));
 $insensitive_bg_color: if($variant == 'light', mix($bg_color, $base_color, 40%), lighten($bg_color, 2%));
 
-$header_bg: if($transparency == 'true', transparentize(ayu('surface.sunk'), 0.03), ayu('surface.sunk'));
+$header_bg: if($transparency == 'true', transparentize(ayu('surface.base'), 0.03), ayu('surface.base'));
 
 $header_bg_backdrop: lighten($header_bg, if($variant == 'dark', 1.5%, 3%));
 
-$header_border: darken($header_bg, 7%);
+$header_border: $borders_color;
 
 $header_fg: saturate(transparentize($fg_color, 0.2), 10%);
 

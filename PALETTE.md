@@ -43,12 +43,13 @@ The theme uses the official ayu roles for the surfaces:
 |---|---|---|---|---|
 | `$bg_color` (window) | `surface.base` | `#F8F9FA` | `#1F2430` | `#0D1017` |
 | `$base_color` (entry, editor) | `surface.lift` | `#FCFCFC` | `#242936` | `#10141C` |
-| `$header_bg` (header bar) | `surface.sunk` | `#EBEEF0` | `#181C26` | `#010102` |
+| `$header_bg` (header bar) | `surface.base` | `#F8F9FA` | `#1F2430` | `#0D1017` |
 | `$text_color`, `$fg_color` | `editor.fg` | `#5C6166` | `#CCCAC2` | `#BFBDB6` |
 | `$dark_sidebar_fg`, `$panel_fg` (GTK sidebars, panels) | `editor.fg` | `#5C6166` | `#CCCAC2` | `#BFBDB6` |
 | `$panel_fg_color` (GNOME Shell top bar) | `editor.fg` | `#5C6166` | `#CCCAC2` | `#BFBDB6` |
 | `$dark_sidebar_bg` | `ui.panel.bg` | `#FAFAFA` | `#282E3B` | `#141821` |
 | `$osd_bg_color` | `ui.popup.bg` | `#FFFFFF` | `#1C212C` | `#0F131A` |
+| menus, popovers (`$_popover_bg`, `popover_bg_color`) | `ui.popup.bg` | `#FFFFFF` | `#1C212C` | `#0F131A` |
 | `$borders_color`, `$entry_border` | `ui.line` | `rgba(#6B7D8F,.12)` | `#171B24` | `#1B1F29` |
 | `$selected_bg_color` | `common.accent.tint` | `#F29718` | `#FFCC66` | `#E6B450` |
 | `$selected_fg_color` | `common.accent.on` | `#7E4B01` | `#735923` | `#765B24` |
@@ -83,8 +84,8 @@ formulas below — never with a hand-picked hex value.
 |---|---|
 | `$insensitive_fg_color` | `transparentize(editor.fg, .45)` light, `.55` dark |
 | `$insensitive_bg_color` | `mix(surface.base, surface.lift, 40%)` light, `lighten(surface.base, 2%)` dark |
-| `$header_bg_backdrop` | `lighten(surface.sunk, 3%)` light, `1.5%` dark |
-| `$header_border` | `darken(surface.sunk, 7%)` |
+| `$header_bg_backdrop` | `lighten(surface.base, 3%)` light, `1.5%` dark |
+| `$header_border` | `ui.line` (same as `$borders_color`) |
 | `$header_fg` | `saturate(transparentize(editor.fg, .2), 10%)` |
 | `$panel_bg` | `darken(ui.panel.bg, 4.7%)` |
 | `$button_bg` | `lighten(surface.base, 2%)` light, `lighten(surface.lift, 2%)` dark |

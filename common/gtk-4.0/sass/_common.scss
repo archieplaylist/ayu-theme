@@ -887,16 +887,17 @@ button {
 
 /* menu buttons */
 modelbutton.flat {
-  min-height: 24px;
-  padding-left: 8px;
-  padding-right: 8px;
-  border-radius: 2px;
+  min-height: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 9px;
 
   @extend %undecorated_button;
 
   &:disabled { color: $insensitive_fg_color; }
 
-  &:hover, &:selected { @extend %selected_items; }
+  &:hover, &:selected { background-color: gtkalpha(currentColor, 0.1); }
+  &:active { background-color: gtkalpha(currentColor, 0.19); }
 }
 
 modelbutton.flat arrow {
@@ -1365,7 +1366,7 @@ headerbar {
   min-height: 42px;
   border-width: 0 0 1px;
   border-style: solid;
-  border-color: opacify($header_border, 1);
+  border-color: $header_border;
   border-radius: 0;
 
   color: $header_fg;
@@ -1415,7 +1416,7 @@ headerbar {
   // non-transparent headerbar for maximized windows
   .maximized & {
     background-color: opacify($header_bg, 1);
-    border-color: opacify($header_border, 1);
+    border-color: $header_border;
 
     &:backdrop { background-color: opacify($header_bg_backdrop, 1); }
   }
@@ -1503,7 +1504,7 @@ headerbar {
     box-shadow: none;
   }
 
-  separator { background-color: opacify($header_border, 1); }
+  separator { background-color: $header_border; }
 
   @extend %titlebar;
 }
@@ -2022,7 +2023,7 @@ treeview.view {
 /***************
  * Popovers   *
  ***************/
-$_popover_bg: if($variant!='dark', $base_color, $bg_color);
+$_popover_bg: ayu('ui.popup.bg');
 
 popover.background {
   background-color: transparent;
@@ -2038,7 +2039,7 @@ popover.background {
 
   > contents {
     padding: 8px;
-    border-radius: 3px;
+    border-radius: 15px;
 
     > list,
     > .view,
@@ -2048,11 +2049,11 @@ popover.background {
     }
 
     separator {
-      background-color: $_popover_bg;
-      margin: 2px 0;
+      background-color: $borders_color;
+      margin: 6px 0;
     }
 
-    list separator { margin: 2px 0; }
+    list separator { margin: 0; }
   }
 
   .osd &,
@@ -2080,14 +2081,23 @@ magnifier {
  * Popover Base Menus *
  **********************/
 
-$_menu-padding: 8px; //inner menuitem padding
-//global $menu-margin for outside menuitems
-
 popover.menu {
   padding: 0;
 
+  > contents {
+    padding: 0;
+
+    > stack > box,
+    > scrolledwindow > viewport > stack > box {
+      padding: 6px;
+    }
+  }
+
+  separator { margin: 6px 0; }
+  list separator { margin: 0; }
+
   box.inline-buttons {
-    padding: 0 $_menu-padding;
+    padding: 0 12px;
 
     button.image-button.model {
       @include button(normal);
@@ -2101,7 +2111,7 @@ popover.menu {
   }
 
   box.circular-buttons {
-    padding: $_menu-padding $_menu-padding 6px;
+    padding: 12px 12px 6px;
 
     button.circular.image-button.model {
       @extend %list_button;
@@ -2116,8 +2126,8 @@ popover.menu {
   accelerator {
     color: gtkalpha(currentColor,0.55);
 
-    &:dir(ltr) { margin-left: 22px; }//$_menu-padding;
-    &:dir(rtl) { margin-right: 22px; }//$_menu-padding;
+    &:dir(ltr) { margin-left: 12px; }
+    &:dir(rtl) { margin-right: 12px; }
   }
 
   arrow.left,
@@ -2135,19 +2145,28 @@ popover.menu {
   }
 
   scale {
-    padding: 5px $_menu-padding;
+    padding: 5px 12px;
   }
 
   modelbutton {
-    min-height: 16px;
+    min-height: 32px;
     min-width: 40px;
-    padding: 5px $_menu-padding;
-    border-radius: 2px;
+    padding: 0 12px;
+    border-radius: 9px;
+    background-color: transparent;
+
+    &:hover, &:selected {
+      background-color: gtkalpha(currentColor, 0.1);
+    }
+
+    &:active {
+      background-color: gtkalpha(currentColor, 0.19);
+    }
   }
 
   label.title {
     font-weight: bold;
-    padding: 4px ($_menu-padding + 20px); //this will fall apart with font sizing
+    padding: 4px 32px;
   }
 }
 
@@ -2163,25 +2182,17 @@ menubar {
 
   > item {
     min-height: 16px;
-    padding: 4px $_menu-padding;
+    padding: 4px 8px;
+    border-radius: 9px;
 
-    &:selected { //Seems like it :selected even with keyboard focus
-      @extend %selected_items;
+    &:hover, &:selected { //Seems like it :selected even with keyboard focus
+      background-color: gtkalpha(currentColor, 0.1);
     }
 
     &:disabled {
       color: transparentize($header_fg, 0.6);
       border-color: transparent;
     }
-  }
-
-  & > item popover.menu modelbutton {
-    border-radius: 0;
-  }
-
-  & > item popover.menu.background > contents {
-    padding: 4px 0;
-    border-radius: 2px;
   }
 
   //nested submenus
