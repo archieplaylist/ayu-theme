@@ -1002,7 +1002,7 @@ headerbar,
         -gtk-icon-source: -gtk-icontheme("pan-down-symbolic"); }
     .maximized headerbar.selection-mode, .maximized .selection-mode.titlebar:not(headerbar) {
       background-color: #e6b450; }
-  .tiled headerbar, .maximized headerbar, .tiled .titlebar:not(headerbar), .maximized .titlebar:not(headerbar) {
+  .tiled headerbar, .tiled-top headerbar, .tiled-left headerbar, .tiled-right headerbar, .tiled-bottom headerbar, .maximized headerbar, .fullscreen headerbar, .tiled .titlebar:not(headerbar), .tiled-top .titlebar:not(headerbar), .tiled-left .titlebar:not(headerbar), .tiled-right .titlebar:not(headerbar), .tiled-bottom .titlebar:not(headerbar), .maximized .titlebar:not(headerbar), .fullscreen .titlebar:not(headerbar) {
     border-radius: 0; }
   .maximized headerbar, .maximized .titlebar:not(headerbar) {
     background-color: #0d1017;
@@ -1019,20 +1019,20 @@ headerbar,
       background-color: #0d1017; }
 
 .titlebar {
-  border-radius: 3px 3px 0 0; }
+  border-radius: 15px 15px 0 0; }
 
 headerbar entry, headerbar button, headerbar separator {
   margin-top: 6px;
   margin-bottom: 6px; }
 
 separator:first-child + headerbar, separator:first-child + headerbar:backdrop, headerbar:first-child, headerbar:first-child:backdrop {
-  border-top-left-radius: 3px; }
-  .maximized separator:first-child + headerbar, .tiled separator:first-child + headerbar, .maximized separator:first-child + headerbar:backdrop, .tiled separator:first-child + headerbar:backdrop, .maximized headerbar:first-child, .tiled headerbar:first-child, .maximized headerbar:first-child:backdrop, .tiled headerbar:first-child:backdrop {
+  border-top-left-radius: 15px; }
+  .maximized separator:first-child + headerbar, .fullscreen separator:first-child + headerbar, .tiled separator:first-child + headerbar, .tiled-top separator:first-child + headerbar, .tiled-left separator:first-child + headerbar, .tiled-right separator:first-child + headerbar, .tiled-bottom separator:first-child + headerbar, .maximized separator:first-child + headerbar:backdrop, .fullscreen separator:first-child + headerbar:backdrop, .tiled separator:first-child + headerbar:backdrop, .tiled-top separator:first-child + headerbar:backdrop, .tiled-left separator:first-child + headerbar:backdrop, .tiled-right separator:first-child + headerbar:backdrop, .tiled-bottom separator:first-child + headerbar:backdrop, .maximized headerbar:first-child, .fullscreen headerbar:first-child, .tiled headerbar:first-child, .tiled-top headerbar:first-child, .tiled-left headerbar:first-child, .tiled-right headerbar:first-child, .tiled-bottom headerbar:first-child, .maximized headerbar:first-child:backdrop, .fullscreen headerbar:first-child:backdrop, .tiled headerbar:first-child:backdrop, .tiled-top headerbar:first-child:backdrop, .tiled-left headerbar:first-child:backdrop, .tiled-right headerbar:first-child:backdrop, .tiled-bottom headerbar:first-child:backdrop {
     border-radius: 0; }
 
 headerbar:last-child, headerbar:last-child:backdrop {
-  border-top-right-radius: 3px; }
-  .maximized headerbar:last-child, .tiled headerbar:last-child, .maximized headerbar:last-child:backdrop, .tiled headerbar:last-child:backdrop {
+  border-top-right-radius: 15px; }
+  .maximized headerbar:last-child, .fullscreen headerbar:last-child, .tiled headerbar:last-child, .tiled-top headerbar:last-child, .tiled-left headerbar:last-child, .tiled-right headerbar:last-child, .tiled-bottom headerbar:last-child, .maximized headerbar:last-child:backdrop, .fullscreen headerbar:last-child:backdrop, .tiled headerbar:last-child:backdrop, .tiled-top headerbar:last-child:backdrop, .tiled-left headerbar:last-child:backdrop, .tiled-right headerbar:last-child:backdrop, .tiled-bottom headerbar:last-child:backdrop {
     border-radius: 0; }
 
 window > .titlebar:not(headerbar), window > .titlebar:not(headerbar):backdrop, window.csd > .titlebar:not(headerbar), window.csd > .titlebar:not(headerbar):backdrop {
@@ -2621,8 +2621,8 @@ messagedialog .dialog-action-area button {
   min-height: 0; }
 
 messagedialog.csd.background {
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   border: none; }
 
 messagedialog.csd .dialog-action-area button {
@@ -2633,15 +2633,15 @@ messagedialog.csd .dialog-action-area button {
   border-right-style: none; }
 
 messagedialog.csd .dialog-action-area button:last-child {
-  border-radius: 0 0 3px 0;
+  border-radius: 0 0 15px 0;
   border-right-style: none; }
 
 messagedialog.csd .dialog-action-area button:first-child {
-  border-radius: 0 0 0 3px;
+  border-radius: 0 0 0 15px;
   border-left-style: none; }
 
 messagedialog.csd .dialog-action-area button:only-child {
-  border-radius: 0 0 3px 3px;
+  border-radius: 0 0 15px 15px;
   border-left-style: none;
   border-right-style: none; }
 
@@ -2957,20 +2957,20 @@ stackswitcher button.circular {
   box-shadow: inset 0 0 0 1px #59C2FF; }
 
 decoration {
-  border-radius: 3px 3px 0 0;
+  border-radius: 15px;
   border-width: 0px;
   box-shadow: 0 0 0 1px black, 0 8px 8px 0 rgba(0, 0, 0, 0.35);
   margin: 10px; }
   decoration:backdrop {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.9), 0 8px 8px 0 transparent, 0 5px 5px 0 rgba(0, 0, 0, 0.35);
     transition: 200ms ease-out; }
-  .fullscreen decoration, .tiled decoration {
+  .fullscreen decoration, .maximized decoration, .tiled decoration, .tiled-top decoration, .tiled-left decoration, .tiled-right decoration, .tiled-bottom decoration {
     border-radius: 0; }
   .popup decoration {
     box-shadow: none;
     border-radius: 0; }
   .ssd decoration {
-    border-radius: 3px 3px 0 0;
+    border-radius: 15px 15px 0 0;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65); }
     .ssd decoration.maximized {
       border-radius: 0; }
@@ -2981,7 +2981,7 @@ decoration {
     border-radius: 2px;
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.25); }
   messagedialog.csd decoration {
-    border-radius: 3px; }
+    border-radius: 15px; }
   .solid-csd decoration {
     border-radius: 0;
     margin: 1px;
@@ -3335,7 +3335,7 @@ workbench.csd > stack.titlebar:not(headerbar) {
   border: none;
   box-shadow: none; }
   workbench.csd > stack.titlebar:not(headerbar) headerbar, workbench.csd > stack.titlebar:not(headerbar) headerbar:first-child, workbench.csd > stack.titlebar:not(headerbar) headerbar:last-child {
-    border-radius: 3px 3px 0 0; }
+    border-radius: 15px 15px 0 0; }
 
 editortweak .linked > entry.search:focus + .gb-linked-scroller {
   border-top-color: #E6B450; }

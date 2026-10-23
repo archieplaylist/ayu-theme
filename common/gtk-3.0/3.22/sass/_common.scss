@@ -1016,7 +1016,7 @@ actionbar {
 //
 // Headerbars
 //
-$_header_radius: if($mirage=='false' and $variant=='light', 4px, 3px);
+$_header_radius: 15px; // matches libadwaita/Adwaita and the GTK4/GTK3 popovers
 
 headerbar,
 %titlebar {
@@ -1085,7 +1085,12 @@ headerbar,
   }
 
   .tiled &, .tiled &:backdrop,
-  .maximized &, .maximized &:backdrop {
+  .tiled-top &, .tiled-top &:backdrop,
+  .tiled-left &, .tiled-left &:backdrop,
+  .tiled-right &, .tiled-right &:backdrop,
+  .tiled-bottom &, .tiled-bottom &:backdrop,
+  .maximized &, .maximized &:backdrop,
+  .fullscreen &, .fullscreen &:backdrop {
     border-radius: 0; // squared corners when the window is max'd or tiled
   }
 
@@ -1130,7 +1135,12 @@ headerbar {
       border-top-left-radius: $_header_radius;
 
       .maximized &,
-      .tiled & { border-radius: 0; }
+      .fullscreen &,
+      .tiled &,
+      .tiled-top &,
+      .tiled-left &,
+      .tiled-right &,
+      .tiled-bottom & { border-radius: 0; }
     }
   }
 
@@ -1139,7 +1149,12 @@ headerbar {
       border-top-right-radius: $_header_radius;
 
       .maximized &,
-      .tiled & { border-radius: 0; }
+      .fullscreen &,
+      .tiled &,
+      .tiled-top &,
+      .tiled-left &,
+      .tiled-right &,
+      .tiled-bottom & { border-radius: 0; }
     }
   }
 }
@@ -2646,8 +2661,8 @@ messagedialog { // Message Dialog styling
 
   &.csd { // rounded bottom border styling for csd version
     &.background {
-      border-bottom-left-radius: 3px;
-      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: $_header_radius;
+      border-bottom-right-radius: $_header_radius;
       border: none;
     }
     .dialog-action-area button {
@@ -2663,15 +2678,15 @@ messagedialog { // Message Dialog styling
       border-right-style: none;
     }
     %last_button {
-      border-radius: 0 0 3px 0;
+      border-radius: 0 0 $_header_radius 0;
       border-right-style: none;
     }
     %first_button {
-      border-radius: 0 0 0 3px;
+      border-radius: 0 0 0 $_header_radius;
       border-left-style: none;
     }
     %single_button {
-      border-radius: 0 0 3px 3px;
+      border-radius: 0 0 $_header_radius $_header_radius;
       border-left-style: none;
       border-right-style: none;
     }
@@ -3139,7 +3154,7 @@ stackswitcher button {
 //
 
 decoration {
-  border-radius: if($mirage=='false' and $variant=='light', 4px 4px 0 0, 3px 3px 0 0);
+  border-radius: $_header_radius;
   border-width: 0px;
 
   $_wm_border: if($variant=='light', transparentize(black, 0.9), transparentize(black, 0.45));
@@ -3160,16 +3175,22 @@ decoration {
     transition: $backdrop_transition;
   }
   .fullscreen &,
-  .tiled & {
+  .maximized &,
+  .tiled &,
+  .tiled-top &,
+  .tiled-left &,
+  .tiled-right &,
+  .tiled-bottom & {
     border-radius: 0;
   }
   .popup & {
     box-shadow: none;
     border-radius: 0;
   }
-  // server-side decorations as used by mutter
+  // server-side decorations as used by mutter (the WM draws the frame, so we
+  // only round the top corners here and leave the bottom to the WM)
   .ssd & {
-    border-radius: if($mirage=='false' and $variant=='light', 4px 4px 0 0, 3px 3px 0 0);
+    border-radius: $_header_radius $_header_radius 0 0;
     box-shadow: 0 0 0 1px if($mirage=='true' or $variant == 'dark', transparentize(black, 0.35), $_wm_border);
 
     &.maximized { border-radius: 0; }
@@ -3184,7 +3205,7 @@ decoration {
     box-shadow: 0 1px 3px 1px if($variant == 'light', $_wm_border, transparentize($_wm_border, 0.3));
   }
   messagedialog.csd & {
-    border-radius: 3px;
+    border-radius: $_header_radius;
   }
   .solid-csd & {
     border-radius: 0;

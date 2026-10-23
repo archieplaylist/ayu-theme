@@ -3272,8 +3272,8 @@ window.dialog.message .titlebar {
   background-image: none;
   background-color: rgba(13, 16, 23, 0.97);
   border-bottom: 1px solid rgba(0, 0, 0, 0.97);
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px; }
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px; }
 
 window.dialog.message .dialog-action-area button {
   padding: 8px;
@@ -3288,8 +3288,8 @@ window.dialog.message label.title {
   font-size: 15pt; }
 
 window.dialog.message.csd.background {
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   border: none; }
 
 window.dialog.message.csd .dialog-action-area > entry + entry {
@@ -3379,10 +3379,10 @@ window.dialog.message.csd .dialog-action-area button {
   border-bottom-style: none;
   border-right-style: none; }
   window.dialog.message.csd .dialog-action-area button:first-child {
-    border-bottom-left-radius: 2px;
+    border-bottom-left-radius: 15px;
     border-left-style: none; }
   window.dialog.message.csd .dialog-action-area button:last-child {
-    border-bottom-right-radius: 2px; }
+    border-bottom-right-radius: 15px; }
 
 filechooser .dialog-action-box {
   border-top: 1px solid #1B1F29; }
@@ -3737,17 +3737,20 @@ colorchooser .popover.osd {
 window {
   border-width: 0px; }
   window.csd {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.97), 0 8px 8px 0 rgba(0, 0, 0, 0.35);
+    outline: 1px solid rgba(0, 0, 0, 0.97);
+    outline-offset: -1px;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.35);
     margin: 0px;
-    border-radius: 3px 3px 0 0; }
+    border-radius: 15px; }
     window.csd:backdrop {
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.87), 0 8px 8px 0 transparent, 0 5px 5px 0 rgba(0, 0, 0, 0.35);
+      outline-color: rgba(0, 0, 0, 0.87);
+      box-shadow: 0 8px 8px 0 transparent, 0 5px 5px 0 rgba(0, 0, 0, 0.35);
       transition: 200ms ease-out; }
     window.csd.popup {
       border-radius: 2px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45), 0 0 0 1px black; }
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45); }
     window.csd.dialog.message {
-      border-radius: 3px 3px 2px 2px; }
+      border-radius: 15px; }
   window.solid-csd {
     margin: 1px;
     padding: 0;
@@ -3757,9 +3760,11 @@ window {
     box-shadow: none; }
   window.maximized, window.fullscreen {
     border-radius: 0;
-    box-shadow: none; }
+    box-shadow: none;
+    outline: none; }
   window.tiled, window.tiled-top, window.tiled-left, window.tiled-right, window.tiled-bottom {
     border-radius: 0;
+    outline: none;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.97), 0 0 0 20px transparent; }
     window.tiled:backdrop, window.tiled-top:backdrop, window.tiled-left:backdrop, window.tiled-right:backdrop, window.tiled-bottom:backdrop {
       box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.97), 0 0 0 20px transparent; }
@@ -3767,7 +3772,7 @@ window {
     border-radius: 0;
     box-shadow: none; }
   window.ssd {
-    border-radius: 3px 3px 0 0;
+    border-radius: 15px 15px 0 0;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65); }
     window.ssd.maximized {
       border-radius: 0; }
