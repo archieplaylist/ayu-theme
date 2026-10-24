@@ -41,6 +41,10 @@ filechooser,
       &:selected, &:selected:hover, &:active:hover {
         @extend %selected_items;
 
+        // Solid on the left, fading out to the right so long names stay readable.
+        background-color: transparent;
+        background-image: linear-gradient(to right, $selected_bg_color 0%, $selected_bg_color 50%, transparent 100%);
+
         .sidebar-icon { color: inherit; }
       }
 

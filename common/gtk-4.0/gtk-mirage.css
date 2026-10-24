@@ -3470,7 +3470,8 @@ separator.sidebar {
     .navigation-sidebar > row:hover {
       background-color: rgba(255, 255, 255, 0.03); }
     .navigation-sidebar > row:selected {
-      background-color: #FFCC66;
+      background-color: transparent;
+      background-image: linear-gradient(to right, #FFCC66 0%, #FFCC66 50%, transparent 100%);
       color: #735923; }
       .navigation-sidebar > row:selected:hover {
         background-color: #e6b85c; }

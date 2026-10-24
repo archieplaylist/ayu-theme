@@ -4183,12 +4183,19 @@ filechooser placessidebar.sidebar,
     .nautilus-window placessidebar.sidebar row.sidebar-row:disabled label,
     .nautilus-window placessidebar.sidebar row.sidebar-row:disabled image {
       color: rgba(191, 189, 182, 0.4); }
-    filechooser placessidebar.sidebar row.sidebar-row:selected.has-open-popup .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:selected .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:selected:hover .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:active:hover .sidebar-icon,
-    .nautilus-window placessidebar.sidebar row.sidebar-row:selected.has-open-popup .sidebar-icon,
-    .nautilus-window placessidebar.sidebar row.sidebar-row:selected .sidebar-icon,
-    .nautilus-window placessidebar.sidebar row.sidebar-row:selected:hover .sidebar-icon,
-    .nautilus-window placessidebar.sidebar row.sidebar-row:active:hover .sidebar-icon {
-      color: inherit; }
+    filechooser placessidebar.sidebar row.sidebar-row:selected.has-open-popup, filechooser placessidebar.sidebar row.sidebar-row:selected, filechooser placessidebar.sidebar row.sidebar-row:selected:hover, filechooser placessidebar.sidebar row.sidebar-row:active:hover,
+    .nautilus-window placessidebar.sidebar row.sidebar-row:selected.has-open-popup,
+    .nautilus-window placessidebar.sidebar row.sidebar-row:selected,
+    .nautilus-window placessidebar.sidebar row.sidebar-row:selected:hover,
+    .nautilus-window placessidebar.sidebar row.sidebar-row:active:hover {
+      background-color: transparent;
+      background-image: linear-gradient(to right, #E6B450 0%, #E6B450 50%, transparent 100%); }
+      filechooser placessidebar.sidebar row.sidebar-row:selected.has-open-popup .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:selected .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:selected:hover .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:active:hover .sidebar-icon,
+      .nautilus-window placessidebar.sidebar row.sidebar-row:selected.has-open-popup .sidebar-icon,
+      .nautilus-window placessidebar.sidebar row.sidebar-row:selected .sidebar-icon,
+      .nautilus-window placessidebar.sidebar row.sidebar-row:selected:hover .sidebar-icon,
+      .nautilus-window placessidebar.sidebar row.sidebar-row:active:hover .sidebar-icon {
+        color: inherit; }
     filechooser placessidebar.sidebar row.sidebar-row:not(:selected) button.sidebar-button,
     .nautilus-window placessidebar.sidebar row.sidebar-row:not(:selected) button.sidebar-button {
       color: #BFBDB6; }
