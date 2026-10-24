@@ -7,6 +7,12 @@ $backdrop_transition: 200ms ease-out;
 $asset_suffix: if($variant=='dark', '-dark', ''); // use dark assets in dark variant
 $mirage_asset_suffix: if($mirage=='true', '-dark', $asset_suffix);
 
+// Shared corner radii, matching libadwaita so GTK3 apps look like GTK4 ones.
+// The window/header radius is $_header_radius further down.
+$button_radius: 9px;
+$view_radius: 9px;
+$file_tile_radius: 12px;
+
 * {
   background-clip: padding-box;
   -GtkToolButton-icon-spacing: 4;
@@ -70,7 +76,7 @@ $mirage_asset_suffix: if($mirage=='true', '-dark', $asset_suffix);
   &:selected {
     &, &:focus {
       @extend %selected_items;
-      border-radius: 2px;
+      border-radius: $view_radius;
     }
   }
 }
@@ -99,7 +105,7 @@ flowbox {
 
   flowboxchild {
     padding: 3px;
-    border-radius: 2px;
+    border-radius: $view_radius;
 
     &:selected {
       @extend %selected_items;
@@ -197,7 +203,7 @@ entry {
   padding: 2px 8px;
 
   caret-color: currentColor;
-  border-radius: 3px;
+  border-radius: $button_radius;
   transition: all 200ms $ease-out-quad;
 
   &.search { border-radius: 20px; }
@@ -332,7 +338,7 @@ button {
   min-width: 20px;
   transition: $button_transition;
   border: 1px solid;
-  border-radius: 3px;
+  border-radius: $button_radius;
   padding: 2px 6px;
 
   @include button(normal);
@@ -681,16 +687,16 @@ toolbar.inline-toolbar toolbutton {
 %linked {
   @extend %linked_middle;
   &:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-left-radius: $button_radius;
+    border-bottom-left-radius: $button_radius;
   }
   &:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: $button_radius;
+    border-bottom-right-radius: $button_radius;
     border-right-style: solid;
   }
   &:only-child {
-    border-radius: 3px;
+    border-radius: $button_radius;
     border-style: solid;
   }
 }
@@ -702,39 +708,39 @@ toolbar.inline-toolbar toolbutton {
 
 %linked_first {
   @extend %linked_middle;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: $button_radius;
+  border-bottom-left-radius: $button_radius;
 }
 
 %linked_last {
   @extend %linked_middle;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-top-right-radius: $button_radius;
+  border-bottom-right-radius: $button_radius;
   border-right-style: solid;
 }
 
 %linked_only {
   @extend %linked_middle;
-  border-radius: 3px;
+  border-radius: $button_radius;
   border-style: solid;
 }
 
 %linked_vertical_first {
   @extend %linked_vertical_middle;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: $button_radius;
+  border-top-right-radius: $button_radius;
 }
 
 %linked_vertical_last {
   @extend %linked_vertical_middle;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: $button_radius;
+  border-bottom-right-radius: $button_radius;
   border-bottom-style: solid;
 }
 
 %linked_vertical_only {
   @extend %linked_vertical_middle;
-  border-radius: 3px;
+  border-radius: $button_radius;
   border-style: solid;
 }
 
@@ -747,16 +753,16 @@ toolbar.inline-toolbar toolbutton {
 %linked_vertical{
   @extend %linked_vertical_middle;
   &:first-child {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-top-left-radius: $button_radius;
+    border-top-right-radius: $button_radius;
   }
   &:last-child {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: $button_radius;
+    border-bottom-right-radius: $button_radius;
     border-bottom-style: solid;
   }
   &:only-child {
-    border-radius: 3px;
+    border-radius: $button_radius;
     border-style: solid;
   }
 }
@@ -848,7 +854,7 @@ spinbutton {
     button, entry { @extend %linked; }
 
     &:dir(ltr) entry,
-    &:dir(rtl) button.up { border-radius: 3px 0 0 3px; }
+    &:dir(rtl) button.up { border-radius: $button_radius 0 0 $button_radius; }
 
     > button + button { border-left-style: none; }
 
@@ -886,7 +892,7 @@ spinbutton {
       @extend %linked_vertical;
     }
 
-    button.up { border-radius: 3px 3px 0 0; }
+    button.up { border-radius: $button_radius $button_radius 0 0; }
 
     > entry:focus + button { border-top-color: if($variant=='light', $selected_bg_color, $entry_border); }
 
@@ -1289,7 +1295,7 @@ headerbar {
   // Reset buttons
   .linked:not(.vertical):not(.path-bar) > button {
     &, &:hover, &:active, &:checked, &:disabled {
-      border-radius: 3px;
+      border-radius: $button_radius;
       border-style: solid;
     }
   }
@@ -2698,6 +2704,13 @@ messagedialog { // Message Dialog styling
 //
 filechooser {
   #pathbarbox { border-bottom: 1px solid transparentize($borders_color, 0.5); }
+}
+
+// File chooser grid tiles use a larger radius than list rows, matching
+// libadwaita's file chooser.
+filechooser iconview.view:selected,
+filechooser iconview.view:selected:focus {
+  border-radius: $file_tile_radius;
 }
 
 filechooserbutton:drop(active) {

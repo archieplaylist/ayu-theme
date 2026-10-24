@@ -6,6 +6,9 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad, outline-width 0s;
 $header_radius: 15px; // matches libadwaita/Adwaita (--window-radius) and our popovers
+$button_radius: 9px;  // libadwaita button/entry/view radius
+$view_radius: 9px;
+$file_tile_radius: 12px; // libadwaita file chooser grid tile
 $scale_trough_bg: if($variant != 'dark', $button_border, darken($bg_color, 5%));
 
 $asset_suffix: if($variant=='dark', '-dark', '');
@@ -49,7 +52,7 @@ image:disabled {
     &:focus, & {
       @extend %selected_items;
 
-      border-radius: 2px;
+      border-radius: $view_radius;
     }
   }
 }
@@ -96,7 +99,7 @@ flowbox {
 
   > flowboxchild {
     padding: 3px;
-    border-radius: 2px;
+    border-radius: $view_radius;
 
     @include focus-ring();
 
@@ -111,7 +114,7 @@ gridview {
 
   > child {
     padding: 3px;
-    border-radius: 2px;
+    border-radius: $view_radius;
 
     @include focus-ring();
 
@@ -267,7 +270,7 @@ entry {
     padding-left: 8px;
     padding-right: 8px;
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: $button_radius;
     border-spacing: 5px;
     transition: all 200ms $ease-out-quad;
     background-clip: padding-box;
@@ -428,7 +431,7 @@ button {
     min-width: 20px;
     padding: 2px 6px;
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: $button_radius;
     transition: $button_transition;
     background-clip: padding-box;
 
@@ -1021,7 +1024,7 @@ spinbutton {
     button, text { @extend %linked; }
 
     &:dir(ltr) text,
-    &:dir(rtl) button.up { border-radius: 3px 0 0 3px; }
+    &:dir(rtl) button.up { border-radius: $button_radius 0 0 $button_radius; }
 
     > button + button { border-left-style: none; }
 
@@ -1059,7 +1062,7 @@ spinbutton {
       @extend %linked_vertical;
     }
 
-    button.up { border-radius: 3px 3px 0 0; }
+    button.up { border-radius: $button_radius $button_radius 0 0; }
 
     > text:focus + button { border-top-color: if($variant!='dark', $selected_bg_color, $entry_border); }
 
@@ -1629,7 +1632,7 @@ window.devel {
   // Reset buttons
   .linked:not(.vertical):not(.path-bar) > button {
     &, &:hover, &:active, &:checked, &:disabled {
-      border-radius: 3px;
+      border-radius: $button_radius;
       border-style: solid;
     }
   }
@@ -3527,6 +3530,10 @@ filechooser {
   }
 
   #pathbarbox { border-bottom: 1px solid transparentize($borders_color, 0.5); }
+
+  // File chooser grid tiles use a larger radius than list rows, matching
+  // libadwaita's file chooser.
+  gridview > child { border-radius: $file_tile_radius; }
 }
 
 
