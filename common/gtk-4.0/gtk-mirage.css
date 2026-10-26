@@ -3474,9 +3474,21 @@ separator.sidebar {
       background-image: linear-gradient(to right, #FFCC66 0%, #FFCC66 50%, transparent 100%);
       color: #735923; }
       .navigation-sidebar > row:selected:hover {
-        background-color: #e6b85c; }
+        background-color: transparent;
+        background-image: linear-gradient(to right, #e6b85c 0%, #e6b85c 50%, transparent 100%); }
     .navigation-sidebar > row:disabled {
       color: rgba(204, 202, 194, 0.45); }
+
+/* Open With app chooser (Nautilus). Scoped so generic lists keep solid selection. */
+appchooser listview.view > row:selected,
+appchooser list > row:selected {
+  background-color: transparent;
+  background-image: linear-gradient(to right, #FFCC66 0%, #FFCC66 50%, transparent 100%); }
+  appchooser listview.view > row:selected.has-open-popup, appchooser listview.view > row:selected:hover,
+  appchooser list > row:selected.has-open-popup,
+  appchooser list > row:selected:hover {
+    background-color: transparent;
+    background-image: linear-gradient(to right, #e6b85c 0%, #e6b85c 50%, transparent 100%); }
 
 /****************
  * File chooser *

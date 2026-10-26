@@ -20,6 +20,15 @@
   }
 }
 
+//
+// Selection gradient: solid on the left, fading out to the right
+// so long labels stay readable while the row blends into its background.
+//
+@mixin selection-gradient($color: $selected_bg_color) {
+  background-color: transparent;
+  background-image: linear-gradient(to right, $color 0%, $color 50%, transparent 100%);
+}
+
 // Entries
 
 @mixin entry($t) {

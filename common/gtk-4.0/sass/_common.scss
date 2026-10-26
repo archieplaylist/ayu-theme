@@ -3641,17 +3641,25 @@ separator.sidebar {
     }
 
     &:selected {
-      background-color: transparent;
-      background-image: linear-gradient(to right, $selected_bg_color 0%, $selected_bg_color 50%, transparent 100%);
+      @include selection-gradient();
       color: $selected_fg_color;
 
       &:hover {
-        background-color: mix(black, $selected_bg_color, 10%);
+        @include selection-gradient(mix(black, $selected_bg_color, 10%));
       }
     }
 
     &:disabled { color: $insensitive_fg_color; }
   }
+}
+
+/* Open With app chooser (Nautilus). Scoped so generic lists keep solid selection. */
+appchooser listview.view > row:selected,
+appchooser list > row:selected {
+  @include selection-gradient();
+
+  &.has-open-popup,
+  &:hover { @include selection-gradient(mix(black, $selected_bg_color, 10%)); }
 }
 
 
