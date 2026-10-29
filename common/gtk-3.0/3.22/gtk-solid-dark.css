@@ -4177,7 +4177,9 @@ filechooser placessidebar.sidebar,
     filechooser placessidebar.sidebar row.sidebar-row.has-open-popup, filechooser placessidebar.sidebar row.sidebar-row:hover,
     .nautilus-window placessidebar.sidebar row.sidebar-row.has-open-popup,
     .nautilus-window placessidebar.sidebar row.sidebar-row:hover {
-      background-color: rgba(191, 189, 182, 0.15); }
+      background-color: transparent;
+      background-image: linear-gradient(to left, rgba(191, 189, 182, 0.15) 0%, rgba(191, 189, 182, 0.15) 50%, transparent 100%);
+      box-shadow: inset -2px 0 #59C2FF; }
     filechooser placessidebar.sidebar row.sidebar-row:disabled, filechooser placessidebar.sidebar row.sidebar-row:disabled label, filechooser placessidebar.sidebar row.sidebar-row:disabled image,
     .nautilus-window placessidebar.sidebar row.sidebar-row:disabled,
     .nautilus-window placessidebar.sidebar row.sidebar-row:disabled label,
@@ -4189,7 +4191,8 @@ filechooser placessidebar.sidebar,
     .nautilus-window placessidebar.sidebar row.sidebar-row:selected:hover,
     .nautilus-window placessidebar.sidebar row.sidebar-row:active:hover {
       background-color: transparent;
-      background-image: linear-gradient(to right, #E6B450 0%, #E6B450 50%, transparent 100%); }
+      background-image: linear-gradient(to left, #E6B450 0%, #E6B450 50%, transparent 100%);
+      box-shadow: inset -2px 0 #59C2FF; }
       filechooser placessidebar.sidebar row.sidebar-row:selected.has-open-popup .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:selected .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:selected:hover .sidebar-icon, filechooser placessidebar.sidebar row.sidebar-row:active:hover .sidebar-icon,
       .nautilus-window placessidebar.sidebar row.sidebar-row:selected.has-open-popup .sidebar-icon,
       .nautilus-window placessidebar.sidebar row.sidebar-row:selected .sidebar-icon,

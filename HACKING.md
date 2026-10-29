@@ -62,6 +62,8 @@ release; separate version directories for 3.14–3.20 were dropped.
 
 Because this theme is heavily based on the pixmap engine, a lot of the styling comes from the images in the `assets` and `assets-dark` folders. Don't edit these images directly. See the next section.
 
+The Thunar sidebar row-state pixmaps are generated with `node tools/gen-gtk2-sidebar-assets.mjs`.
+
 --
 
 #### Editing the images for the GTK 2, GTK 3 and GTK 4 themes

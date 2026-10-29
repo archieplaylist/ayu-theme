@@ -3637,15 +3637,17 @@ separator.sidebar {
 
     @include focus-ring($focus-state: 'focus-visible:focus-within');
     &:hover {
-      @include selection-gradient(if($variant != 'dark', transparentize(black, 0.95), transparentize(white, 0.97)));
+      @include selection-gradient(if($variant != 'dark', transparentize(black, 0.95), transparentize(white, 0.97)), to left);
+      box-shadow: inset -2px 0 ayu('palette.blue.l3');
     }
 
     &:selected {
-      @include selection-gradient();
+      @include selection-gradient($direction: to left);
       color: $selected_fg_color;
+      box-shadow: inset -2px 0 ayu('palette.blue.l3');
 
       &:hover {
-        @include selection-gradient(mix(black, $selected_bg_color, 10%));
+        @include selection-gradient(mix(black, $selected_bg_color, 10%), to left);
       }
     }
 

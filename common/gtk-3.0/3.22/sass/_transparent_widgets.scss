@@ -31,7 +31,11 @@ filechooser,
       .sidebar-icon { color: transparentize($dark_sidebar_fg, 0.4); }
 
       &.has-open-popup,
-      &:hover { background-color: transparentize($dark_sidebar_fg, 0.85); }
+      &:hover {
+        background-color: transparent;
+        background-image: linear-gradient(to left, transparentize($dark_sidebar_fg, 0.85) 0%, transparentize($dark_sidebar_fg, 0.85) 50%, transparent 100%);
+        box-shadow: inset -2px 0 ayu('palette.blue.l3');
+      }
 
       &:disabled {
         &, label, image { color: transparentize($dark_sidebar_fg, 0.6); }
@@ -41,9 +45,10 @@ filechooser,
       &:selected, &:selected:hover, &:active:hover {
         @extend %selected_items;
 
-        // Solid on the left, fading out to the right so long names stay readable.
+        // Keep long names readable as the selection fades toward the left.
         background-color: transparent;
-        background-image: linear-gradient(to right, $selected_bg_color 0%, $selected_bg_color 50%, transparent 100%);
+        background-image: linear-gradient(to left, $selected_bg_color 0%, $selected_bg_color 50%, transparent 100%);
+        box-shadow: inset -2px 0 ayu('palette.blue.l3');
 
         .sidebar-icon { color: inherit; }
       }

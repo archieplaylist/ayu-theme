@@ -3469,14 +3469,16 @@ separator.sidebar {
       outline-width: 1px; }
     .navigation-sidebar > row:hover {
       background-color: transparent;
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%); }
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+      box-shadow: inset -2px 0 #59C2FF; }
     .navigation-sidebar > row:selected {
       background-color: transparent;
-      background-image: linear-gradient(to right, #E6B450 0%, #E6B450 50%, transparent 100%);
-      color: #765B24; }
+      background-image: linear-gradient(to left, #E6B450 0%, #E6B450 50%, transparent 100%);
+      color: #765B24;
+      box-shadow: inset -2px 0 #59C2FF; }
       .navigation-sidebar > row:selected:hover {
         background-color: transparent;
-        background-image: linear-gradient(to right, #cfa248 0%, #cfa248 50%, transparent 100%); }
+        background-image: linear-gradient(to left, #cfa248 0%, #cfa248 50%, transparent 100%); }
     .navigation-sidebar > row:disabled {
       color: rgba(191, 189, 182, 0.45); }
 

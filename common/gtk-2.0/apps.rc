@@ -10,10 +10,50 @@ style "dark-sidebar" {
 
   base[NORMAL] = @dark_sidebar_bg
   base[INSENSITIVE] = @dark_sidebar_bg
+  base[PRELIGHT] = @dark_sidebar_bg
+  base[SELECTED] = @dark_sidebar_bg
 
   text[NORMAL] = "#CCCAC2"
   text[ACTIVE] = @selected_fg_color
   text[SELECTED] = @selected_fg_color
+
+  engine "pixmap" {
+    image {
+      function = FLAT_BOX
+      state = PRELIGHT
+      detail = "cell_even"
+      file = "assets/sidebar-row-hover.png"
+      border = { 0, 2, 0, 0 }
+      stretch = TRUE
+    }
+
+    image {
+      function = FLAT_BOX
+      state = PRELIGHT
+      detail = "cell_odd"
+      file = "assets/sidebar-row-hover.png"
+      border = { 0, 2, 0, 0 }
+      stretch = TRUE
+    }
+
+    image {
+      function = FLAT_BOX
+      state = SELECTED
+      detail = "cell_even"
+      file = "assets/sidebar-row-selected.png"
+      border = { 0, 2, 0, 0 }
+      stretch = TRUE
+    }
+
+    image {
+      function = FLAT_BOX
+      state = SELECTED
+      detail = "cell_odd"
+      file = "assets/sidebar-row-selected.png"
+      border = { 0, 2, 0, 0 }
+      stretch = TRUE
+    }
+  }
 }
 
 style "thunar-frame" {
