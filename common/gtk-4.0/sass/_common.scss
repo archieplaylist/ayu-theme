@@ -3637,7 +3637,7 @@ separator.sidebar {
 
     @include focus-ring($focus-state: 'focus-visible:focus-within');
     &:hover {
-      background-color: if($variant != 'dark', transparentize(black, 0.95), transparentize(white, 0.97));
+      @include selection-gradient(if($variant != 'dark', transparentize(black, 0.95), transparentize(white, 0.97)));
     }
 
     &:selected {

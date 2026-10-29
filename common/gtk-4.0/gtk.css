@@ -3471,7 +3471,8 @@ separator.sidebar {
     .navigation-sidebar > row:focus-visible:focus-within {
       outline-width: 1px; }
     .navigation-sidebar > row:hover {
-      background-color: rgba(0, 0, 0, 0.05); }
+      background-color: transparent;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 100%); }
     .navigation-sidebar > row:selected {
       background-color: transparent;
       background-image: linear-gradient(to right, #F29718 0%, #F29718 50%, transparent 100%);
