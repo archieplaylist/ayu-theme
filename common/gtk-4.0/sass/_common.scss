@@ -3638,16 +3638,18 @@ separator.sidebar {
     @include focus-ring($focus-state: 'focus-visible:focus-within');
     &:hover {
       @include selection-gradient(if($variant != 'dark', transparentize(black, 0.95), transparentize(white, 0.97)), to left);
-      box-shadow: inset -2px 0 ayu('palette.blue.l3');
+      box-shadow: inset -2px 0 $selected_bg_color;
     }
 
     &:selected {
-      @include selection-gradient($direction: to left);
-      color: $selected_fg_color;
-      box-shadow: inset -2px 0 ayu('palette.blue.l3');
+      @include selection-gradient(transparentize($selected_bg_color, 0.75), to left);
+      color: $text_color;
+      box-shadow: inset -2px 0 $selected_bg_color;
+
+      label { color: $text_color; }
 
       &:hover {
-        @include selection-gradient(mix(black, $selected_bg_color, 10%), to left);
+        @include selection-gradient(transparentize(mix(black, $selected_bg_color, 10%), 0.75), to left);
       }
     }
 
@@ -3658,10 +3660,29 @@ separator.sidebar {
 /* Open With app chooser (Nautilus). Scoped so generic lists keep solid selection. */
 appchooser listview.view > row:selected,
 appchooser list > row:selected {
-  @include selection-gradient();
+  @include selection-gradient(transparentize($selected_bg_color, 0.75), to left);
+  color: $text_color;
+  box-shadow: inset -2px 0 $selected_bg_color;
 
   &.has-open-popup,
-  &:hover { @include selection-gradient(mix(black, $selected_bg_color, 10%)); }
+  &:hover { @include selection-gradient(transparentize(mix(black, $selected_bg_color, 10%), 0.75), to left); }
+}
+
+appchooser listview.view > row:selected label,
+appchooser list > row:selected label {
+  color: $text_color;
+}
+
+filechooser .view:selected,
+filechooser row:selected {
+  @include selection-gradient(transparentize($selected_bg_color, 0.75), to left);
+  color: $text_color;
+  box-shadow: inset -2px 0 $selected_bg_color;
+}
+
+filechooser .view:selected label,
+filechooser row:selected label {
+  color: $text_color;
 }
 
 

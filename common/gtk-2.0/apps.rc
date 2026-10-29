@@ -15,7 +15,7 @@ style "dark-sidebar" {
 
   text[NORMAL] = "#CCCAC2"
   text[ACTIVE] = @selected_fg_color
-  text[SELECTED] = @selected_fg_color
+  text[SELECTED] = @text_color
 
   engine "pixmap" {
     image {

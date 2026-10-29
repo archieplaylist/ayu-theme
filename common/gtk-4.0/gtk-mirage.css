@@ -3470,15 +3470,17 @@ separator.sidebar {
     .navigation-sidebar > row:hover {
       background-color: transparent;
       background-image: linear-gradient(to left, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
-      box-shadow: inset -2px 0 #73D0FF; }
+      box-shadow: inset -2px 0 #FFCC66; }
     .navigation-sidebar > row:selected {
       background-color: transparent;
-      background-image: linear-gradient(to left, #FFCC66 0%, #FFCC66 50%, transparent 100%);
-      color: #735923;
-      box-shadow: inset -2px 0 #73D0FF; }
+      background-image: linear-gradient(to left, rgba(255, 204, 102, 0.25) 0%, rgba(255, 204, 102, 0.25) 50%, transparent 100%);
+      color: #CCCAC2;
+      box-shadow: inset -2px 0 #FFCC66; }
+      .navigation-sidebar > row:selected label {
+        color: #CCCAC2; }
       .navigation-sidebar > row:selected:hover {
         background-color: transparent;
-        background-image: linear-gradient(to left, #e6b85c 0%, #e6b85c 50%, transparent 100%); }
+        background-image: linear-gradient(to left, rgba(230, 184, 92, 0.25) 0%, rgba(230, 184, 92, 0.25) 50%, transparent 100%); }
     .navigation-sidebar > row:disabled {
       color: rgba(204, 202, 194, 0.45); }
 
@@ -3486,12 +3488,29 @@ separator.sidebar {
 appchooser listview.view > row:selected,
 appchooser list > row:selected {
   background-color: transparent;
-  background-image: linear-gradient(to right, #FFCC66 0%, #FFCC66 50%, transparent 100%); }
+  background-image: linear-gradient(to left, rgba(255, 204, 102, 0.25) 0%, rgba(255, 204, 102, 0.25) 50%, transparent 100%);
+  color: #CCCAC2;
+  box-shadow: inset -2px 0 #FFCC66; }
   appchooser listview.view > row:selected.has-open-popup, appchooser listview.view > row:selected:hover,
   appchooser list > row:selected.has-open-popup,
   appchooser list > row:selected:hover {
     background-color: transparent;
-    background-image: linear-gradient(to right, #e6b85c 0%, #e6b85c 50%, transparent 100%); }
+    background-image: linear-gradient(to left, rgba(230, 184, 92, 0.25) 0%, rgba(230, 184, 92, 0.25) 50%, transparent 100%); }
+
+appchooser listview.view > row:selected label,
+appchooser list > row:selected label {
+  color: #CCCAC2; }
+
+filechooser .view:selected, filechooser iconview:selected,
+filechooser row:selected {
+  background-color: transparent;
+  background-image: linear-gradient(to left, rgba(255, 204, 102, 0.25) 0%, rgba(255, 204, 102, 0.25) 50%, transparent 100%);
+  color: #CCCAC2;
+  box-shadow: inset -2px 0 #FFCC66; }
+
+filechooser .view:selected label, filechooser iconview:selected label,
+filechooser row:selected label {
+  color: #CCCAC2; }
 
 /****************
  * File chooser *

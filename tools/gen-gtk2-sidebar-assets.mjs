@@ -13,14 +13,14 @@ const variants = [
     hoverColor: [0, 0, 0],
     hoverOpacity: 0.05,
     selectedColor: [242, 151, 24],
-    accentColor: [63, 179, 244],
+    accentColor: [242, 151, 24],
   },
   {
     directory: "common/gtk-2.0/assets-dark",
     hoverColor: [255, 255, 255],
     hoverOpacity: 0.03,
     selectedColor: [230, 180, 80],
-    accentColor: [89, 194, 255],
+    accentColor: [230, 180, 80],
   },
 ];
 
@@ -49,5 +49,5 @@ function writeRowImage(directory, name, color, opacity, accentColor) {
 
 for (const variant of variants) {
   writeRowImage(variant.directory, "sidebar-row-hover.png", variant.hoverColor, variant.hoverOpacity, variant.accentColor);
-  writeRowImage(variant.directory, "sidebar-row-selected.png", variant.selectedColor, 1, variant.accentColor);
+  writeRowImage(variant.directory, "sidebar-row-selected.png", variant.selectedColor, 0.25, variant.accentColor);
 }

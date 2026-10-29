@@ -34,7 +34,7 @@ filechooser,
       &:hover {
         background-color: transparent;
         background-image: linear-gradient(to left, transparentize($dark_sidebar_fg, 0.85) 0%, transparentize($dark_sidebar_fg, 0.85) 50%, transparent 100%);
-        box-shadow: inset -2px 0 ayu('palette.blue.l3');
+        box-shadow: inset -2px 0 $selected_bg_color;
       }
 
       &:disabled {
@@ -47,10 +47,11 @@ filechooser,
 
         // Keep long names readable as the selection fades toward the left.
         background-color: transparent;
-        background-image: linear-gradient(to left, $selected_bg_color 0%, $selected_bg_color 50%, transparent 100%);
-        box-shadow: inset -2px 0 ayu('palette.blue.l3');
+        background-image: linear-gradient(to left, transparentize($selected_bg_color, 0.75) 0%, transparentize($selected_bg_color, 0.75) 50%, transparent 100%);
+        box-shadow: inset -2px 0 $selected_bg_color;
 
         .sidebar-icon { color: inherit; }
+        label { color: $dark_sidebar_fg; }
       }
 
       &:not(:selected) button.sidebar-button {
