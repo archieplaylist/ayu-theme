@@ -142,6 +142,9 @@ if ENABLE_MIRAGE
 		assets-dark \
 		$(ithememiragedir)/gtk-2.0/assets
 
+	cp $(srcdir)/gtk-2.0/assets-mirage/sidebar-row-*.png \
+		$(ithememiragedir)/gtk-2.0/assets
+
 	cd $(srcdir)/gtk-2.0 && cp -R \
 		gtkrc-mirage \
 		$(ithememiragedir)/gtk-2.0/gtkrc

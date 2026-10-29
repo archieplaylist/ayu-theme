@@ -22,6 +22,13 @@ const variants = [
     selectedColor: [230, 180, 80],
     accentColor: [230, 180, 80],
   },
+  {
+    directory: "common/gtk-2.0/assets-mirage",
+    hoverColor: [255, 255, 255],
+    hoverOpacity: 0.03,
+    selectedColor: [255, 204, 102],
+    accentColor: [255, 204, 102],
+  },
 ];
 
 function writeRowImage(directory, name, color, opacity, accentColor) {
