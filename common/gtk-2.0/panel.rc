@@ -9,14 +9,14 @@ style "theme-panel" {
   bg[SELECTED] = @selected_bg_color
 
   fg[NORMAL] = "#CCCAC2"
-  fg[PRELIGHT] = @selected_fg_color
+  fg[PRELIGHT] = "#FFFFFF"
   fg[ACTIVE] = @selected_fg_color
   fg[SELECTED] = @selected_fg_color
 
   text[NORMAL] = "#CCCAC2"
-  text[PRELIGHT] = "#CCCAC2"
-  text[ACTIVE] = "#CCCAC2"
-  text[SELECTED] = "#CCCAC2"
+  text[PRELIGHT] = "#FFFFFF"
+  text[ACTIVE] = @selected_fg_color
+  text[SELECTED] = @selected_fg_color
 
   engine "murrine" {
     reliefstyle = 0
@@ -56,20 +56,15 @@ style "panelbuttons" {
   }
 }
 
-style "theme-panel-text" {
+style "theme-panel-text" = "theme-panel" {
 
   fg[NORMAL] = "#CCCAC2"
-  fg[PRELIGHT] = @selected_fg_color
-  fg[ACTIVE] = "#CCCAC2"
+  fg[PRELIGHT] = "#FFFFFF"
+  fg[ACTIVE] = @selected_fg_color
 
   text[NORMAL] = "#CCCAC2"
-  text[PRELIGHT] = @selected_fg_color
-  text[ACTIVE] = "#CCCAC2"
-
-  engine "murrine" {
-    textstyle = 0
-    text_shade = 0.2
-  }
+  text[PRELIGHT] = "#FFFFFF"
+  text[ACTIVE] = @selected_fg_color
 }
 
 style "panel-entry" {
@@ -77,20 +72,20 @@ style "panel-entry" {
   fg[NORMAL] = @text_color
   fg[PRELIGHT] = @text_color
   fg[ACTIVE] = @text_color
-  fg[SELECTED] = @text_color
-  fg[INSENSITIVE] = @text_color
+  fg[SELECTED] = @selected_fg_color
+  fg[INSENSITIVE] = @insensitive_fg_color
 
   text[NORMAL] = @text_color
   text[PRELIGHT] = @text_color
   text[ACTIVE] = @text_color
-  text[SELECTED] = @text_color
-  text[INSENSITIVE] = @text_color
+  text[SELECTED] = @selected_fg_color
+  text[INSENSITIVE] = @insensitive_fg_color
 
 }
 
 style "theme-main-menu-text" = "theme-panel-text" {
-  fg[PRELIGHT] = @selected_fg_color
-  text[PRELIGHT] = @selected_fg_color
+  fg[PRELIGHT] = "#FFFFFF"
+  text[PRELIGHT] = "#FFFFFF"
 }
 
 style "workspace-switcher" = "theme-panel" {
@@ -112,7 +107,6 @@ widget_class "*<XfceArrowButton>"                     style "panelbuttons"
 widget_class "*<XfceActionsPlugin>*"                  style "panelbuttons"
 widget_class "*XfcePanelPlugin.GtkButton"             style "panelbuttons"
 widget "*dict*Applet*"                                style "panelbuttons"
-widget_class "*Xfce*NetkTasklist*GtkToggleButton"     style "panelbuttons"
 widget_class "*Tasklist*"                             style:highest "panelbuttons"
 
 class "*Panel*MenuBar*"                               style "panelbar"
@@ -126,8 +120,6 @@ widget "*CPUFreq*Applet*"                             style "theme-panel"
 class "PanelApp*"                                     style "theme-panel"
 class "PanelToplevel*"                                style "theme-panel"
 widget_class "*PanelToplevel*"                        style "theme-panel"
-widget_class "*notif*"                                style "theme-panel"
-widget_class "*Notif*"                                style "theme-panel"
 widget_class "*Tray*"                                 style "theme-panel" 
 widget_class "*tray*"                                 style "theme-panel"
 widget_class "*computertemp*"                         style "theme-panel"

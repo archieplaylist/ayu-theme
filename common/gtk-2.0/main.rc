@@ -66,7 +66,6 @@ style "default" {
 
   GnomeHRef::link_color = @link_color
   GtkHTML::link-color = @link_color
-  GtkIMHtmlr::hyperlink-color = @link_color
   GtkIMHtml::hyperlink-color = @link_color
   GtkWidget::link-color = @link_color
   GtkWidget::visited-link-color = @text_color
@@ -718,7 +717,7 @@ style "menu_item"
   # highlight. The price to pay is black text on menus as well,
   # but at least it's readable.
   # See https://bugs.freedesktop.org/show_bug.cgi?id=38038
-  bg[SELECTED] = @selected_fg_color
+  bg[SELECTED] = @selected_bg_color
 
   fg[NORMAL] = @fg_color
   fg[SELECTED] = @selected_fg_color
@@ -2205,8 +2204,8 @@ style "xfdesktop-icon-view" {
   XfdesktopIconView::cell-padding = 6
   XfdesktopIconView::cell-text-width-proportion = 1.9
 
-  fg[NORMAL] = @selected_fg_color
-  fg[ACTIVE] = @selected_fg_color
+  fg[NORMAL] = "#FFFFFF"
+  fg[ACTIVE] = "#FFFFFF"
 }
 
 style "xfwm-tabwin" {
@@ -2283,8 +2282,8 @@ class "GtkTreeView"                                                 style "treev
 class "GtkToolbar"                                                  style "toolbar"
 class "*HandleBox"                                                  style "toolbar"
 
-widget_class "*<GtkMenu>*"                                          style "menu"
 widget_class "*<GtkMenu>*"                                          style "menu_framed_box"
+widget_class "*<GtkMenu>*"                                          style "menu"
 widget_class "*<GtkMenuItem>*"                                      style "menu_item"
 widget_class "*<GtkCheckButton>*"                                   style "checkbutton"
 widget_class "*<GtkComboBox>"                                       style "combobox"

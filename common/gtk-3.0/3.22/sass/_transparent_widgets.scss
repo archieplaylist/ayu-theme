@@ -50,7 +50,7 @@ filechooser,
         background-image: linear-gradient(to left, transparentize($selected_bg_color, 0.75) 0%, transparentize($selected_bg_color, 0.75) 50%, transparent 100%);
         box-shadow: inset -2px 0 $selected_bg_color;
 
-        .sidebar-icon { color: inherit; }
+        .sidebar-icon { color: $dark_sidebar_fg; }
         label { color: $dark_sidebar_fg; }
       }
 
@@ -146,7 +146,7 @@ filechooser {
     button { @extend %dark_sidebar_button; }
     entry { @extend %dark_sidebar_entry; }
 
-    @extend %osd_check_radio;
+    @if $variant == 'dark' { @extend %osd_check_radio; }
 
     label, combobox { color: $dark_sidebar_fg; }
   }
@@ -212,7 +212,7 @@ filechooser {
   slider {
     background-color: transparentize(lighten($dark_sidebar_fg, 15%), 0.3);
 
-    &:hover { background-color: lighten($dark_sidebar_fg, 20%); }
+    &:hover { background-color: if($variant == 'light', darken($dark_sidebar_fg, 10%), lighten($dark_sidebar_fg, 20%)); }
 
     &:hover:active { background-color: $selected_bg_color; }
 

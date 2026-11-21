@@ -120,11 +120,11 @@ stage {
 }
 
 %default_button {
-  @include button(normal, $c:-st-accent-color, $tc:-st-accent-fg-color, $style: default);
-  &:focus { @include button(focus, $c:-st-accent-color, $tc:-st-accent-fg-color, $style: default);}
-  &:hover { @include button(hover, $c:-st-accent-color, $tc:-st-accent-fg-color, $style: default);}
-  &:insensitive { @include button(insensitive, $c:-st-accent-color, $tc:-st-accent-fg-color, $style: default);}
-  &:active { @include button(active, $c:-st-accent-color, $tc:-st-accent-fg-color, $style: default);}
+  @include button(normal, $c:$accent_color, $tc:$accent_fg_color, $style: default);
+  &:focus { @include button(focus, $c:$accent_color, $tc:$accent_fg_color, $style: default);}
+  &:hover { @include button(hover, $c:$accent_color, $tc:$accent_fg_color, $style: default);}
+  &:insensitive { @include button(insensitive, $c:$accent_color, $tc:$accent_fg_color, $style: default);}
+  &:active { @include button(active, $c:$accent_color, $tc:$accent_fg_color, $style: default);}
 }
 
 // items in popover menus
@@ -176,7 +176,7 @@ stage {
   border-radius: $base_border_radius;
   padding: $base_padding * 1.5 $base_padding * 1.5;
 
-  selection-background-color: st-transparentize(-st-accent-color, 0.7);
+  selection-background-color: transparentize($accent_color, 0.7);
   selected-color: $fg_color;
 }
 
@@ -302,10 +302,11 @@ stage {
 // entries
 %osd_entry {
   @extend %entry_common;
-  @include entry(normal, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: true);
-  &:hover { @include entry(hover, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: true);}
-  &:focus { @include entry(focus, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: true);}
-  &:insensitive { @include entry(insensitive, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: true);}
+  $_osd_dark: $variant == 'dark';
+  @include entry(normal, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: $_osd_dark);
+  &:hover { @include entry(hover, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: $_osd_dark);}
+  &:focus { @include entry(focus, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: $_osd_dark);}
+  &:insensitive { @include entry(insensitive, $c:$osd_fg_color, $bc:$osd_bg_color, $always_dark: $_osd_dark);}
 
   StLabel.hint-text {color: transparentize($osd_fg_color, 0.3); }
 }
@@ -313,22 +314,24 @@ stage {
 // buttons on OSD elements
 %osd_button {
   @extend %button_common;
-  @include button(normal, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: true);
-  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: true);}
-  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: true);}
-  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: true);}
-  &:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: true);}
-  &:insensitive { @include button(insensitive, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: true);}
+  $_osd_dark: $variant == 'dark';
+  @include button(normal, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: $_osd_dark);
+  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: $_osd_dark);}
+  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: $_osd_dark);}
+  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: $_osd_dark);}
+  &:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: $_osd_dark);}
+  &:insensitive { @include button(insensitive, $tc:$osd_fg_color, $c:$osd_bg_color, $always_dark: $_osd_dark);}
 }
 
 %osd_button_flat {
   @extend %button_common;
-  @include button(normal, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: true);
-  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: true);}
-  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: true);}
-  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: true);}
-  &:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: true);}
-  &:insensitive { @include button(insensitive, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: true);}
+  $_osd_dark: $variant == 'dark';
+  @include button(normal, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: $_osd_dark);
+  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: $_osd_dark);}
+  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: $_osd_dark);}
+  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: $_osd_dark);}
+  &:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: $_osd_dark);}
+  &:insensitive { @include button(insensitive, $tc:$osd_fg_color, $c:$osd_bg_color, $style: flat, $always_dark: $_osd_dark);}
 }
 
 /* System Elements */
@@ -346,12 +349,12 @@ stage {
 
 // buttons
 %system_button {
-  @include button(normal, $tc:$system_fg_color, $c:$system_bg_color);
-  &:insensitive { @include button(insensitive, $tc:$system_fg_color, $c:$system_bg_color);}
-  &:focus { @include button(focus, $tc:$system_fg_color, $c:$system_bg_color);}
-  &:hover { @include button(hover, $tc:$system_fg_color, $c:$system_bg_color);}
-  &:active { @include button(active, $tc:$system_fg_color, $c:$system_bg_color);}
-  &:checked { @include button(checked, $tc:$system_fg_color, $c:$system_bg_color);}
+  @include button(normal, $tc:$system_fg_color, $c:$system_bg_color, $always_dark: true);
+  &:insensitive { @include button(insensitive, $tc:$system_fg_color, $c:$system_bg_color, $always_dark: true);}
+  &:focus { @include button(focus, $tc:$system_fg_color, $c:$system_bg_color, $always_dark: true);}
+  &:hover { @include button(hover, $tc:$system_fg_color, $c:$system_bg_color, $always_dark: true);}
+  &:active { @include button(active, $tc:$system_fg_color, $c:$system_bg_color, $always_dark: true);}
+  &:checked { @include button(checked, $tc:$system_fg_color, $c:$system_bg_color, $always_dark: true);}
 }
 
 /* Lockscreen Elements */
@@ -359,12 +362,12 @@ stage {
 // buttons
 %lockscreen_button {
   @extend %button_common;
-  @include button(normal, $tc:$system_fg_color, $style: lockscreen);
-  &:focus { @include button(focus, $tc:$system_fg_color, $style: lockscreen);}
-  &:hover { @include button(hover, $tc:$system_fg_color, $style: lockscreen);}
-  &:active { @include button(active, $tc:$system_fg_color, $style: lockscreen);}
-  &:checked { @include button(checked, $tc:$system_fg_color, $style: lockscreen);}
-  &:insensitive { @include button(insensitive, $tc:$system_fg_color, $style: lockscreen);}
+  @include button(normal, $tc:$system_fg_color, $c:$system_bg_color, $style: lockscreen, $always_dark: true);
+  &:focus { @include button(focus, $tc:$system_fg_color, $c:$system_bg_color, $style: lockscreen, $always_dark: true);}
+  &:hover { @include button(hover, $tc:$system_fg_color, $c:$system_bg_color, $style: lockscreen, $always_dark: true);}
+  &:active { @include button(active, $tc:$system_fg_color, $c:$system_bg_color, $style: lockscreen, $always_dark: true);}
+  &:checked { @include button(checked, $tc:$system_fg_color, $c:$system_bg_color, $style: lockscreen, $always_dark: true);}
+  &:insensitive { @include button(insensitive, $tc:$system_fg_color, $c:$system_bg_color, $style: lockscreen, $always_dark: true);}
 }
 
 // entries

@@ -31,7 +31,7 @@ function recolorFile(file, mapping) {
     const target = seen.get(key);
     return target === m ? m : target;
   });
-  const n = [...seen.entries()].filter(([k, v]) => v !== k).length;
+  const n = [...seen.entries()].filter(([k, v]) => v.toLowerCase() !== k).length;
   if (out !== text) {
     if (!dry) fs.writeFileSync(file, out);
     changed += n;

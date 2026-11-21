@@ -3,15 +3,13 @@ $asset_path: if($variant == 'dark', dark-assets, light-assets);
 //
 // Globals
 //
-$font-size: 9;
-$font-family: Futura Bk bt, sans, Sans-Serif;
+$font-size: 9.5;
 $_bubble_bg_color: opacify($osd_bg_color,0.25);
 $_bubble_fg_color: $osd_fg_color;
 $_bubble_borders_color: transparentize($osd_fg_color,0.8);
 $_shell_fg_color: white;
 
 stage {
-  font-family: $font-family;
   @include fontsize($font-size);
   color: $fg_color;
 }
@@ -88,9 +86,9 @@ stage {
 %osd_entry {
   padding: 7px;
   caret-size: 1px;
-  caret-color: $osd_fg_color;
-  selection-background-color: $selected_bg_color;
-  selected-color: $selected_fg_color;
+  caret-color: $selected_fg_color;
+  selection-background-color: $selected_fg_color;
+  selected-color: $selected_bg_color;
   transition-duration: 300ms;
   border-radius: 3px;
 
@@ -128,7 +126,7 @@ StScrollBar {
     border: 0px solid;
     margin: 0px;
 
-    &:hover { background-color: mix($fg_color, $bg_color, 30%); }
+    &:hover { background-color: mix($fg_color, $bg_color, 55%); }
 
     &:active { background-color: $selected_bg_color; }
   }
@@ -136,8 +134,8 @@ StScrollBar {
 
 .separator {
   -gradient-height: 1px;
-  -gradient-start: rgba(0,0,0,0);
-  -gradient-end: rgba(0,0,0,0);
+  -gradient-start: $borders_color;
+  -gradient-end: $borders_color;
   -margin-horizontal: 1.5em;
   height: 1em;
 }
@@ -334,9 +332,9 @@ StScrollBar {
 .popup-combobox-item { spacing: 1em; }
 
 .popup-separator-menu-item {
-  -gradient-height: 2px;
-  -gradient-start: transparent;
-  -gradient-end: transparent;
+  -gradient-height: 1px;
+  -gradient-start: $borders_color;
+  -gradient-end: $borders_color;
   -margin-horizontal: 1.5em;
   height: 1em;
 }
@@ -356,8 +354,6 @@ StScrollBar {
 //
 #panel {
   font-weight: bold;
-  height: 27px;
-  width: 32px;
 
   &:highlight {
     border-image: none;
@@ -598,7 +594,7 @@ StScrollBar {
   }
   &-uuid {
     font-size: 10px;
-    color: #888;
+    color: $insensitive_fg_color;
   }
   &-icon {
     padding-right: 20px;
@@ -610,7 +606,6 @@ StScrollBar {
     background-color: $base_color;
     padding: 4px;
     padding-right: 0;
-    border-radius: 0;
 
     &-innerBox {
       padding: 1.2em;
@@ -624,7 +619,7 @@ StScrollBar {
   &-version {
     padding-left: 7px;
     font-size: 10px;
-    color: #888;
+    color: $insensitive_fg_color;
   }
 }
 
@@ -1020,9 +1015,9 @@ StScrollBar {
   }
 
   &-item {
-    color: #ccc;
+    color: transparentize($fg_color, 0.2);
 
-    &:hover { color: white }
+    &:hover { color: $fg_color; }
 
     &:ltr { padding-right: 1em; }
     &:rtl { padding-left: 1em; }
@@ -1118,7 +1113,7 @@ StScrollBar {
     &-box {
       margin: auto;
       padding: 10px;
-      border: 0px solid red;
+      border: none;
     }
 
     &-button { padding: 10px; }
@@ -1156,8 +1151,8 @@ StScrollBar {
       @include button(hover); border-radius: 2px;
     }
     &-hover {
-      background-color: red;
-      border-radius: 2px;
+      padding: 7px;
+      @include button(hover); border-radius: 2px;
     }
     &-greyed {
       padding: 7px;
@@ -1188,7 +1183,7 @@ StScrollBar {
   &-selected-app-description { max-width: 150px; }
 
   &-search-box:ltr { padding-left: 30px; }
-  &-search-box-rtl { padding-right: 30px; }
+  &-search-box:rtl { padding-right: 30px; }
 }
 
 #menu-search-entry {
@@ -1244,6 +1239,11 @@ StScrollBar {
     background-color: transparentize(black, 0.5);
     border-radius: 2px;
     color: $selected_bg_color;
+  }
+
+  .level-bar {
+    border-radius: 2px;
+    background-color: $selected_bg_color;
   }
 }
 
@@ -1302,9 +1302,116 @@ StScrollBar {
   }
 
   &-item-demands-attention {
+    color: $warning_fg_color;
     background-gradient-start: $warning_color;
     background-gradient-end: $warning_color;
   }
+}
+
+//
+// Grouped Window List (Cinnamon 4.0–6.x)
+//
+.grouped-window-list {
+  &-box {
+    spacing: 2px;
+    padding: 0 4px;
+  }
+
+  &-item-box {
+    color: transparentize($_shell_fg_color, 0.25);
+    font-weight: bold;
+    padding: 0 6px;
+    spacing: 0.4em;
+    border-bottom: 2px solid transparent;
+    transition-duration: 100ms;
+
+    &:hover {
+      color: $_shell_fg_color;
+      background-color: transparentize($_shell_fg_color, 0.9);
+    }
+
+    &:active,
+    &:checked,
+    &:focus {
+      color: $_shell_fg_color;
+      background-color: transparentize($_shell_fg_color, 0.85);
+      border-bottom: 2px solid $selected_bg_color;
+    }
+
+    &.top:active, &.top:checked, &.top:focus {
+      border-bottom: none;
+      border-top: 2px solid $selected_bg_color;
+    }
+
+    &.left:active, &.left:checked, &.left:focus {
+      border-bottom: none;
+      border-left: 2px solid $selected_bg_color;
+    }
+
+    &.right:active, &.right:checked, &.right:focus {
+      border-bottom: none;
+      border-right: 2px solid $selected_bg_color;
+    }
+
+    .progress {
+      background-color: transparentize($selected_bg_color, 0.4);
+    }
+  }
+
+  &-badge {
+    border-radius: 9999px;
+    background-color: $selected_bg_color;
+    color: $selected_fg_color;
+    padding: 0 4px;
+  }
+
+  &-number-label {
+    z-index: 99;
+    color: $selected_fg_color;
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+
+  &-thumbnail-menu {
+    background-color: $osd_bg_color;
+    color: $osd_fg_color;
+    border: 1px solid $osd_borders_color;
+    border-radius: 4px;
+    padding: 6px;
+    spacing: 6px;
+
+    .item-box {
+      padding: 6px;
+      border-radius: 3px;
+      spacing: 4px;
+
+      &:outlined {
+        border: 1px solid $selected_bg_color;
+      }
+
+      &:selected {
+        background-color: transparentize($osd_fg_color, 0.88);
+      }
+    }
+  }
+
+  &-thumbnail-label {
+    color: $osd_fg_color;
+    padding-left: 4px;
+  }
+
+  &-thumbnail-alert {
+    background-color: transparentize($warning_color, 0.5);
+  }
+}
+
+.window-list-preview {
+  background-color: $osd_bg_color;
+  color: $osd_fg_color;
+  border: 1px solid $osd_borders_color;
+  border-radius: 4px;
+  padding: 10px 14px;
+  spacing: 6px;
 }
 
 ///
@@ -1393,7 +1500,7 @@ StScrollBar {
     spacing: 0.5em;
     background: transparentize(darken($osd_bg_color, 5%), 0.1);
     border: 0px solid darken($osd_bg_color, 10%);
-    border-bottom: 1px ;
+    border-bottom-width: 1px;
     color: $osd_fg_color;
 
     StButton {
@@ -1446,13 +1553,13 @@ StScrollBar {
 .workspace-button {
   width: 20px;
   height: 10px;
-  color: $selected_fg_color;
+  color: transparentize($_shell_fg_color, 0.3);
   padding: 3px;
   padding-top: 4px;
-  transition-duration: 300;
+  transition-duration: 300ms;
 
   &:outlined, &:outlined:hover { color: $selected_bg_color; }
-  &:hover { color: transparentize($selected_bg_color, 0.5) }
+  &:hover { color: $_shell_fg_color; }
 }
 
 /* Controls the style when using the "Visual representation" option */
@@ -1653,13 +1760,85 @@ StScrollBar {
 //
 // Workspace OSD
 //
-/*FIXME*/
 .workspace-osd {
-  /*color: red;*/
-  text-shadow: black 5px 5px 5px;
+  color: $osd_fg_color;
+  background-color: transparentize($osd_bg_color, 0.1);
+  border: 1px solid $osd_borders_color;
+  border-radius: 6px;
+  padding: 12px 24px;
   font-weight: bold;
-  font-size: 48pt;
+  font-size: 36pt;
 }
+
+//
+// Modern Cinnamon 4–6 additions (Dialogs, Calendar Events, Panel Applets, Corner Bar)
+//
+.dialog {
+  background-color: $bg_color;
+  color: $fg_color;
+  border: 1px solid $borders_color;
+  border-radius: 6px;
+  padding: 18px;
+
+  .dialog-content-box { spacing: 14px; }
+  .dialog-button-box { spacing: 10px; padding-top: 12px; }
+  .dialog-button { @extend %button; }
+  .confirm-dialog-title { font-weight: bold; font-size: 1.2em; }
+}
+
+.calendar-main-box { margin: 0 0.8em 0.5em 0.8em; }
+.calendar-events-main-box {
+  height: 300px;
+  margin-right: 0.5em;
+  padding: 0.5em;
+  min-width: 280px;
+  border: 1px solid $borders_color;
+  border-radius: 3px;
+  background-color: $base_color;
+  color: $fg_color;
+}
+.calendar-events-no-events-button {
+  margin: 6px 0;
+  padding: 6px;
+  border-radius: 3px;
+  color: $insensitive_fg_color;
+  &:hover { background-color: transparentize($fg_color, 0.92); color: $fg_color; }
+}
+.calendar-events-date-label {
+  padding: 0.2em 0 0.6em 0;
+  font-weight: bold;
+  color: $fg_color;
+}
+.calendar-event-button {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  margin: 3px 0;
+  &:hover { background-color: transparentize($fg_color, 0.92); }
+}
+.calendar-event-color-strip { width: 3px; border-radius: 2px; }
+.calendar-event-row-content { margin: 4px 6px; }
+.calendar-event-time-past { color: $insensitive_fg_color; }
+.calendar-event-time-present { color: $selected_bg_color; font-weight: bold; }
+.calendar-event-time-future { color: $fg_color; }
+.calendar-today-home-button {
+  padding: 6px;
+  border-radius: 3px;
+  &:hover { background-color: transparentize($fg_color, 0.92); }
+}
+
+.applet-box:checked,
+.applet-box:open {
+  background-color: transparentize($_shell_fg_color, 0.88);
+  color: $_shell_fg_color;
+}
+
+.systray { spacing: 5px; }
+.spacer-box:highlight { background-color: transparentize($selected_bg_color, 0.5); }
+.corner-bar {
+  background-color: transparentize($_shell_fg_color, 0.8);
+  &:hover { background-color: $selected_bg_color; }
+}
+#notification.critical { border-color: $error_color; }
 
 //
 // Notification Applet

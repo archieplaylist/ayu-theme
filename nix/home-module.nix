@@ -17,8 +17,9 @@ let
     .${cfg.variant}
     + (lib.optionalString cfg.solid "-solid");
 
-  # The HiDPI window decorations are shipped as a separate theme.
-  windowThemeName = themeName + (lib.optionalString cfg.hdpi "-hdpi");
+  # The HiDPI window decorations are shipped as a separate xfwm4-only theme;
+  # Metacity/Mutter/Marco (org.gnome.desktop.wm.preferences) always uses themeName.
+  xfwmThemeName = themeName + (lib.optionalString cfg.hdpi "-hdpi");
 
   # libadwaita apps ignore GTK_THEME and only read
   # ~/.config/gtk-4.0/gtk.css, which cannot be set system-wide.
@@ -81,7 +82,7 @@ in
     windowTheme = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Set `org.gnome.desktop.wm.preferences theme` (xfwm4).";
+      description = "Set `org.gnome.desktop.wm.preferences theme` (Metacity/Mutter/Marco).";
     };
 
     shellTheme = lib.mkOption {
@@ -108,7 +109,7 @@ in
       };
 
       "org/gnome/desktop/wm/preferences" = {
-        "theme" = lib.mkIf cfg.windowTheme windowThemeName;
+        "theme" = lib.mkIf cfg.windowTheme themeName;
       };
 
       "org/gnome/shell/extensions/user-theme" = {

@@ -19,9 +19,9 @@ $fg_color: ayu('editor.fg');
 $osd_fg_color: ayu('editor.fg');
 $osd_bg_color: ayu('ui.popup.bg');
 
-// system elements (lock/login) are always dark
-$system_base_color: ayu('surface.base', 'dark');
-$system_fg_color: ayu('editor.fg', 'dark');
+// system elements (overview/lock/login) stay dark; Mirage keeps its own dark slate
+$system_base_color: if($flavor == 'mirage', ayu('surface.base', 'mirage'), ayu('surface.base', 'dark'));
+$system_fg_color: if($flavor == 'mirage', ayu('editor.fg', 'mirage'), ayu('editor.fg', 'dark'));
 
 $panel_bg_color: ayu('ui.panel.bg');
 // The panel foreground has to be readable on ui.panel.bg: ui.fg is the
@@ -38,6 +38,7 @@ $card_shadow_border_color: if($flavor == 'light', transparentize($dark_5, .91), 
 // _default-colors.scss, which are imported before this file.
 //
 $accent_color: ayu('common.accent.tint');
+$accent_fg_color: ayu('common.accent.on');
 
 $destructive_bg_color: ayu('common.error');
 $destructive_color: ayu('common.error');
@@ -45,11 +46,11 @@ $destructive_fg_color: ayu('surface.over');
 
 $success_bg_color: ayu('vcs.added');
 $success_color: ayu('vcs.added');
-$success_fg_color: ayu('surface.over');
+$success_fg_color: if($flavor == 'light', ayu('surface.sunk', 'dark'), ayu('surface.sunk'));
 
 $warning_bg_color: ayu('syntax.func');
 $warning_color: ayu('syntax.func');
-$warning_fg_color: ayu('surface.over');
+$warning_fg_color: if($flavor == 'light', ayu('surface.sunk', 'dark'), ayu('surface.sunk'));
 
 $error_bg_color: ayu('common.error');
 $error_color: ayu('common.error');

@@ -18,7 +18,8 @@ $app_folder_size: 720px;
 /* App Icons */
 
 // items in the app grid and dash
-.overview-tile {
+.overview-tile,
+.app-well-app {
   @include tile_button($bg:$system_base_color);
 
   // override the %tile style

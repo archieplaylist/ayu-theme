@@ -386,13 +386,13 @@ $selection_mode_bg: if($transparency == 'true', transparentize($selected_bg_colo
 $selection_mode_fg: $selected_fg_color;
 $warning_color: ayu('syntax.func');
 $error_color: ayu('common.error');
-$warning_fg_color: $text_color;
+$warning_fg_color: if($variant == 'light', ayu('surface.sunk', 'dark'), ayu('surface.sunk'));
 $error_fg_color: ayu('surface.over');
 $success_color: ayu('vcs.added');
 $destructive_color: ayu('common.error');
 $suggested_color: ayu('syntax.entity');
 $destructive_fg_color: ayu('surface.over');
-$suggested_fg_color: $selected_fg_color;
+$suggested_fg_color: if($variant == 'light', ayu('surface.over'), ayu('surface.sunk'));
 
 $drop_target_color: ayu('syntax.entity');
 
@@ -400,11 +400,11 @@ $drop_target_color: ayu('syntax.entity');
 $insensitive_fg_color: if($variant == 'light', transparentize($fg_color, 0.45), transparentize($fg_color, 0.55));
 $insensitive_bg_color: if($variant == 'light', mix($bg_color, $base_color, 40%), lighten($bg_color, 2%));
 
-$header_bg: if($transparency == 'true', transparentize(ayu('surface.sunk'), 0.03), ayu('surface.sunk'));
+$header_bg: if($transparency == 'true', transparentize(ayu('surface.base'), 0.03), ayu('surface.base'));
 
 $header_bg_backdrop: lighten($header_bg, if($variant == 'dark', 1.5%, 3%));
 
-$header_border: darken($header_bg, 7%);
+$header_border: $borders_color;
 
 $header_fg: saturate(transparentize($fg_color, 0.2), 10%);
 
@@ -414,8 +414,11 @@ $dark_sidebar_bg: if($transparency == 'true', transparentize(ayu('ui.panel.bg'),
 $dark_sidebar_fg: ayu('editor.fg');
 $dark_sidebar_border: if($variant == 'light', $dark_sidebar_bg, darken($dark_sidebar_bg, 5%));
 
-$osd_fg_color: ayu('editor.fg');
-$osd_bg_color: ayu('ui.popup.bg');
+// Cinnamon OSD, desklets, notifications, alt-tab, and run dialog sit on dark
+// shared SVG surfaces (common-assets/misc/{bg,osd,desklet}.svg), so keep OSD
+// tokens dark-surface-paired even in Ayu Light.
+$osd_fg_color: if($variant == 'light', ayu('editor.fg', 'dark'), ayu('editor.fg'));
+$osd_bg_color: if($variant == 'light', ayu('ui.popup.bg', 'dark'), ayu('ui.popup.bg'));
 
 $osd_button_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
 $osd_button_border: transparentize(darken($osd_bg_color, 12%), 0.6);

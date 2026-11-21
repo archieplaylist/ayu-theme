@@ -305,7 +305,7 @@ entry {
     &:focus-within {
       background-clip: border-box;
       @include entry(focus);
-      > placeholder {
+      > text > placeholder {
         opacity: 0; /* We hide placeholders on focus */
       }
     }
@@ -330,7 +330,7 @@ entry {
           box-shadow: none;
         }
 
-        > selection {
+        > text > selection {
           background-color: $e_fg_color;
           color: $e_color;
         }
@@ -386,8 +386,6 @@ entry {
 
   // Vertically linked entries
   .linked.vertical > & { @extend %linked_vertical; }
-
-  &.error { color: $error_color; }
 }
 
 treeview entry {
@@ -499,7 +497,7 @@ button {
       padding-right: 12px;
     }
 
-    %image_text_button,
+    @at-root %image_text_button,
     &.text-button.image-button {
       padding-left: 5px;
       padding-right: 5px;
@@ -692,7 +690,7 @@ button {
 
   .linked.vertical > & { @extend %linked_vertical; }
 
-  %circular_button,
+  @at-root %circular_button,
   menubutton.circular &,
   &.circular { // force circular button shape
     min-width: 24px;
@@ -711,21 +709,21 @@ button {
   $_border: if($vert=='false', left, top);
 
   @if $entry_rules=='true' {
-    > entry + entry { border-#{$_border}-color: transparentize($e_border, $a); }
+    > entry + entry { border-#{$_border}-color: _fade($e_border, 1 - $a); }
 
     > entry.error + entry,
-    > entry + entry.error { border-#{$_border}-color: if($var=='light', $error_color, transparentize($e_border, $a)); }
+    > entry + entry.error { border-#{$_border}-color: if($var=='light', $error_color, _fade($e_border, 1 - $a)); }
 
     > entry.warning + entry,
-    > entry + entry.warning { border-#{$_border}-color: if($var=='light', $warning_color, transparentize($e_border, $a)); }
+    > entry + entry.warning { border-#{$_border}-color: if($var=='light', $warning_color, _fade($e_border, 1 - $a)); }
 
     > entry.error + entry.warning,
-    > entry.warning + entry.error { border-#{$_border}-color: if($var=='light', mix($error_color, $warning_color, 50%), transparentize($e_border, $a));}
+    > entry.warning + entry.error { border-#{$_border}-color: if($var=='light', mix($error_color, $warning_color, 50%), _fade($e_border, 1 - $a));}
 
-    @each $e_type, $e_color in (':focus',$selected_bg_color),
+    @each $e_type, $e_color in (':focus-within',$selected_bg_color),
                                (':drop(active)', $drop_target_color),
-                               ('.warning:focus', $warning_color),
-                               ('.error:focus', $error_color) {
+                               ('.warning:focus-within', $warning_color),
+                               ('.error:focus-within', $error_color) {
 
       > entry + entry#{$e_type}:not(:last-child),
       > entry + entry#{$e_type}:last-child { border-#{$_border}-color: if($var=='light', $e_color, $e_border); }
@@ -748,7 +746,7 @@ button {
     > #{$_uncolored_button}:hover + #{$_uncolored_button} { box-shadow: inset if($vert=='false', 1px 0, 0 1px) $b_border; }
 
     > #{$_uncolored_button}:disabled:not(:only-child),
-    > #{$_uncolored_button}:disabled + #{$_uncolored_button}:not(:hover) { box-shadow: inset if($vert=='false', 1px 0, 0 1px) transparentize($b_border, 0.5); }
+    > #{$_uncolored_button}:disabled + #{$_uncolored_button}:not(:hover) { box-shadow: inset if($vert=='false', 1px 0, 0 1px) _fade($b_border, 0.5); }
 
     > button:active + #{$_uncolored_button}:hover,
     > button:checked + #{$_uncolored_button}:hover,
@@ -763,12 +761,12 @@ button {
     > button:checked + #{$_uncolored_button}:disabled,
     > button.suggested-action + #{$_uncolored_button}:disabled,
     > button.destructive-action + #{$_uncolored_button}:disabled,
-    > entry + #{$_uncolored_button}:disabled:not(:only-child), { box-shadow: none; }
+    > entry + #{$_uncolored_button}:disabled:not(:only-child) { box-shadow: none; }
   }
 }
 
 // special case, because path-bars are bugged
-@mixin pathbar_linking_rules($sep_color:if($variant!='dark', transparentize($button_border, 0.6), transparentize($button_border, 0.5))) {
+@mixin pathbar_linking_rules($sep_color:if($variant!='dark', _fade($button_border, 0.7), _fade($button_border, 0.5))) {
 
   > button + button { border-left-style: none; }
 
@@ -1032,7 +1030,7 @@ spinbutton {
     > button:hover:not(:active) + button { box-shadow: inset 1px 0 $button_border; }
 
     > button:disabled + button:not(:disabled):not(:active):not(:checked):not(:hover),
-    > button:not(:disabled):not(:active):not(:checked):not(:hover) + button:disabled { box-shadow: inset 1px 0 transparentize($button_border, 0.5); }
+    > button:not(:disabled):not(:active):not(:checked):not(:hover) + button:disabled { box-shadow: inset 1px 0 _fade($button_border, 0.5); }
 
     > button:first-child:hover:not(:active),
     > button.up:dir(rtl):hover:not(:active),
@@ -1075,17 +1073,6 @@ spinbutton {
 /**************
  * ComboBoxes *
  **************/
-dropdown > popover.menu.background > contents { padding: 0; } //allow search entries with no margin
-
-dropdown > button > box {
-  border-spacing: 6px;
-
-  > stack > row.activatable:hover {
-    background: none;
-    box-shadow: none;
-  }
-}
-
 dropdown,
 combobox {
   arrow {
@@ -1253,9 +1240,15 @@ infobar {
 
 //close button for info and searchbar
 
-infobar > revealer > box > button.close,
-searchbar > revealer > box > button.close {
+infobar > revealer > box > button.close {
   @extend %selected_button_flat;
+}
+
+searchbar > revealer > box > button.close {
+  @include button(undecorated);
+  color: $fg_color;
+  &:hover { @include button(hover); }
+  &:active { @include button(active); }
 }
 
 //
@@ -1550,7 +1543,7 @@ window.devel {
 
     &:backdrop { opacity: 0.85; }
 
-    &:focus {
+    &:focus-within {
       @include entry(header-focus);
       background-clip: if($variant=='light' or $variant=='lighter', border-box, padding-box);
 
@@ -1558,7 +1551,7 @@ window.devel {
     }
     &:disabled { @include entry(header-insensitive); }
 
-    selection:focus {
+    > text > selection {
       background-color: $selected_fg_color;
       color: $selected_bg_color;
     }
@@ -1576,11 +1569,11 @@ window.devel {
         border-color: if($variant=='light' or $variant=='lighter', $e_color, $header_entry_border);
         background-color: mix($e_color, $header_bg, 60%);
 
-        &:focus {
+        &:focus-within {
           color: $e_fg_color;
           background-color: $e_color;
         }
-        selection, selection:focus {
+        > text > selection {
           background-color: $e_fg_color;
           color: $e_color;
         }
@@ -1689,7 +1682,6 @@ window.devel {
       &.flat:disabled,
       &:disabled { @include button(header-insensitive); }
     }
-    button.#{$b_type}:backdrop,
     button.#{$b_type}:backdrop {
       opacity: 0.8;
     }
@@ -1697,9 +1689,9 @@ window.devel {
 
   // Headerbar Spinbuttons
   spinbutton:not(.vertical) {
-    &:focus {
-    color: $selected_fg_color;
-    caret-color: $selected_fg_color;
+    &:focus-within {
+      color: $selected_fg_color;
+      caret-color: $selected_fg_color;
     }
     button {
       &,&:disabled { @include button(header-hover); }
@@ -1718,9 +1710,9 @@ window.devel {
     > button:not(:disabled):not(:active):not(:checked):not(:hover) + button:disabled { box-shadow: inset 1px 0 $header_button_border; }
 
     > button:first-child:hover:not(:active),
-    > entry + button:not(:active):hover { box-shadow: none; }
+    > text + button:not(:active):hover { box-shadow: none; }
 
-    > entry:focus + button { border-left-color: if($variant=='light' or $variant=='lighter', $selected_bg_color, $header_entry_border); }
+    > text:focus + button { border-left-color: if($variant=='light' or $variant=='lighter', $selected_bg_color, $header_entry_border); }
   }
 
   // Headerbar ComboBoxes
@@ -1738,14 +1730,12 @@ window.devel {
       &:dir(ltr) {
         border-right-style: none;
 
-        &:focus { box-shadow: none; }
-        @if $variant=='light' or $variant=='lighter' { &:focus { box-shadow: 1px 0 $selected_bg_color; } }
+        &:focus-within { box-shadow: if($variant=='light' or $variant=='lighter', 1px 0 $selected_bg_color, none); }
       }
       &:dir(rtl) {
         border-left-style: none;
 
-        &:focus { box-shadow: none; }
-        @if $variant=='light' or $variant=='lighter' { &:focus { box-shadow: -1px 0 $selected_bg_color; } }
+        &:focus-within { box-shadow: if($variant=='light' or $variant=='lighter', -1px 0 $selected_bg_color, none); }
       }
     }
     > .linked > button.combo {
@@ -2400,7 +2390,7 @@ notebook {
 
         &:hover {
           @extend %undecorated_button;
-          color: lighten(red, 15%);
+          color: $destructive_color;
         }
         &:active, &:active:hover {
           @extend %undecorated_button;
@@ -2442,7 +2432,7 @@ scrollbar {
     background-clip: padding-box;
     background-color: mix($fg_color, $bg_color, 40%);
 
-    &:hover { background-color: mix($fg_color, $bg_color, 30%); }
+    &:hover { background-color: mix($fg_color, $bg_color, 55%); }
 
     &:hover:active { background-color: $selected_bg_color; }
 
@@ -2605,8 +2595,8 @@ checkbutton {
 
     .osd {
       #{$w}#{$s} {
-        -gtk-icon-source: -gtk-scaled(url("assets/#{$a}#{$as}-dark.png"),
-                                      url("assets/#{$a}#{$as}-dark@2.png"));
+        -gtk-icon-source: -gtk-scaled(url("assets/#{$a}#{$as}#{$asset_suffix}.png"),
+                                      url("assets/#{$a}#{$as}#{$asset_suffix}@2.png"));
       }
     }
     // the borders of checks and radios are
@@ -2632,7 +2622,7 @@ checkbutton {
   background-color: $scale_trough_bg;
 
   &:disabled {
-   background-color: transparentize($scale_trough_bg, 0.45);
+   background-color: _fade($scale_trough_bg, 0.55);
   }
 
   // ...on selected list-rows and infobars
@@ -2648,9 +2638,7 @@ checkbutton {
 
   // OSD
   .osd & {
-    background-color: if($variant == 'lighter', $osd_button_border, lighten($osd_bg_color, 7%));
-
-    &:disabled {  }
+    background-color: if($variant == 'light', darken($osd_bg_color, 10%), lighten($osd_bg_color, 7%));
   }
 }
 
@@ -2733,12 +2721,12 @@ scale {
   }
 
   > trough > slider {
-    $_slider_border: if($variant!='dark', transparentize(darken($button_border,25%), 0.5), darken($button_border,2%));
+    $_slider_border: if($variant!='dark', darken(opacify($button_border, 1), 15%), darken($button_border,2%));
 
     background-color: $button_bg;
     border-width: 1px;
     border-style: solid;
-    border-color: $_slider_border;
+    border-color: if($variant!='dark', _fade($_slider_border, 0.35), $_slider_border);
     border-radius: 100%;
     transition: $button_transition;
     transition-property: background, border;
@@ -2753,7 +2741,7 @@ scale {
 
     &:disabled {
       background-color: mix($entry_bg, $bg_color, 55%);
-      border-color: transparentize($_slider_border, 0.2);
+      border-color: _fade($_slider_border, if($variant!='dark', 0.2, 0.8));
     }
 
     // ...on selected list rows
@@ -3150,7 +3138,7 @@ window.dialog.print {
 
     paper {
       background: white;
-      color: $fg_color;
+      color: ayu('editor.fg', 'light');
       border: 1px solid $borders_color;
     }
 
@@ -3397,7 +3385,7 @@ expander-widget {
     border-radius: 3px;
 
     &:hover > expander {
-      color: lighten($fg_color,30%); //only lightens the icon
+      color: if($variant == 'light', darken($fg_color, 15%), lighten($fg_color, 20%));
     }
   }
 }
@@ -3432,7 +3420,7 @@ calendar {
         @extend %undecorated_button;
       }
 
-      color: transparentize($fg_color,0.55);
+      color: transparentize($fg_color, 0.25);
 
       &:hover { color: $fg_color; }
       &:active { color: $selected_bg_color; }
@@ -3529,7 +3517,7 @@ filechooser {
     border-top: 1px solid $borders_color;
   }
 
-  #pathbarbox { border-bottom: 1px solid transparentize($borders_color, 0.5); }
+  #pathbarbox { border-bottom: 1px solid _fade($borders_color, 0.5); }
 
   // File chooser grid tiles use a larger radius than list rows, matching
   // libadwaita's file chooser.
@@ -3853,8 +3841,9 @@ tooltip {
   &.background {
     // background-color needs to be set this way otherwise it gets drawn twice
     // see https://bugzilla.gnome.org/show_bug.cgi?id=736155 for details.
-    background-color: lighten($osd_bg_color, 10%);
+    background-color: if($variant == 'light', $osd_bg_color, lighten($osd_bg_color, 10%));
     background-clip: padding-box;
+    border: 1px solid $borders_color;
   }
 
   &.background, & {
@@ -4012,7 +4001,7 @@ plane {
 }
 
 // colorscale popup
-colorchooser .popover.osd { border-radius: 3px; }
+colorchooser popover.osd { border-radius: 3px; }
 
 /********
  * Misc *

@@ -27,21 +27,35 @@ install-data-local:
 
 if ENABLE_LIGHT
 	$(MKDIR_P) $(ithemedir)
-	cp $(srcdir)/index.theme $(ithemedir)
+	cp $(srcdir)/index.theme $(ithemedir)/index.theme
+if !ENABLE_TRANSPARENCY
+	sed -i -e 's/^Name=Ayu Light$$/Name=Ayu Light Solid/' \
+	       -e 's/=Ayu-Light$$/=Ayu-Light-solid/' $(ithemedir)/index.theme
+endif
 endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
 	$(MKDIR_P) $(ithememiragedir)
 	cp $(srcdir)/index.theme-mirage $(ithememiragedir)/index.theme
-endif # ENABLE_LIGHT
+if !ENABLE_TRANSPARENCY
+	sed -i -e 's/^Name=Ayu Mirage$$/Name=Ayu Mirage Solid/' \
+	       -e 's/=Ayu-Mirage$$/=Ayu-Mirage-solid/' $(ithememiragedir)/index.theme
+endif
+endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
 	$(MKDIR_P) $(ithemedarkdir)
 	cp $(srcdir)/index.theme-dark $(ithemedarkdir)/index.theme
+if !ENABLE_TRANSPARENCY
+	sed -i -e 's/^Name=Ayu Dark$$/Name=Ayu Dark Solid/' \
+	       -e 's/=Ayu-Dark$$/=Ayu-Dark-solid/' $(ithemedarkdir)/index.theme
+endif
 endif # ENABLE_DARK
 
 
 if ENABLE_CINNAMON
+
+if ENABLE_LIGHT
 	$(MKDIR_P) $(ithemedir)/cinnamon
 
 	cd $(srcdir)/cinnamon && cp -R \
@@ -49,6 +63,7 @@ if ENABLE_CINNAMON
 		light-assets \
 		cinnamon.css \
 		$(ithemedir)/cinnamon
+endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
 	$(MKDIR_P) $(ithememiragedir)/cinnamon
@@ -80,6 +95,8 @@ endif # ENABLE_CINNAMON
 
 
 if ENABLE_GNOME_SHELL
+
+if ENABLE_LIGHT
 	$(MKDIR_P) $(ithemedir)/gnome-shell
 
 	cd $(srcdir)/gnome-shell/$(GNOME_VERSION) && cp -R \
@@ -87,6 +104,7 @@ if ENABLE_GNOME_SHELL
 		light-assets \
 		gnome-shell.css \
 		$(ithemedir)/gnome-shell
+endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
 	$(MKDIR_P) $(ithememiragedir)/gnome-shell
@@ -131,39 +149,35 @@ if ENABLE_LIGHT
 endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
-	$(MKDIR_P) $(ithememiragedir)/gtk-2.0
+	$(MKDIR_P) $(ithememiragedir)/gtk-2.0/assets
 
 	cd $(srcdir)/gtk-2.0 && cp -R \
 		menubar-toolbar \
 		*.rc \
 		$(ithememiragedir)/gtk-2.0
 
-	cd $(srcdir)/gtk-2.0 && cp -R \
-		assets-dark \
+	cp -R $(srcdir)/gtk-2.0/assets-dark/*.png \
 		$(ithememiragedir)/gtk-2.0/assets
 
 	cp $(srcdir)/gtk-2.0/assets-mirage/sidebar-row-*.png \
 		$(ithememiragedir)/gtk-2.0/assets
 
-	cd $(srcdir)/gtk-2.0 && cp -R \
-		gtkrc-mirage \
+	cp $(srcdir)/gtk-2.0/gtkrc-mirage \
 		$(ithememiragedir)/gtk-2.0/gtkrc
 endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
-	$(MKDIR_P) $(ithemedarkdir)/gtk-2.0
+	$(MKDIR_P) $(ithemedarkdir)/gtk-2.0/assets
 
 	cd $(srcdir)/gtk-2.0 && cp -R \
 		menubar-toolbar \
 		*.rc \
 		$(ithemedarkdir)/gtk-2.0
 
-	cd $(srcdir)/gtk-2.0 && cp -R \
-		assets-dark \
+	cp -R $(srcdir)/gtk-2.0/assets-dark/*.png \
 		$(ithemedarkdir)/gtk-2.0/assets
 
-	cd $(srcdir)/gtk-2.0 && cp -R \
-		gtkrc-dark \
+	cp $(srcdir)/gtk-2.0/gtkrc-dark \
 		$(ithemedarkdir)/gtk-2.0/gtkrc
 endif # ENABLE_DARK
 
@@ -187,7 +201,6 @@ if ENABLE_MIRAGE
 
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
 		assets \
-		gtk-dark.css \
 		$(ithememiragedir)/gtk-3.0
 
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
@@ -223,10 +236,6 @@ if ENABLE_MIRAGE
 	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
 		gtk-solid-mirage.css \
 		$(ithememiragedir)/gtk-3.0/gtk.css
-
-	cd $(srcdir)/gtk-3.0/$(GNOME_VERSION) && cp -R \
-		gtk-solid-dark.css \
-		$(ithememiragedir)/gtk-3.0/gtk-dark.css
 endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
@@ -235,7 +244,7 @@ if ENABLE_DARK
 		$(ithemedarkdir)/gtk-3.0/gtk.css
 endif # ENABLE_DARK
 
-endif #!ENABLE_TRANSPARENCY
+endif # !ENABLE_TRANSPARENCY
 
 endif # ENABLE_GTK3
 
@@ -243,35 +252,28 @@ endif # ENABLE_GTK3
 if ENABLE_GTK4
 
 if ENABLE_LIGHT
-	$(MKDIR_P) $(ithemedir)/gtk-4.0
+	$(MKDIR_P) $(ithemedir)/gtk-4.0/assets
 
+	cp -R $(srcdir)/gtk-4.0/assets/*.png $(ithemedir)/gtk-4.0/assets
 	cd $(srcdir)/gtk-4.0 && cp -R \
-		assets \
 		gtk.css \
 		gtk-dark.css \
 		$(ithemedir)/gtk-4.0
 endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
-	$(MKDIR_P) $(ithememiragedir)/gtk-4.0
+	$(MKDIR_P) $(ithememiragedir)/gtk-4.0/assets
 
-	cd $(srcdir)/gtk-4.0 && cp -R \
-		assets \
-		gtk-dark.css \
-		$(ithememiragedir)/gtk-4.0
-
+	cp -R $(srcdir)/gtk-4.0/assets/*.png $(ithememiragedir)/gtk-4.0/assets
 	cd $(srcdir)/gtk-4.0 && cp -R \
 		gtk-mirage.css \
 		$(ithememiragedir)/gtk-4.0/gtk.css
 endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
-	$(MKDIR_P) $(ithemedarkdir)/gtk-4.0
+	$(MKDIR_P) $(ithemedarkdir)/gtk-4.0/assets
 
-	cd $(srcdir)/gtk-4.0 && cp -R \
-		assets \
-		$(ithemedarkdir)/gtk-4.0
-
+	cp -R $(srcdir)/gtk-4.0/assets/*.png $(ithemedarkdir)/gtk-4.0/assets
 	cd $(srcdir)/gtk-4.0 && cp -R \
 		gtk-dark.css \
 		$(ithemedarkdir)/gtk-4.0/gtk.css
@@ -293,10 +295,6 @@ if ENABLE_MIRAGE
 	cd $(srcdir)/gtk-4.0 && cp -R \
 		gtk-solid-mirage.css \
 		$(ithememiragedir)/gtk-4.0/gtk.css
-
-	cd $(srcdir)/gtk-4.0 && cp -R \
-		gtk-solid-dark.css \
-		$(ithememiragedir)/gtk-4.0/gtk-dark.css
 endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
@@ -305,7 +303,7 @@ if ENABLE_DARK
 		$(ithemedarkdir)/gtk-4.0/gtk.css
 endif # ENABLE_DARK
 
-endif #!ENABLE_TRANSPARENCY
+endif # !ENABLE_TRANSPARENCY
 
 endif # ENABLE_GTK4
 
@@ -313,25 +311,32 @@ endif # ENABLE_GTK4
 if ENABLE_METACITY
 
 if ENABLE_LIGHT
+	$(MKDIR_P) $(ithemedir)
 	cp -R $(srcdir)/metacity-1 $(ithemedir)
 
-	cd $(ithemedir)/metacity-1 && rm metacity-theme-1-dark.xml metacity-theme-2-dark.xml
+	cd $(ithemedir)/metacity-1 && rm -f *-dark.xml *-mirage.xml
 endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)
 	cp -R $(srcdir)/metacity-1 $(ithememiragedir)
 
 	cd $(ithememiragedir)/metacity-1 && \
-		mv metacity-theme-1-dark.xml metacity-theme-1.xml && \
-		mv metacity-theme-2-dark.xml metacity-theme-2.xml
+		mv metacity-theme-1-mirage.xml metacity-theme-1.xml && \
+		mv metacity-theme-2-mirage.xml metacity-theme-2.xml && \
+		mv metacity-theme-3-mirage.xml metacity-theme-3.xml && \
+		rm -f *-dark.xml
 endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
+	$(MKDIR_P) $(ithemedarkdir)
 	cp -R $(srcdir)/metacity-1 $(ithemedarkdir)
 
 	cd $(ithemedarkdir)/metacity-1 && \
 		mv metacity-theme-1-dark.xml metacity-theme-1.xml && \
-		mv metacity-theme-2-dark.xml metacity-theme-2.xml
+		mv metacity-theme-2-dark.xml metacity-theme-2.xml && \
+		mv metacity-theme-3-dark.xml metacity-theme-3.xml && \
+		rm -f *-mirage.xml
 endif # ENABLE_DARK
 
 endif # ENABLE_METACITY
@@ -340,12 +345,14 @@ endif # ENABLE_METACITY
 if ENABLE_UNITY
 
 if ENABLE_LIGHT
+	$(MKDIR_P) $(ithemedir)
 	cp -R $(srcdir)/unity $(ithemedir)
 
 	cd $(ithemedir)/unity && rm -rf window-buttons-dark
 endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
+	$(MKDIR_P) $(ithememiragedir)
 	cp -R $(srcdir)/unity $(ithememiragedir)
 
 	cd $(ithememiragedir)/unity && \
@@ -354,6 +361,7 @@ if ENABLE_MIRAGE
 endif # ENABLE_MIRAGE
 
 if ENABLE_DARK
+	$(MKDIR_P) $(ithemedarkdir)
 	cp -R $(srcdir)/unity $(ithemedarkdir)
 
 	cd $(ithemedarkdir)/unity && \
@@ -400,7 +408,9 @@ endif # ENABLE_XFWM
 
 
 uninstall-local:
+if ENABLE_LIGHT
 	rm -rf $(ithemedir)
+endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
 	rm -rf $(ithememiragedir)
@@ -411,7 +421,9 @@ if ENABLE_DARK
 endif # ENABLE_DARK
 
 if ENABLE_XFWM
+if ENABLE_LIGHT
 	rm -rf $(ihdpidir)
+endif # ENABLE_LIGHT
 
 if ENABLE_MIRAGE
 	rm -rf $(ihdpimiragedir)

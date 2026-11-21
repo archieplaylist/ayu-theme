@@ -67,8 +67,8 @@ toolbar.bottom-toolbar {
 // Sidebar & Source List
 //
 .source-list {
-  -GtkTreeView-horizontal-separator: 1px;
-  -GtkTreeView-vertical-separator: 6px;
+  -GtkTreeView-horizontal-separator: 1;
+  -GtkTreeView-vertical-separator: 6;
 }
 
 .source-list,
@@ -134,7 +134,7 @@ toolbar.bottom-toolbar {
 
 .source-list.category-expander,
 .source-list.category-expander:backdrop {
-    color: transparent;
+    color: $fg_color;
     border: none;
 }
 
@@ -161,19 +161,12 @@ GraniteWidgetsWelcome .h3 {
 }
 
 //
-// Help Button
-//
-.help_button {
-  border-radius: 0;
-}
-
-//
 // Popover
 //
 GraniteWidgetsPopOver {
   -GraniteWidgetsPopOver-arrow-width: 21;
   -GraniteWidgetsPopOver-arrow-height: 10;
-  -GraniteWidgetsPopOver-border-radius: 2px;
+  -GraniteWidgetsPopOver-border-radius: 2;
   -GraniteWidgetsPopOver-border-width: 1;
   -GraniteWidgetsPopOver-shadow-size: 12;
 
@@ -213,6 +206,6 @@ GraniteWidgetsXsEntry entry { padding: 4px; }
     padding-top: 6px;
 }
 
-GtkListBox .h4{
+list .h4 {
 	padding-left: 6px;
 }

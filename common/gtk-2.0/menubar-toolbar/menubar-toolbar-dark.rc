@@ -128,7 +128,7 @@ style "toolbar_button" {
 style "toolbar_entry" {
 
   base[NORMAL] = "#404953"
-  base[ACTIVE] = "#404953"
+  base[ACTIVE] = "#333B44"
   base[INSENSITIVE] = "#333B44"
 
   text[NORMAL] = "#BFBDB6"
@@ -198,9 +198,9 @@ style "chrome-gtk-frame" {
 
   ChromeGtkFrame::incognito-frame-gradient-color = @bg_color
 
-  ChromeGtkFrame::scrollbar-trough-color = shade(0.912, @bg_color)
-  ChromeGtkFrame::scrollbar-slider-prelight-color = shade(1.04, @bg_color)
-  ChromeGtkFrame::scrollbar-slider-normal-color = @bg_color
+  ChromeGtkFrame::scrollbar-trough-color = @bg_color
+  ChromeGtkFrame::scrollbar-slider-prelight-color = "#5A6378"
+  ChromeGtkFrame::scrollbar-slider-normal-color = "#333B44"
 
 }
 
@@ -208,6 +208,7 @@ widget_class "*<GtkMenuBar>*"                                       style "menub
 widget_class "*<GtkMenuBar>.<GtkMenuItem>*"                         style "menubar_item"
 
 widget_class "*ThunarWindow*<GtkToolbar>"                           style "menubar"
+widget_class "*CajaNavigationWindow*<GtkToolbar>"                   style "menubar"
 
 class "ChromeGtkFrame"                                              style "chrome-gtk-frame"
 
@@ -219,4 +220,10 @@ widget_class "*ThunarWindow*<GtkToolbar>*<GtkEntry>"                        styl
 widget_class "*ThunarWindow*<GtkToolbar>*<GtkButton>"                       style "toolbar_button"
 widget_class "*ThunarWindow*<GtkToolbar>*<GtkWidget>"                       style "toolbar_text"
 widget_class "*ThunarWindow*<GtkToolbar>*<GtkButton>*<GtkLabel>"            style "menubar-text"
+
+widget_class "*CajaNavigationWindow*<GtkMenuBar>"                           style "menubar-borderless"
+widget_class "*CajaNavigationWindow*<GtkToolbar>*<GtkEntry>"                style "toolbar_entry"
+widget_class "*CajaNavigationWindow*<GtkToolbar>*<GtkButton>"               style "toolbar_button"
+widget_class "*CajaNavigationWindow*<GtkToolbar>*<GtkWidget>"               style "toolbar_text"
+widget_class "*CajaNavigationWindow*<GtkToolbar>*<GtkButton>*<GtkLabel>"    style "menubar-text"
 

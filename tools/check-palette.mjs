@@ -46,6 +46,8 @@ const derived = new Set([
   // headerbar backdrop: lighten(surface.base, 1.5%) in mirage and dark,
   // see PALETTE.md; the light value is #ffffff above
   "#222735", "#10131c",
+  // XFCE notification hover (GTK 2): shade(ui.panel.bg, 1.3), see PALETTE.md
+  "#343c4d",
   // legacy Arc artwork that is only used as an alpha mask in the sprite sheets
   "#ff00ff",
 ]);
@@ -54,15 +56,15 @@ const derived = new Set([
  * ramps for widget internals; the ayu surfaces, text and accents override
  * them. See PALETTE.md. */
 const shellAdwaita = new Set([
-  "#99c1f1", "#62a0ea", "#3584e4", "#1c71d8", "#1a5fb4",
-  "#8ff0a4", "#57e389", "#33d17a", "#2ec27e", "#26a269",
-  "#f9f06b", "#f8e45c", "#f6d32d", "#f5c211", "#e5a50a",
-  "#ffbe6f", "#ffa348", "#ff7800", "#e66100", "#c64600",
-  "#f66151", "#ed333b", "#e01b24", "#c01c28", "#a51d2d",
-  "#dc8add", "#c061cb", "#9141ac", "#813d9c", "#613583",
-  "#cdab8f", "#b5835a", "#986a44", "#865e3c", "#63452c",
-  "#f6f5f4", "#deddda", "#9a9996", "#77767b", "#5e5c64",
-  "#3d3846", "#241f31", "#c0bfbc",
+  "99c1f1", "62a0ea", "3584e4", "1c71d8", "1a5fb4",
+  "8ff0a4", "57e389", "33d17a", "2ec27e", "26a269",
+  "f9f06b", "f8e45c", "f6d32d", "f5c211", "e5a50a",
+  "ffbe6f", "ffa348", "ff7800", "e66100", "c64600",
+  "f66151", "ed333b", "e01b24", "c01c28", "a51d2d",
+  "dc8add", "c061cb", "9141ac", "813d9c", "613583",
+  "cdab8f", "b5835a", "986a44", "865e3c", "63452c",
+  "f6f5f4", "deddda", "9a9996", "77767b", "5e5c64",
+  "3d3846", "241f31", "c0bfbc",
 ]);
 
 const problems = [];
@@ -103,11 +105,15 @@ for (const glob of SOURCE_GLOBS) {
     // ignore comments: bug numbers such as "#786613" are not colours
     const code = text.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
     const rel = path.relative(ROOT, file);
-    for (const m of code.matchAll(/#[0-9a-fA-F]{6,8}\b/g)) {
+    for (const m of code.matchAll(/#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6})\b/g)) {
       const hex = m[0].toLowerCase().replace("#", "");
       const base = hex.slice(0, 6);
+      if (hex.length === 8) {
+        if (officialAlpha.has(hex) || derived.has(hex) || derived.has("#" + hex)) continue;
+        report("colour", rel, `#${hex} is not an official ayu alpha token`);
+        continue;
+      }
       if (official.has(base)) continue;
-      if (officialAlpha.has(hex)) continue;
       if (derived.has(hex) || derived.has("#" + hex) ||
           derived.has(base) || derived.has("#" + base)) continue;
       if (rel.includes("gnome-shell") && shellAdwaita.has(base)) continue;

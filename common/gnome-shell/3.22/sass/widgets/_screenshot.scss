@@ -47,7 +47,7 @@ $screenshot_ui_button_red: $red_4;
   .screenshot-ui-capture-button-circle {
     background-color: $osd_fg_color;
     transition-duration: 200ms;
-    &:hover, &:focus { background-color: $hover_bg_color;}
+    &:hover, &:focus { background-color: if($variant == 'light', darken($osd_fg_color, 15%), lighten($osd_fg_color, 10%)); }
     border-radius: $forced_circular_radius;
   }
 
@@ -168,18 +168,18 @@ $screenshot_ui_button_red: $red_4;
 .screenshot-ui-window-selector-window {
   &:hover {
     .screenshot-ui-window-selector-window-border {
-      border-color: st-darken(-st-accent-color, 15%);
+      border-color: darken($accent_color, 15%);
     }
   }
   &:checked {
     .screenshot-ui-window-selector-window-border {
-      border-color: -st-accent-color;
-      background-color: st-transparentize(-st-accent-color, 0.8);
+      border-color: $accent_color;
+      background-color: transparentize($accent_color, 0.8);
     }
 
     .screenshot-ui-window-selector-check {
-      color: -st-accent-fg-color;
-      background-color: -st-accent-color;
+      color: $accent_fg_color;
+      background-color: $accent_color;
     }
   }
 }

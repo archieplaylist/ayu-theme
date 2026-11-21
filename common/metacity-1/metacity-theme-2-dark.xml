@@ -36,7 +36,7 @@
 <constant name="C_icon_bg_focused" value="#BFBDB6" />
 <constant name="C_icon_bg_unfocused" value="#5A6378" />
 <constant name="C_icon_bg_hover" value="#BFBDB6" />
-<constant name="C_icon_bg_active" value="#E6B450" />
+<constant name="C_icon_bg_active" value="#765B24" />
 
 <!-- geometries -->
 
@@ -65,7 +65,6 @@
 							This needs to be 1 less then the
 							title_vertical_pad on normal state
 							or you'll have bigger buttons		-->
-	<distance name="bottom_height" value="0" />
 </frame_geometry>
 
 <frame_geometry name="small" title_scale="small" parent="normal" hide_buttons="true" rounded_top_left="1" rounded_top_right="1">
@@ -527,7 +526,7 @@
 
 <frame_style name="modal_dialog_unfocused" geometry="modal">
 	<piece position="entire_background" draw_ops="entire_background_unfocused" />
-	<piece position="titlebar" draw_ops="titlebar_focused" />
+	<piece position="titlebar" draw_ops="titlebar_unfocused" />
 	<piece position="title" draw_ops="title_unfocused" />
 	<button function="close" state="normal" draw_ops="close_unfocused"/>
 	<button function="close" state="prelight" draw_ops="close_unfocused_prelight"/>

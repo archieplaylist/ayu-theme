@@ -9,18 +9,18 @@
   }
 
   // override link color since OSD style
-  $lg_link_color: st-lighten(-st-accent-color, 20%);
+  $lg_link_color: lighten($accent_color, 20%);
   .shell-link {
     color: $lg_link_color;
-    &:hover { color: st-lighten($lg_link_color, 10%); }
-    &:active { color: st-darken($lg_link_color, 10%); }
+    &:hover { color: lighten($lg_link_color, 10%); }
+    &:active { color: darken($lg_link_color, 10%); }
    }
 
   .actor-link {
     @extend %monospace;
-    color: st-darken($osd_fg_color, 20%);
+    color: darken($osd_fg_color, 20%);
     &:hover { color:$osd_fg_color; }
-    &:active { color: st-lighten($osd_fg_color, 20%); }
+    &:active { color: lighten($osd_fg_color, 20%); }
     & StIcon { icon-size: 12px; }
    }
 }
@@ -211,23 +211,23 @@
     // switch style overrides since lg is OSD style
     .toggle-switch {
       @if $contrast == 'high' {
-        background: transparentize(white, .7);
+        background: transparentize($osd_fg_color, .7);
         &:hover {
-          background: transparentize(white, .6);
+          background: transparentize($osd_fg_color, .6);
         }
       } @else {
-        background: transparentize(white, .85);
+        background: transparentize($osd_fg_color, .82);
         &:hover {
-          background: transparentize(white, .8);
+          background: transparentize($osd_fg_color, .75);
         }
       }
       &:checked {
-        background: -st-accent-color;
-        color: -st-accent-fg-color;
+        background: $accent_color;
+        color: $accent_fg_color;
 
         &:hover {
-          background-color: st-lighten(-st-accent-color, 5%);
-          color: st-lighten(-st-accent-fg-color, 5%);
+          background-color: lighten($accent_color, 5%);
+          color: lighten($accent_fg_color, 5%);
         }
       }
     }

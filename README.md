@@ -92,7 +92,7 @@ For hacking on the theme, `nix develop` gives you a shell with autotools,
 
 ### Manual Installation
 
-To build the theme the follwing packages are required 
+To build the theme the following packages are required 
 * `autoconf`
 * `automake`
 * `pkg-config` or `pkgconfig` for Fedora
@@ -106,7 +106,7 @@ For the theme to function properly, install the following
 * GUI toolkit version requirements: GTK 3.22+ and GTK 4 for the GTK3/GTK4 themes
 * GNOME >= 3.22 / Cinnamon >= 3.x for the shell themes (the CSS adapts to
   newer releases; only the 3.22 shell sources are shipped)
-* The `gnome-themes-standard` package
+* The `gnome-themes-extra` (or legacy `gnome-themes-standard`) package
 * The murrine engine. This has different names depending on the distro.
   * `gtk-engine-murrine` (Arch Linux)
   * `gtk2-engines-murrine` (Debian, Ubuntu, elementary OS)
@@ -137,7 +137,7 @@ Other options to pass to autogen.sh are
     --disable-gnome-shell      disable GNOME Shell support
     --disable-gtk2             disable GTK2 support
     --disable-gtk3             disable GTK3 support
-    --enable-gtk4              enable GTK4 support
+    --disable-gtk4             disable GTK4 support
     --disable-metacity         disable Metacity support
     --disable-unity            disable Unity support
     --disable-xfwm             disable XFWM support
@@ -146,7 +146,7 @@ Other options to pass to autogen.sh are
                                release; the version is detected automatically
                                and any GTK >= 3.22 build uses the 3.22 CSS
 
-After the installation is complete the theme can be activated with `gnome-tweak-tool` or a similar program by selecting `Ayu Light`, `Ayu Mirage` or `Ayu Dark` as Window/GTK+ theme.
+After the installation is complete the theme can be activated with `gnome-tweaks` or a similar program by selecting `Ayu Light`, `Ayu Mirage` or `Ayu Dark` as Window/GTK+ theme.
 
 If the `--disable-transparency` option was used, the theme will be installed as `Ayu-Light-solid`, `Ayu-Mirage-solid` and `Ayu-Dark-solid`.
 
@@ -233,7 +233,7 @@ If you get artifacts like black or invisible backgrounds under Unity, disable ov
 
 
 ## Bugs
-If you find a bug, please report it at the upstream tracker: https://github.com/jnsh/arc-theme/issues
+If you find a bug, please report it at the issue tracker: https://github.com/archieplaylist/ayu-theme/issues
 
 ## License
 This theme is based on Arc by horst3180 and is available under the terms of the GPL-3.0. See `COPYING` for details. The ayu palette follows https://github.com/ayu-theme/ayu-colors.

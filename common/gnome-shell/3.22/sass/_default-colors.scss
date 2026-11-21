@@ -1,11 +1,12 @@
 // Named Colors
 
 // base colors
-$_base_color_dark: ayu('surface.base');
-$_base_color_light: ayu('surface.base');
+$_base_color_dark: ayu('surface.base', 'dark');
+$_base_color_light: ayu('surface.base', 'light');
 
 // accent colors
-$accent_color: if($variant== 'light', -st-accent-color, st-mix(-st-accent-color, $light_1, 60%));
+$accent_color: ayu('common.accent.tint');
+$accent_fg_color: ayu('common.accent.on');
 
 // colors for destructive elements
 $destructive_bg_color: if($variant == 'light', $red_3, $red_4);
@@ -26,8 +27,8 @@ $error_fg_color: $light_1;
 $error_color: $error_bg_color;
 
 // link colors
-$link_color: if($variant == 'light', st-darken(-st-accent-color, 10%), st-lighten(-st-accent-color, 20%));
-$link_visited_color: st-transparentize($link_color, .6);
+$link_color: if($variant == 'light', darken($accent_color, 10%), lighten($accent_color, 20%));
+$link_visited_color: transparentize($link_color, .6);
 
 // special cased widget definitions
 $background_mix_factor: if($variant == 'light', 12%, 9%); // used to boost the color of backgrounds in different variants

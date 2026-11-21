@@ -1,37 +1,37 @@
-/* Ayu (light) libadwaita named-color overrides
+/* Ayu (light) libadwaita overrides
  *
  * Install via extra/libadwaita/install.sh
  * libadwaita loads ~/.config/gtk-4.0/gtk.css on top of its own styles,
- * so re-defining these named colors re-skins modern GNOME GTK4 apps.
+ * so re-defining both @define-color (libadwaita 1.0–1.5) and :root CSS
+ * custom properties (libadwaita 1.6+ / GNOME 47+) re-skins modern GNOME apps.
  */
 @define-color accent_bg_color #F29718;
 @define-color accent_fg_color #7E4B01;
 @define-color accent_color #F29718;
-@define-color accent_color_rgba rgba(242, 151, 24, 1);
 
 @define-color destructive_bg_color #E65050;
 @define-color destructive_fg_color #FFFFFF;
 @define-color destructive_color #E65050;
 
 @define-color success_bg_color #6CBF43;
-@define-color success_fg_color #FFFFFF;
+@define-color success_fg_color #010102;
 @define-color success_color #6CBF43;
 
 @define-color warning_bg_color #EBA400;
-@define-color warning_fg_color #5C6166;
+@define-color warning_fg_color #010102;
 @define-color warning_color #EBA400;
 
 @define-color error_bg_color #E65050;
 @define-color error_fg_color #FFFFFF;
 @define-color error_color #E65050;
 
-/*scrol window / views */
+/* Window / views */
 @define-color window_bg_color #F8F9FA;
 @define-color window_fg_color #5C6166;
 @define-color view_bg_color #FCFCFC;
 @define-color view_fg_color #5C6166;
 
-/* header bar */
+/* Header bar */
 @define-color headerbar_bg_color #F8F9FA;
 @define-color headerbar_fg_color #5C6166;
 @define-color headerbar_border_color rgba(107, 125, 143, 0.12);
@@ -39,27 +39,97 @@
 @define-color headerbar_shade_color rgba(0, 0, 0, 0.12);
 @define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.25);
 
+/* Sidebars */
 @define-color sidebar_bg_color #FAFAFA;
 @define-color sidebar_fg_color #5C6166;
 @define-color sidebar_backdrop_color #F8F9FA;
-@define-color sidebar_shade_color rgba(0, 0, 0, 0.12);
+@define-color sidebar_border_color rgba(107, 125, 143, 0.12);
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.07);
 
 @define-color secondary_sidebar_bg_color #FAFAFA;
 @define-color secondary_sidebar_fg_color #5C6166;
 @define-color secondary_sidebar_backdrop_color #F8F9FA;
-@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.12);
+@define-color secondary_sidebar_border_color rgba(107, 125, 143, 0.12);
+@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.07);
 
+/* Cards, popovers, dialogs, thumbnails */
 @define-color card_bg_color #FCFCFC;
 @define-color card_fg_color #5C6166;
+@define-color card_shade_color rgba(0, 0, 0, 0.07);
+
 @define-color popover_bg_color #FFFFFF;
 @define-color popover_fg_color #5C6166;
+@define-color popover_shade_color rgba(0, 0, 0, 0.07);
 
-@define-color thumbnail_fg_color #FCFCFC;
+@define-color thumbnail_bg_color #FCFCFC;
+@define-color thumbnail_fg_color #5C6166;
 
 @define-color dialog_bg_color #F8F9FA;
 @define-color dialog_fg_color #5C6166;
 
-@define-color bluebench_border_color rgba(107, 125, 143, 0.12);
-@define-color unfocused_borders rgba(107, 125, 143, 0.12);
+@define-color shade_color rgba(0, 0, 0, 0.07);
+@define-color scrollbar_outline_color rgba(255, 255, 255, 0.8);
 
-@define-color unfocused_fg_color #828E9F;
+/* Libadwaita 1.6+ (GNOME 47+) CSS custom properties */
+:root {
+  --accent-bg-color: #F29718;
+  --accent-fg-color: #7E4B01;
+  --accent-color: #F29718;
+
+  --destructive-bg-color: #E65050;
+  --destructive-fg-color: #FFFFFF;
+  --destructive-color: #E65050;
+
+  --success-bg-color: #6CBF43;
+  --success-fg-color: #010102;
+  --success-color: #6CBF43;
+
+  --warning-bg-color: #EBA400;
+  --warning-fg-color: #010102;
+  --warning-color: #EBA400;
+
+  --error-bg-color: #E65050;
+  --error-fg-color: #FFFFFF;
+  --error-color: #E65050;
+
+  --window-bg-color: #F8F9FA;
+  --window-fg-color: #5C6166;
+  --view-bg-color: #FCFCFC;
+  --view-fg-color: #5C6166;
+
+  --headerbar-bg-color: #F8F9FA;
+  --headerbar-fg-color: #5C6166;
+  --headerbar-border-color: rgba(107, 125, 143, 0.12);
+  --headerbar-backdrop-color: #FFFFFF;
+  --headerbar-shade-color: rgba(0, 0, 0, 0.12);
+  --headerbar-darker-shade-color: rgba(0, 0, 0, 0.25);
+
+  --sidebar-bg-color: #FAFAFA;
+  --sidebar-fg-color: #5C6166;
+  --sidebar-backdrop-color: #F8F9FA;
+  --sidebar-border-color: rgba(107, 125, 143, 0.12);
+  --sidebar-shade-color: rgba(0, 0, 0, 0.07);
+
+  --secondary-sidebar-bg-color: #FAFAFA;
+  --secondary-sidebar-fg-color: #5C6166;
+  --secondary-sidebar-backdrop-color: #F8F9FA;
+  --secondary-sidebar-border-color: rgba(107, 125, 143, 0.12);
+  --secondary-sidebar-shade-color: rgba(0, 0, 0, 0.07);
+
+  --card-bg-color: #FCFCFC;
+  --card-fg-color: #5C6166;
+  --card-shade-color: rgba(0, 0, 0, 0.07);
+
+  --popover-bg-color: #FFFFFF;
+  --popover-fg-color: #5C6166;
+  --popover-shade-color: rgba(0, 0, 0, 0.07);
+
+  --thumbnail-bg-color: #FCFCFC;
+  --thumbnail-fg-color: #5C6166;
+
+  --dialog-bg-color: #F8F9FA;
+  --dialog-fg-color: #5C6166;
+
+  --shade-color: rgba(0, 0, 0, 0.07);
+  --scrollbar-outline-color: rgba(255, 255, 255, 0.8);
+}
