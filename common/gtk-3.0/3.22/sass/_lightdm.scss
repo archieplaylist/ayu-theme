@@ -87,19 +87,21 @@
 }
 
 // the shutdown button
+button#shutdown_button,
 #shutdown_button.button {
-  @include button(suggested_destructive, $destructive_color);
+  @include button(suggested_destructive, $destructive_color, $destructive_fg_color);
 
-  &:hover { @include button(suggested_destructive, lighten($destructive_color, 10%)); }
-  &:active, &:checked { @include button(suggested_destructive, darken($destructive_color, 10%)); }
+  &:hover { @include button(suggested_destructive, lighten($destructive_color, 10%), $destructive_fg_color); }
+  &:active, &:checked { @include button(suggested_destructive, darken($destructive_color, 10%), $destructive_fg_color); }
 }
 
 // the restart button
+button#restart_button,
 #restart_button.button {
-  @include button(suggested_destructive, $suggested_color);
+  @include button(suggested_destructive, $suggested_color, $suggested_fg_color);
 
-  &:hover { @include button(suggested_destructive, lighten($suggested_color, 10%)); }
-  &:active, &:checked { @include button(suggested_destructive, darken($suggested_color, 10%)); }
+  &:hover { @include button(suggested_destructive, lighten($suggested_color, 10%), $suggested_fg_color); }
+  &:active, &:checked { @include button(suggested_destructive, darken($suggested_color, 10%), $suggested_fg_color); }
 }
 
 // the warning, in case a wrong password is entered or something else goes wrong according to PAM

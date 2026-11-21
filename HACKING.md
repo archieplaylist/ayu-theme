@@ -7,10 +7,21 @@ This theme uses `sassc` (libsass) to process the various .scss files. Never edit
 * Edit the `common/gtk-3.0/3.22/sass/*.scss`, `common/gtk-4.0/sass/*.scss`,
   `common/cinnamon/sass/*.scss` and/or `common/gnome-shell/3.22/sass/*.scss` files
 
-* Regenerate the CSS. From within a `sass` directory, compile every entry point one level up, for example:
+* Regenerate the CSS with `./tools/build-css.sh` (or compile from within a `sass` directory one level up):
+
+  ```sh
+  ./tools/build-css.sh
+  ```
+
+  Individual trees can also be compiled manually:
 
   ```sh
   cd common/gtk-3.0/3.22/sass
+  for f in gtk gtk-dark gtk-mirage gtk-solid gtk-solid-dark gtk-solid-mirage; do
+      sassc "$f.scss" "../$f.css"
+  done
+
+  cd common/gtk-4.0/sass
   for f in gtk gtk-dark gtk-mirage gtk-solid gtk-solid-dark gtk-solid-mirage; do
       sassc "$f.scss" "../$f.css"
   done
@@ -75,9 +86,9 @@ The Thunar sidebar row-state pixmaps are generated with `node tools/gen-gtk2-sid
 
 * Find the object you want to edit and make your changes. Important: Don't change the object id!
 
-* Save `assets.svg` and delete the images corresponding to the edited .svg objects from the `assets` folder (or just delete everything in the `assets` folder). Copy updated PNGs to `common/gtk-4.0/assets` as well.
+* Save `assets.svg` and delete only the images corresponding to the edited .svg objects from the `assets` folder (do not delete `common/gtk-3.0/3.22/assets/thumbnail-frame.png`). Copy updated PNGs to `common/gtk-4.0/assets` as well.
 
-* Run `./render-assets.sh` or `./render-dark-assets.sh` from a terminal
+* Run `./render-assets.sh` from a terminal
 
 * The `assets.svg` sources and the PNGs are already ayu-colored in this tree,
   so a fresh render normally needs no extra pass. If you bring in new artwork

@@ -5,6 +5,11 @@
   @return linear-gradient(to bottom, $c, $c);
 }
 
+// Multiply a color's existing alpha instead of subtracting (avoids alpha=0 underflow on translucent light borders)
+@function _fade($c, $factor) {
+  @return rgba($c, alpha($c) * $factor);
+}
+
 // Entries
 
 @mixin entry($t) {
@@ -44,8 +49,8 @@
   // insensitive entry
   //
     color: $insensitive_fg_color;
-    border-color: transparentize($entry_border, 0.45);
-    background-color: transparentize($entry_bg, 0.45);
+    border-color: _fade($entry_border, 0.55);
+    background-color: _fade($entry_bg, 0.55);
   }
 
   @if $t==header-normal {
@@ -149,8 +154,8 @@
   //
     label, & { color: $insensitive_fg_color; }
 
-    border-color: transparentize($button_border, 0.45);
-    background-color: transparentize($button_bg, 0.45);
+    border-color: _fade($button_border, 0.55);
+    background-color: _fade($button_bg, 0.55);
   }
 
   @else if $t==insensitive-active {
@@ -299,11 +304,9 @@
     $_big_gradient_size: $_big_gradient_length 100%;
   }
 
-  background-image: -gtk-gradient(radial,
-                                $_position, 0,
-                                $_position, 0.6,
-                                from(transparentize($c, 0.8)),
-                                to(transparentize($c, 1)));
+  background-image: radial-gradient(circle farthest-side at $_position,
+                                    transparentize($c, 0.8),
+                                    transparentize($c, 1));
 
   background-size: $_big_gradient_size;
   background-repeat: no-repeat;

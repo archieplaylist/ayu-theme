@@ -72,10 +72,10 @@ UnityPanelWidget,
 }
 
 .lightdm-combo .menu {
-  background-color: lighten($header_bg, 8);
+  background-color: lighten($header_bg, 8%);
   border-radius: 0px;
   padding: 0px;
-  color: white;
+  color: $fg_color;
 }
 
 .lightdm.menu .menuitem *,

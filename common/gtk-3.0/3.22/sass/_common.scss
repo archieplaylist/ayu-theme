@@ -317,18 +317,14 @@ $_dot_color: $selected_bg_color;
 
 @keyframes needs_attention {
   from {
-    background-image: -gtk-gradient(radial,
-                                    center center, 0,
-                                    center center, 0.01,
-                                    to($_dot_color),
-                                    to(transparent));
+    background-image: radial-gradient(circle at center,
+                                      $_dot_color 0%,
+                                      transparent 1%);
   }
   to {
-    background-image: -gtk-gradient(radial,
-                                    center center, 0,
-                                    center center, 0.5,
-                                    to($selected_bg_color),
-                                    to(transparent));
+    background-image: radial-gradient(circle at center,
+                                      $selected_bg_color 0%,
+                                      transparent 50%);
   }
 }
 
@@ -376,8 +372,7 @@ button {
   }
 
   //Webkitgtk workaround start
-  &:active { color: $fg_color; }
-  &:active:hover, &:checked { color: $selected_fg_color; }
+  &:active, &:active:hover, &:checked { color: $selected_fg_color; }
   //Webkitgtk workaround end
 
   &.flat:disabled { @include button(undecorated); }
@@ -532,13 +527,11 @@ button {
     }
   }
 
-  %needs_attention {
+  @at-root %needs_attention {
     animation: needs_attention 150ms ease-in;
-    background-image: -gtk-gradient(radial,
-                                    center center, 0,
-                                    center center, 0.5,
-                                    to($_dot_color),
-                                    to(transparent));
+    background-image: radial-gradient(circle at center,
+                                      $_dot_color 0%,
+                                      transparent 50%);
     background-size: 6px 6px, 6px 6px;
     background-repeat: no-repeat;
     @if $variant == 'light' { background-position: right 3px, right 4px; }
@@ -599,16 +592,16 @@ toolbar.inline-toolbar toolbutton {
   $_border: if($vert=='false', left, top);
 
   @if $entry_rules=='true' {
-    > entry + entry { border-#{$_border}-color: transparentize($e_border, $a); }
+    > entry + entry { border-#{$_border}-color: _fade($e_border, 1 - $a); }
 
     > entry.error + entry,
-    > entry + entry.error { border-#{$_border}-color: if($var=='light', $error_color, transparentize($e_border, $a)); }
+    > entry + entry.error { border-#{$_border}-color: if($var=='light', $error_color, _fade($e_border, 1 - $a)); }
 
     > entry.warning + entry,
-    > entry + entry.warning { border-#{$_border}-color: if($var=='light', $warning_color, transparentize($e_border, $a)); }
+    > entry + entry.warning { border-#{$_border}-color: if($var=='light', $warning_color, _fade($e_border, 1 - $a)); }
 
     > entry.error + entry.warning,
-    > entry.warning + entry.error { border-#{$_border}-color: if($var=='light', mix($error_color, $warning_color, 50%), transparentize($e_border, $a));}
+    > entry.warning + entry.error { border-#{$_border}-color: if($var=='light', mix($error_color, $warning_color, 50%), _fade($e_border, 1 - $a));}
 
     @each $e_type, $e_color in (':focus',$selected_bg_color),
                                (':drop(active)', $drop_target_color),
@@ -636,7 +629,7 @@ toolbar.inline-toolbar toolbutton {
     > #{$_uncolored_button}:hover + #{$_uncolored_button} { box-shadow: inset if($vert=='false', 1px 0, 0 1px) $b_border; }
 
     > #{$_uncolored_button}:disabled:not(:only-child),
-    > #{$_uncolored_button}:disabled + #{$_uncolored_button}:not(:hover) { box-shadow: inset if($vert=='false', 1px 0, 0 1px) transparentize($b_border, 0.5); }
+    > #{$_uncolored_button}:disabled + #{$_uncolored_button}:not(:hover) { box-shadow: inset if($vert=='false', 1px 0, 0 1px) _fade($b_border, 0.5); }
 
     > button:active + #{$_uncolored_button}:hover,
     > button:checked + #{$_uncolored_button}:hover,
@@ -651,12 +644,12 @@ toolbar.inline-toolbar toolbutton {
     > button:checked + #{$_uncolored_button}:disabled,
     > button.suggested-action + #{$_uncolored_button}:disabled,
     > button.destructive-action + #{$_uncolored_button}:disabled,
-    > entry + #{$_uncolored_button}:disabled:not(:only-child), { box-shadow: none; }
+    > entry + #{$_uncolored_button}:disabled:not(:only-child) { box-shadow: none; }
   }
 }
 
 // special case, because path-bars are bugged
-@mixin pathbar_linking_rules($sep_color:if($variant=='light', transparentize($button_border, 0.6), transparentize($button_border, 0.5))) {
+@mixin pathbar_linking_rules($sep_color:if($variant=='light', _fade($button_border, 0.7), _fade($button_border, 0.5))) {
 
   > button + button { border-left-style: none; }
 
@@ -862,7 +855,7 @@ spinbutton {
     > button:hover + button { box-shadow: inset 1px 0 $button_border; }
 
     > button:disabled + button:not(:disabled):not(:active):not(:checked):not(:hover),
-    > button:not(:disabled):not(:active):not(:checked):not(:hover) + button:disabled { box-shadow: inset 1px 0 transparentize($button_border, 0.5); }
+    > button:not(:disabled):not(:active):not(:checked):not(:hover) + button:disabled { box-shadow: inset 1px 0 _fade($button_border, 0.5); }
 
     > button:first-child:hover:not(:active),
     > button.up:dir(rtl):hover:not(:active),
@@ -993,7 +986,7 @@ toolbar {
   separator { @extend %header_separator; }
 }
 
-.primary-toolbar { @extend %header_widgets; }
+.primary-toolbar:not(.libreoffice-toolbar) { @extend %header_widgets; }
 
 .inline-toolbar {
   @extend toolbar;
@@ -1082,7 +1075,6 @@ headerbar,
       box-shadow: none;
       padding-left: 10px;
       padding-right: 10px;
-      GtkArrow { -GtkArrow-arrow-scaling: 1; }
       .arrow {
         -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
       }
@@ -1943,7 +1935,7 @@ notebook {
 
         &:hover {
           @extend %undecorated_button;
-          color: lighten(red, 15%);
+          color: $destructive_color;
         }
         &:active, &:active:hover {
           @extend %undecorated_button;
@@ -2121,8 +2113,8 @@ switch {
     .osd,
     %osd_check_radio {
       #{$w}#{$s} {
-        -gtk-icon-source: -gtk-scaled(url("assets/#{$a}#{$as}-dark.png"),
-                                      url("assets/#{$a}#{$as}-dark@2.png"));
+        -gtk-icon-source: -gtk-scaled(url("assets/#{$a}#{$as}#{$asset_suffix}.png"),
+                                      url("assets/#{$a}#{$as}#{$asset_suffix}@2.png"));
       }
     }
     // the borders of checks and radios are
@@ -2223,19 +2215,15 @@ scale {
     border-radius: 2.5px;
     background-color: $_scale_trough_bg;
 
-    &:disabled { background-color: transparentize($_scale_trough_bg, 0.45); }
+    &:disabled { background-color: _fade($_scale_trough_bg, 0.55); }
 
     //OSD troughs
     .osd & {
-      background-color: lighten($osd_bg_color, 7%);
+      background-color: if($variant == 'light', darken($osd_bg_color, 10%), lighten($osd_bg_color, 7%));
 
       highlight {
         background-color: $selected_bg_color;
-
-        &:disabled {  }
       }
-
-      &:disabled {  }
     }
 
     // Troughs in selected list-rows and infobars
@@ -2272,10 +2260,10 @@ scale {
   }
 
   slider {
-    $_slider_border: if($variant=='light', transparentize(darken($button_border,25%), 0.5), darken($button_border,2%));
+    $_slider_border: if($variant=='light', darken(opacify($button_border, 1), 15%), darken($button_border,2%));
 
     background-color: $button_bg;
-    border: 1px solid $_slider_border;
+    border: 1px solid if($variant=='light', _fade($_slider_border, 0.35), $_slider_border);
     border-radius: 100%;
 
     transition: $button_transition;
@@ -2291,7 +2279,7 @@ scale {
 
     &:disabled {
       background-color: mix($entry_bg, $bg_color, 55%);
-      border-color: transparentize($_slider_border, 0.2);
+      border-color: _fade($_slider_border, if($variant=='light', 0.2, 0.8));
     }
 
     // Selected list-row and infobar sliders
@@ -2338,12 +2326,22 @@ scale {
 
   value { color: gtkalpha(currentColor, 0.4); }
 
-  marks {
+  &.horizontal marks {
     color: gtkalpha(currentColor, 0.4);
 
     @each $marks_class, $marks_pos, $marks_margin in (top, top, bottom),
-                                                     (bottom, bottom, top),
-                                                     (top, left, right),
+                                                     (bottom, bottom, top) {
+      &.#{$marks_class} {
+        margin-#{$marks_margin}: $_marks_distance;
+        margin-#{$marks_pos}: -($_marks_distance + $_marks_length);
+      }
+    }
+  }
+
+  &.vertical marks {
+    color: gtkalpha(currentColor, 0.4);
+
+    @each $marks_class, $marks_pos, $marks_margin in (top, left, right),
                                                      (bottom, right, left) {
       &.#{$marks_class} {
         margin-#{$marks_margin}: $_marks_distance;
@@ -2352,10 +2350,18 @@ scale {
     }
   }
 
-  &.fine-tune marks {
+  &.fine-tune.horizontal marks {
     @each $marks_class, $marks_pos, $marks_margin in (top, top, bottom),
-                                                     (bottom, bottom, top),
-                                                     (top, left, right),
+                                                     (bottom, bottom, top) {
+      &.#{$marks_class} {
+        margin-#{$marks_margin}: ($_marks_distance - 1px);
+        margin-#{$marks_pos}: -($_marks_distance + $_marks_length - 2px);
+      }
+    }
+  }
+
+  &.fine-tune.vertical marks {
+    @each $marks_class, $marks_pos, $marks_margin in (top, left, right),
                                                      (bottom, right, left) {
       &.#{$marks_class} {
         margin-#{$marks_margin}: ($_marks_distance - 1px);
@@ -2532,7 +2538,7 @@ scrolledwindow {
 
 //vbox and hbox separators
 separator {
-  background-color: transparentize(black, 0.9);
+  background-color: $borders_color;
   min-width: 1px;
   min-height: 1px;
 }
@@ -2614,7 +2620,7 @@ expander {
     -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
-    &:hover { color: lighten($fg_color,30%); } //only lightens the arrow
+    &:hover { color: if($variant == 'light', darken($fg_color, 15%), lighten($fg_color, 20%)); }
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
   }
 }
@@ -2703,7 +2709,7 @@ messagedialog { // Message Dialog styling
 // Filechooser
 //
 filechooser {
-  #pathbarbox { border-bottom: 1px solid transparentize($borders_color, 0.5); }
+  #pathbarbox { border-bottom: 1px solid _fade($borders_color, 0.5); }
 }
 
 // File chooser grid tiles use a larger radius than list rows, matching
@@ -2912,9 +2918,7 @@ infobar {
   border-style: none;
 
   &.info,
-  &.question,
-  &.warning,
-  &.error {
+  &.question {
     background-color: $selected_bg_color;
     color: $selected_fg_color;
     caret-color: currentColor;
@@ -2926,6 +2930,24 @@ infobar {
       background-color: $selected_fg_color;
     }
 
+    *:link { @extend %link_selected; }
+  }
+
+  &.warning {
+    background-color: $warning_color;
+    color: $warning_fg_color;
+    caret-color: currentColor;
+
+    button { @extend %selected-button }
+    *:link { @extend %link_selected; }
+  }
+
+  &.error {
+    background-color: $error_color;
+    color: $error_fg_color;
+    caret-color: currentColor;
+
+    button { @extend %selected-button }
     *:link { @extend %link_selected; }
   }
 }
@@ -2980,8 +3002,9 @@ tooltip {
   &.background {
     // background-color needs to be set this way otherwise it gets drawn twice
     // see https://bugzilla.gnome.org/show_bug.cgi?id=736155 for details.
-    background-color: lighten($osd_bg_color, 10%);
+    background-color: if($variant == 'light', $osd_bg_color, lighten($osd_bg_color, 10%));
     background-clip: padding-box;
+    border: 1px solid $borders_color;
 
     label { padding: 4px; }
   }
@@ -3092,7 +3115,7 @@ button.color {
 }
 
 // colorscale popup
-colorchooser .popover.osd { border-radius: 3px; }
+colorchooser popover.osd { border-radius: 3px; }
 
 //
 // Misc
@@ -3187,29 +3210,30 @@ decoration {
 
     transition: $backdrop_transition;
   }
+  // server-side decorations as used by mutter (the WM draws the frame, so we
+  // only round the top corners here and leave the bottom to the WM)
+  .ssd & {
+    border-radius: $_header_radius $_header_radius 0 0;
+    box-shadow: 0 0 0 1px if($mirage=='true' or $variant == 'dark', transparentize(black, 0.35), $_wm_border);
+  }
   .fullscreen &,
   .maximized &,
   .tiled &,
   .tiled-top &,
   .tiled-left &,
   .tiled-right &,
-  .tiled-bottom & {
+  .tiled-bottom &,
+  .ssd.maximized &,
+  .ssd.fullscreen &,
+  .ssd.tiled & {
     border-radius: 0;
   }
   .popup & {
     box-shadow: none;
     border-radius: 0;
   }
-  // server-side decorations as used by mutter (the WM draws the frame, so we
-  // only round the top corners here and leave the bottom to the WM)
-  .ssd & {
-    border-radius: $_header_radius $_header_radius 0 0;
-    box-shadow: 0 0 0 1px if($mirage=='true' or $variant == 'dark', transparentize(black, 0.35), $_wm_border);
-
-    &.maximized { border-radius: 0; }
-  }
   .csd.popup & {
-    border-radius: 2px;
+    border-radius: $_header_radius;
     box-shadow: 0 3px 6px if($variant == 'light', $_wm_border, transparentize($_wm_border, 0.1)),
                 0 0 0 1px if($variant == 'light', $_wm_border, darken($bg_color, 10%));
   }

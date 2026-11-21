@@ -63,7 +63,7 @@
 
       checks = forAllSystems (
         pkgs: {
-          ayu-theme = self.packages.${pkgs.system}.ayu-theme;
+          ayu-theme = self.packages.${pkgs.stdenv.hostPlatform.system}.ayu-theme;
         }
       );
     };

@@ -386,13 +386,13 @@ $selection_mode_bg: if($transparency == 'true', transparentize($selected_bg_colo
 $selection_mode_fg: $selected_fg_color;
 $warning_color: ayu('syntax.func');
 $error_color: ayu('common.error');
-$warning_fg_color: $text_color;
+$warning_fg_color: if($variant == 'light', ayu('surface.sunk', 'dark'), ayu('surface.sunk'));
 $error_fg_color: ayu('surface.over');
 $success_color: ayu('vcs.added');
 $destructive_color: ayu('common.error');
 $suggested_color: ayu('syntax.entity');
 $destructive_fg_color: ayu('surface.over');
-$suggested_fg_color: $selected_fg_color;
+$suggested_fg_color: if($variant == 'light', ayu('surface.over'), ayu('surface.sunk'));
 
 $drop_target_color: ayu('syntax.entity');
 
@@ -417,11 +417,11 @@ $dark_sidebar_border: if($variant == 'light', $dark_sidebar_bg, darken($dark_sid
 $osd_fg_color: ayu('editor.fg');
 $osd_bg_color: ayu('ui.popup.bg');
 
-$osd_button_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
-$osd_button_border: transparentize(darken($osd_bg_color, 12%), 0.6);
+$osd_button_bg: if($variant == 'light', darken($osd_bg_color, 5%), transparentize(lighten($osd_bg_color, 22%), 0.6));
+$osd_button_border: if($variant == 'light', $borders_color, transparentize(darken($osd_bg_color, 12%), 0.6));
 
-$osd_entry_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
-$osd_entry_border: transparentize(darken($osd_bg_color, 12%), 0.6);
+$osd_entry_bg: if($variant == 'light', $base_color, transparentize(lighten($osd_bg_color, 22%), 0.6));
+$osd_entry_border: if($variant == 'light', $borders_color, transparentize(darken($osd_bg_color, 12%), 0.6));
 
 $osd_insensitive_bg_color: darken($osd_bg_color, 3%);
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 30%);

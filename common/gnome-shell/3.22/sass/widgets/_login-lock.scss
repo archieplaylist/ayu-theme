@@ -28,13 +28,13 @@ $_gdm_dialog_width: 25em;
   .login-dialog-prompt-entry {
     border-radius: $base_border_radius * 1.5;
     // Make room for button-well inside entry
-    :ltr { padding-right: 2.5em; }
-    :rtl { padding-left: 2.5em; }
+    &:ltr { padding-right: 2.5em; }
+    &:rtl { padding-left: 2.5em; }
   }
 
   .login-dialog-default-button-well {
-    :ltr { margin-right: 0.5em; }
-    :rtl { margin-left: 0.5em; }
+    &:ltr { margin-right: 0.5em; }
+    &:rtl { margin-left: 0.5em; }
   }
 }
 
@@ -220,7 +220,8 @@ $_gdm_dialog_width: 25em;
 .login-dialog {
   .login-dialog-auth-list-title,
   .login-dialog-auth-list-item {
-    @include login_dialog_item_button($style:card);
+    @include login_dialog_item_button($style:flat);
+    background-color: $system_bg_color;
     border-radius: $base_border_radius * 1.5;
   }
 
@@ -348,9 +349,9 @@ $_gdm_dialog_width: 25em;
       &:logged-in {
         // color border for logged-in user
         .user-icon {
-          border-color: -st-accent-color;
+          border-color: $accent_color;
           StIcon {
-            background-color: st-transparentize(-st-accent-color, .7);
+            background-color: transparentize($accent_color, .7);
           }
         }
       }
@@ -522,9 +523,9 @@ $_gdm_dialog_width: 25em;
 // Notifications
 #unlockDialogNotifications {
   > .vhandle, > .hhandle {
-    background-color: transparentize($bg_color,0.7);
-    &:hover, &:focus { background-color: transparentize($bg_color,0.5); }
-    &:active { background-color: st-transparentize(-st-accent-color,0.5); }
+    background-color: transparentize($system_fg_color, 0.7);
+    &:hover, &:focus { background-color: transparentize($system_fg_color, 0.5); }
+    &:active { background-color: transparentize($accent_color, 0.5); }
   }
 }
 

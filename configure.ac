@@ -1,9 +1,9 @@
 AC_INIT(
     [ayu-theme],
     [2026.10.2],
-    [https://github.com/ayu-theme/ayu-theme/issues],
+    [https://github.com/archieplaylist/ayu-theme/issues],
     [ayu-theme],
-    [https://github.com/ayu-theme/ayu-theme],
+    [https://github.com/archieplaylist/ayu-theme],
     []
 )
 
@@ -26,7 +26,7 @@ ARC_ENABLE([XFWM],          [xfwm],          [XFWM],          [disable])
 ARC_ENABLE([TRANSPARENCY],  [transparency],  [transparency],  [disable])
 
 AS_IF([test "x$ENABLE_GNOME_SHELL$ENABLE_GTK3" != xnono], [ARC_GNOME])
-AS_IF([test "x$ENABLE_GTK3$ENABLE_GTK4" != xnono], [ARC_GTK4])
+AS_IF([test "x$ENABLE_GTK4" != xno], [ARC_GTK4])
 
 AC_CONFIG_FILES([
     common/Makefile

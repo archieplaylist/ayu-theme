@@ -1,51 +1,50 @@
-//GNOME Color Palette
-//GNOME Color Palette
+// GNOME Color Palette
 //
 // The Adwaita ramps are replaced with the ayu palette so that every colour
-// the shell paints comes from the official palette. The values come from the
-// generated $ayu map (one set per flavour).
-$blue_1: ayu('palette.blue.l1');
-$blue_2: ayu('palette.blue.l2');
+// the shell paints comes from the official palette. Adwaita ramps run
+// light (_1) -> dark (_5), while ayu palette.color.l1..l5 run dark -> light.
+$blue_1: ayu('palette.blue.l5');
+$blue_2: ayu('palette.blue.l4');
 $blue_3: ayu('palette.blue.l3');
-$blue_4: ayu('palette.blue.l4');
-$blue_5: ayu('palette.blue.l5');
-$green_1: ayu('palette.green.l1');
-$green_2: ayu('palette.green.l2');
+$blue_4: ayu('palette.blue.l2');
+$blue_5: ayu('palette.blue.l1');
+$green_1: ayu('palette.green.l5');
+$green_2: ayu('palette.green.l4');
 $green_3: ayu('palette.green.l3');
-$green_4: ayu('palette.green.l4');
-$green_5: ayu('palette.green.l5');
-$yellow_1: ayu('palette.yellow.l1');
-$yellow_2: ayu('palette.yellow.l2');
+$green_4: ayu('palette.green.l2');
+$green_5: ayu('palette.green.l1');
+$yellow_1: ayu('palette.yellow.l5');
+$yellow_2: ayu('palette.yellow.l4');
 $yellow_3: ayu('palette.yellow.l3');
-$yellow_4: ayu('palette.yellow.l4');
-$yellow_5: ayu('palette.yellow.l5');
-$orange_1: ayu('palette.orange.l1');
-$orange_2: ayu('palette.orange.l2');
+$yellow_4: ayu('palette.yellow.l2');
+$yellow_5: ayu('palette.yellow.l1');
+$orange_1: ayu('palette.orange.l5');
+$orange_2: ayu('palette.orange.l4');
 $orange_3: ayu('palette.orange.l3');
-$orange_4: ayu('palette.orange.l4');
-$orange_5: ayu('palette.orange.l5');
-$red_1: ayu('palette.red.l1');
-$red_2: ayu('palette.red.l2');
+$orange_4: ayu('palette.orange.l2');
+$orange_5: ayu('palette.orange.l1');
+$red_1: ayu('palette.red.l5');
+$red_2: ayu('palette.red.l4');
 $red_3: ayu('palette.red.l3');
-$red_4: ayu('palette.red.l4');
-$red_5: ayu('palette.red.l5');
-$purple_1: ayu('palette.purple.l1');
-$purple_2: ayu('palette.purple.l2');
+$red_4: ayu('palette.red.l2');
+$red_5: ayu('palette.red.l1');
+$purple_1: ayu('palette.purple.l5');
+$purple_2: ayu('palette.purple.l4');
 $purple_3: ayu('palette.purple.l3');
-$purple_4: ayu('palette.purple.l4');
-$purple_5: ayu('palette.purple.l5');
-$brown_1: ayu('palette.peach.l1');
-$brown_2: ayu('palette.peach.l2');
+$purple_4: ayu('palette.purple.l2');
+$purple_5: ayu('palette.purple.l1');
+$brown_1: ayu('palette.peach.l5');
+$brown_2: ayu('palette.peach.l4');
 $brown_3: ayu('palette.peach.l3');
-$brown_4: ayu('palette.peach.l4');
-$brown_5: ayu('palette.peach.l5');
-$light_1: ayu('surface.over');
-$light_2: ayu('surface.lift');
-$light_3: ayu('palette.gray.l5');
-$light_4: ayu('palette.gray.l4');
-$light_5: ayu('palette.gray.l3');
-$dark_1: ayu('palette.gray.l2');
-$dark_2: ayu('palette.gray.l1');
-$dark_3: ayu('surface.sunk');
-$dark_4: ayu('surface.sunk');
+$brown_4: ayu('palette.peach.l2');
+$brown_5: ayu('palette.peach.l1');
+$light_1: ayu('surface.over', 'light');
+$light_2: ayu('surface.lift', 'light');
+$light_3: ayu('palette.gray.l5', 'light');
+$light_4: ayu('palette.gray.l4', 'light');
+$light_5: ayu('palette.gray.l3', 'light');
+$dark_1: ayu('palette.gray.l5', 'dark');
+$dark_2: ayu('palette.gray.l3', 'dark');
+$dark_3: ayu('palette.gray.l1', 'dark');
+$dark_4: ayu('surface.base', 'dark');
 $dark_5: #000000;

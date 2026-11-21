@@ -89,6 +89,25 @@ stdenv.mkDerivation {
 
     make install
 
+    # Also build and install the -solid variants so home-module.nix solid = true works.
+    ./configure \
+      --prefix="$out" \
+      --disable-transparency \
+      --enable-light \
+      --enable-mirage \
+      --enable-dark \
+      --enable-gtk2 \
+      --enable-gtk3 \
+      --enable-gtk4 \
+      --enable-cinnamon \
+      --enable-gnome-shell \
+      --enable-metacity \
+      --enable-unity \
+      --enable-xfwm \
+      --with-gnome=3.22 \
+      --with-gtk4=4.0
+    make install
+
     # The autotools install does not cover the extras.
     mkdir -p "$out/share/plank/themes"
     cp -R extra/Ayu-Plank "$out/share/plank/themes/Ayu-Plank"

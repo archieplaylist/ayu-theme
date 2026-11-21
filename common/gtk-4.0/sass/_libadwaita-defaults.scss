@@ -1,12 +1,20 @@
-/* GTK NAMED COLORS
+/* GTK NAMED COLORS & LIBADWAITA 1.6+ CSS VARIABLES
    ----------------
    use responsibly! */
 
 // Sass thinks we're using the colors in the variables as strings and may shoot
 // warning, it's innocuous and can be defeated by using #{$var}.
 
-// These are the colors apps are can override. 
+// These are the colors apps can override.
 // Derived from src/stylesheet/_defaults.scss in libadwaita source tree.
+
+$_success_fg: if($variant == 'light', ayu('surface.sunk', 'dark'), ayu('surface.sunk'));
+$_headerbar_shade: if($variant != 'dark', transparentize(black, 0.88), transparentize(black, 0.65));
+$_headerbar_darker_shade: if($variant != 'dark', transparentize(black, 0.75), transparentize(black, 0.55));
+$_card_shade: if($variant != 'dark', transparentize(black, 0.93), transparentize(black, 0.64));
+$_popover_shade: if($variant != 'dark', transparentize(black, 0.93), transparentize(black, 0.64));
+$_sidebar_shade: if($variant != 'dark', transparentize(black, 0.93), transparentize(black, 0.65));
+$_scrollbar_outline: if($variant != 'dark', white, transparentize(black, 0.5));
 
 // The main accent color and the matching text value
 @define-color accent_bg_color #{$selected_bg_color};
@@ -18,9 +26,9 @@
 @define-color destructive_fg_color #{$destructive_fg_color};
 @define-color destructive_color #{$destructive_color};
 
-// Levelbars, entries, labels and infobars. These don't need text colors
+// Levelbars, entries, labels and infobars
 @define-color success_bg_color #{$success_color};
-@define-color success_fg_color white;
+@define-color success_fg_color #{$_success_fg};
 @define-color success_color #{$success_color};
 
 @define-color warning_bg_color #{$warning_color};
@@ -44,18 +52,105 @@
 @define-color headerbar_fg_color #{$header_fg};
 @define-color headerbar_border_color #{$header_border};
 @define-color headerbar_backdrop_color #{$header_bg_backdrop};
-@define-color headerbar_shade_color #{if($variant != 'dark', transparentize(black, 0.88), transparentize(black, 0.65))};
+@define-color headerbar_shade_color #{$_headerbar_shade};
+@define-color headerbar_darker_shade_color #{$_headerbar_darker_shade};
+
+// Sidebars
+@define-color sidebar_bg_color #{ayu('ui.panel.bg')};
+@define-color sidebar_fg_color #{$fg_color};
+@define-color sidebar_backdrop_color #{$bg_color};
+@define-color sidebar_border_color #{$borders_color};
+@define-color sidebar_shade_color #{$_sidebar_shade};
+
+@define-color secondary_sidebar_bg_color #{ayu('ui.panel.bg')};
+@define-color secondary_sidebar_fg_color #{$fg_color};
+@define-color secondary_sidebar_backdrop_color #{$bg_color};
+@define-color secondary_sidebar_border_color #{$borders_color};
+@define-color secondary_sidebar_shade_color #{$_sidebar_shade};
 
 // Cards, boxed lists
 @define-color card_bg_color #{$base_color};
 @define-color card_fg_color #{$fg_color};
-@define-color card_shade_color #{$base_color};
+@define-color card_shade_color #{$_card_shade};
+
+// Dialogs
+@define-color dialog_bg_color #{$bg_color};
+@define-color dialog_fg_color #{$fg_color};
 
 // Popovers
 @define-color popover_bg_color #{ayu('ui.popup.bg')};
 @define-color popover_fg_color #{$fg_color};
+@define-color popover_shade_color #{$_popover_shade};
+
+// Thumbnails
+@define-color thumbnail_bg_color #{$base_color};
+@define-color thumbnail_fg_color #{$fg_color};
 
 // Miscellaneous
 @define-color shade_color #{transparentize(black, 0.8)};
-@define-color scrollbar_outline_color #{if($variant != 'dark', white, transparentize(black, .5))};
+@define-color scrollbar_outline_color #{$_scrollbar_outline};
 
+// Libadwaita 1.6+ (GNOME 47+) CSS custom properties
+:root {
+  --accent-bg-color: #{$selected_bg_color};
+  --accent-fg-color: #{$selected_fg_color};
+  --accent-color: #{$selected_bg_color};
+
+  --destructive-bg-color: #{$destructive_color};
+  --destructive-fg-color: #{$destructive_fg_color};
+  --destructive-color: #{$destructive_color};
+
+  --success-bg-color: #{$success_color};
+  --success-fg-color: #{$_success_fg};
+  --success-color: #{$success_color};
+
+  --warning-bg-color: #{$warning_color};
+  --warning-fg-color: #{$warning_fg_color};
+  --warning-color: #{$warning_color};
+
+  --error-bg-color: #{$error_color};
+  --error-fg-color: #{$error_fg_color};
+  --error-color: #{$error_color};
+
+  --window-bg-color: #{$bg_color};
+  --window-fg-color: #{$text_color};
+
+  --view-bg-color: #{$base_color};
+  --view-fg-color: #{$fg_color};
+
+  --headerbar-bg-color: #{$header_bg};
+  --headerbar-fg-color: #{$header_fg};
+  --headerbar-border-color: #{$header_border};
+  --headerbar-backdrop-color: #{$header_bg_backdrop};
+  --headerbar-shade-color: #{$_headerbar_shade};
+  --headerbar-darker-shade-color: #{$_headerbar_darker_shade};
+
+  --sidebar-bg-color: #{ayu('ui.panel.bg')};
+  --sidebar-fg-color: #{$fg_color};
+  --sidebar-backdrop-color: #{$bg_color};
+  --sidebar-border-color: #{$borders_color};
+  --sidebar-shade-color: #{$_sidebar_shade};
+
+  --secondary-sidebar-bg-color: #{ayu('ui.panel.bg')};
+  --secondary-sidebar-fg-color: #{$fg_color};
+  --secondary-sidebar-backdrop-color: #{$bg_color};
+  --secondary-sidebar-border-color: #{$borders_color};
+  --secondary-sidebar-shade-color: #{$_sidebar_shade};
+
+  --card-bg-color: #{$base_color};
+  --card-fg-color: #{$fg_color};
+  --card-shade-color: #{$_card_shade};
+
+  --dialog-bg-color: #{$bg_color};
+  --dialog-fg-color: #{$fg_color};
+
+  --popover-bg-color: #{ayu('ui.popup.bg')};
+  --popover-fg-color: #{$fg_color};
+  --popover-shade-color: #{$_popover_shade};
+
+  --thumbnail-bg-color: #{$base_color};
+  --thumbnail-fg-color: #{$fg_color};
+
+  --shade-color: #{transparentize(black, 0.8)};
+  --scrollbar-outline-color: #{$_scrollbar_outline};
+}

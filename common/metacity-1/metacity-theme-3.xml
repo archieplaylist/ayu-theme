@@ -13,8 +13,8 @@
 <constant name="C_title_focused" value="gtk:custom(wm_title,#5C6166)" />
 <constant name="C_title_unfocused" value="gtk:custom(wm_unfocused_title,#828E9F)" />
 
-<constant name="C_wm_bg_focused" value="gtk:custom(wm_bg,#EBEEF0)" />
-<constant name="C_wm_bg_unfocused" value="gtk:custom(wm_bg,#EBEEF0)" />
+<constant name="C_wm_bg_focused" value="gtk:custom(wm_bg,#F8F9FA)" />
+<constant name="C_wm_bg_unfocused" value="gtk:custom(wm_bg_unfocused,#F8F9FA)" />
 
 <constant name="C_wm_highlight" value="gtk:custom(wm_highlight,#FAFAFA)" />
 
@@ -122,7 +122,7 @@
 
 <draw_ops name="title_focused">
 
-	<title version="< 3.1"
+	<title version="&lt; 3.1"
                x="(0 `max` ((width - title_width) / 2))"
                y="(0 `max` ((height - title_height) / 2)) + 1"
                color="C_title_focused" />
@@ -134,7 +134,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-	<title version="< 3.1"
+	<title version="&lt; 3.1"
                x="(0 `max` ((width - title_width) / 2))"
                y="(0 `max` ((height - title_height) / 2)) + 1"
                color="C_title_unfocused" />
@@ -566,7 +566,7 @@
 
 <frame_style name="modal_dialog_unfocused" geometry="modal">
 	<piece position="entire_background" draw_ops="entire_background_unfocused" />
-	<piece position="titlebar" draw_ops="titlebar_focused" />
+	<piece position="titlebar" draw_ops="titlebar_unfocused" />
 	<piece position="title" draw_ops="title_unfocused" />
 	<button function="close" state="normal" draw_ops="close_unfocused"/>
 	<button function="close" state="prelight" draw_ops="close_unfocused_prelight"/>

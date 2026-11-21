@@ -14,10 +14,12 @@ INKSCAPE=${INKSCAPE:-inkscape}
 OPTIPNG=${OPTIPNG:-optipng}
 INDEX=assets.txt
 
-if "$INKSCAPE" --version 2>/dev/null | grep -Eq '^Inkscape 1\.'; then
+if "$INKSCAPE" --version 2>/dev/null | grep -Eq '^Inkscape [1-9]\.'; then
 	EXPORT_OPT=--export-filename
+	EXTRA_OPTS=()
 else
 	EXPORT_OPT=--export-png
+	EXTRA_OPTS=(-z)
 fi
 
 render() {
@@ -27,7 +29,7 @@ render() {
 	while IFS= read -r id; do
 		[ -n "$id" ] || continue
 		echo "Rendering $outdir/$id.png"
-		"$INKSCAPE" --export-id="$id" --export-id-only \
+		"$INKSCAPE" "${EXTRA_OPTS[@]}" --export-id="$id" --export-id-only \
 			--export-dpi="$dpi" "$EXPORT_OPT=$outdir/$id.png" "$src" >/dev/null
 		if command -v "$OPTIPNG" >/dev/null 2>&1; then
 			"$OPTIPNG" -o7 --quiet "$outdir/$id.png"

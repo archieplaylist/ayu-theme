@@ -37,32 +37,33 @@ function rulesFor(file) {
   if (!dark) {
     if (kind === "close") {
       if (state === "normal") return [...DETAIL, ["#F46067", "#F07171"]];
-      if (state === "hover") return [...DETAIL, ["#F68086", "#F38E8E"]];
-      if (state === "active") return [...DETAIL, ["#F13039", "#EB4242"]];
+      if (state === "hover") return [...DETAIL, ["#F68086", "#F28886"], ["#F38E8E", "#F28886"]];
+      if (state === "active") return [...DETAIL, ["#F13039", "#E5474F"], ["#EB4242", "#E5474F"]];
     }
     if ((kind === "maximize" || kind === "minimize") && state === "active") {
       return [...DETAIL, ["#005FD9", "#035BD6"]];
     }
     if ((kind === "maximize" || kind === "minimize") && state === "hover") {
-      return [...DETAIL, ["#7A7F8B", "#5C6773"]];
+      return [...DETAIL, ["#7A7F8B", "#5C6166"], ["#5C6773", "#5C6166"]];
     }
     return DETAIL;
   }
 
   if (kind === "close") {
     if (state === "normal") return [...DETAIL, ["#CC575D", "#F07178"]];
-    if (state === "hover") return [...DETAIL, ["#D7787D", "#F38E94"]];
-    if (state === "active") return [...DETAIL, ["#BE3841", "#EB424C"]];
+    if (state === "hover") return [...DETAIL, ["#D7787D", "#F39193"], ["#F38E94", "#F39193"]];
+    if (state === "active") return [...DETAIL, ["#BE3841", "#EF616B"], ["#EB424C", "#EF616B"]];
     if (state === "backdrop") return [...DETAIL, ["#B9BCC3", "#5A6673"]];
   }
   if (kind === "maximize" || kind === "minimize") {
-    if (state === "normal") return [...DETAIL, ["#B9BCC2", "#8A8A87"]];
+    if (state === "normal") return [...DETAIL, ["#B9BCC2", "#BFBDB6"], ["#8A8A87", "#BFBDB6"]];
     if (state === "backdrop") return [...DETAIL, ["#B9BCC3", "#5A6673"]];
     if (state === "hover") {
       return [
         ...DETAIL,
         ["#C4C7CC", "#BFBDB6"],
-        ["#5F687E", "#1F2738"],
+        ["#5F687E", "#141821"],
+        ["#1F2738", "#141821"],
         ["#15171C", "#0D1017"],
         ["#171A20", "#0D1017"],
       ];

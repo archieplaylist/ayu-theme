@@ -2,50 +2,40 @@
 # ---------------
 AC_DEFUN([ARC_GNOME], [
     GNOMEDIR="$srcdir/common/gtk-3.0"
-    PKG_PROG_PKG_CONFIG()
+    AC_PATH_PROG([PKG_CONFIG], [pkg-config])
     AC_ARG_WITH(
         [gnome],
         [AS_HELP_STRING(
             [--with-gnome],
-            [GNOME minor version]
+            [GNOME/GTK3 version (shared 3.22+ stylesheet)]
         )],
         [GNOME_VERSION="$withval"],
-        [PKG_CHECK_EXISTS(
-             [gtk+-3.0],
-             [GNOME_VERSION=`$PKG_CONFIG --modversion gtk+-3.0`],
-             [AC_MSG_ERROR([Could not determine GNOME version. Install GTK3 and its development files (libgtk-3-dev for Debian/Ubuntu based distros and gtk3-devel for RPM based distros).])]
-         )]
-    )
-
-    # Trim version extras
-    GNOME_VERSION=`echo $GNOME_VERSION | cut -d. -f-2`
-
-    # Extra major and minor version components
-    GNOME_VERSMJR=`echo $GNOME_VERSION | cut -d. -f1`
-    GNOME_VERSMNR=`echo $GNOME_VERSION | cut -d. -f2`
-
-    # Evenize the minor version for stable versions
-    AS_IF(
-        [test `expr $GNOME_VERSMNR % 2` != "0"],
-        [GNOME_VERSION="$GNOME_VERSMJR.`expr $GNOME_VERSMNR + 1`"]
+        [AS_IF(
+            [test -n "$PKG_CONFIG" && "$PKG_CONFIG" --exists gtk+-3.0 2>/dev/null],
+            [GNOME_VERSION=`"$PKG_CONFIG" --modversion gtk+-3.0`],
+            [GNOME_VERSION="3.22"]
+        )]
     )
 
     # Only one GTK3 source tree is shipped: the 3.22 CSS works for
-    # every GTK >= 3.22 release, older variants where dropped.
-    AS_IF(
-        [test "x$GNOME_VERSMJR" != "x3"],
-        [AC_MSG_ERROR([Invalid GTK3 major version: $GNOME_VERSION])],
-        [AS_IF(
-            [test `expr $GNOME_VERSMNR '<' 22` = 1],
-            [AC_MSG_NOTICE([GTK 3.$GNOME_VERSMNR detected; using the 3.22 CSS (GTK >= 3.22 is required for correct rendering)])]
-         )]
+    # every GTK >= 3.22 release; older variants were dropped.
+    GNOME_VERSMJR=`echo "$GNOME_VERSION" | cut -d. -f1`
+    GNOME_VERSMNR=`echo "$GNOME_VERSION" | cut -d. -f2 -s`
+    AS_CASE(["$GNOME_VERSMJR.$GNOME_VERSMNR"],
+        [3.[0-9]*], [
+            AS_IF(
+                [test "$GNOME_VERSMNR" -lt 22 2>/dev/null],
+                [AC_MSG_NOTICE([GTK 3.$GNOME_VERSMNR detected; using the 3.22 CSS (GTK >= 3.22 is required for correct rendering)])]
+            )
+        ],
+        [4[0-9].*|[34][0-9]], []
     )
     GNOME_VERSION="3.22"
 
     AS_IF(
         [! test -e "$GNOMEDIR/$GNOME_VERSION"],
-        [AC_MSG_ERROR([Invalid GNOME version: $GNOME_VERSION])]
+        [AC_MSG_ERROR([Invalid GNOME version directory: $GNOMEDIR/$GNOME_VERSION])]
     )
     AC_SUBST([GNOME_VERSION])
-    AC_MSG_RESULT([Building for GNOME $GNOME_VERSION])
+    AC_MSG_RESULT([Building for GNOME/GTK3 $GNOME_VERSION])
 ])

@@ -11,10 +11,11 @@ style "dark-sidebar" {
   base[NORMAL] = @dark_sidebar_bg
   base[INSENSITIVE] = @dark_sidebar_bg
   base[PRELIGHT] = @dark_sidebar_bg
+  base[ACTIVE] = @dark_sidebar_bg
   base[SELECTED] = @dark_sidebar_bg
 
-  text[NORMAL] = "#CCCAC2"
-  text[ACTIVE] = @selected_fg_color
+  text[NORMAL] = @text_color
+  text[ACTIVE] = @text_color
   text[SELECTED] = @text_color
 
   engine "pixmap" {
@@ -48,6 +49,24 @@ style "dark-sidebar" {
     image {
       function = FLAT_BOX
       state = SELECTED
+      detail = "cell_odd"
+      file = "assets/sidebar-row-selected.png"
+      border = { 0, 2, 0, 0 }
+      stretch = TRUE
+    }
+
+    image {
+      function = FLAT_BOX
+      state = ACTIVE
+      detail = "cell_even"
+      file = "assets/sidebar-row-selected.png"
+      border = { 0, 2, 0, 0 }
+      stretch = TRUE
+    }
+
+    image {
+      function = FLAT_BOX
+      state = ACTIVE
       detail = "cell_odd"
       file = "assets/sidebar-row-selected.png"
       border = { 0, 2, 0, 0 }

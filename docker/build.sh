@@ -94,17 +94,18 @@ fi
 
 say "Verifying staged themes"
 for theme in "${THEMES[@]}"; do
-	for f in gtk-2.0/gtkrc gtk-3.0/gtk.css gtk-4.0/gtk.css; do
+	for f in index.theme gtk-2.0/gtkrc gtk-3.0/gtk.css gtk-4.0/gtk.css metacity-1/metacity-theme-1.xml metacity-1/metacity-theme-2.xml metacity-1/metacity-theme-3.xml; do
 		[ -f "$THEMEDIR/$theme/$f" ] || { echo "Missing $theme/$f" >&2; exit 1; }
 	done
 	[ -d "$THEMEDIR/$theme/cinnamon" ] || { echo "Missing $theme/cinnamon" >&2; exit 1; }
 	[ -d "$THEMEDIR/$theme/gnome-shell" ] || { echo "Missing $theme/gnome-shell" >&2; exit 1; }
+	[ -d "$THEMEDIR/$theme/unity" ] || { echo "Missing $theme/unity" >&2; exit 1; }
 	[ -f "$THEMEDIR/$theme/xfwm4/themerc" ] || { echo "Missing $theme/xfwm4/themerc" >&2; exit 1; }
 done
 
 for theme in "${HDPI_THEMES[@]}"; do
 	[ -f "$THEMEDIR/$theme/xfwm4/themerc" ] || { echo "Missing $theme/xfwm4/themerc" >&2; exit 1; }
-	[ "$(find "$THEMEDIR/$theme/xfwm4" -name '*.png' | wc -l)" -eq 45 ] || {
+	[ "$(find "$THEMEDIR/$theme/xfwm4" -name '*.png' | wc -l)" -ge 45 ] || {
 		echo "Missing xfwm4 HDPI assets in $theme" >&2
 		exit 1
 	}
